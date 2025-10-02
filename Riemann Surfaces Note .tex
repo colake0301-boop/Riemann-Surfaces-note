@@ -508,15 +508,417 @@ $$
 B(F) = F(R(F)) \subset Y \text{ branch locus.}
 $$
 
-\begin{theorem}[Open mapping theorem] \label{thm:openmapping}
+\begin{theorem}
+    (Open mapping theorem) \label{thm:openmapping}
     A non-constant holomorphic map of Riemann Surfaces is an open mapping.
 \end{theorem}
 
 \textbf{Proof:} The local form $z \mapsto z^k$ is open
 ("maps circle to circle").
 
-\begin{theorem}[Biholomorphic maps are biholomorphisms] \label{thm:biholo}
+\begin{theorem}
+    (Biholomorphic maps are biholomorphisms) \label{thm:biholo}
     The inverse of a bijective holomorphic map of Riemann Surfaces is holomorphic
     (since $F$ is an open mapping).
 \end{theorem}
+
+\begin{theorem}
+(Discreteness of preimages)
+Let $F: X \to Y$ non constant map of RS. Then $\forall q \in Y$.
+the preimage $F^{-1}(q)$ is discrete in $X$.
+(\textcolor{red}{If $X$ is compact then $F^{-1}(q)$ is finite})
+\end{theorem}
+
+\begin{proof}
+$F$ follows as a holomorphic map of the complex plane are discrete.
+\end{proof}
+
+\begin{theorem}
+(Surjectivity of non-constant holomorphic map from compact RS)
+Let $F: X \to Y$ a non-constant holomorphic map of RS with $X$ compact.
+Then $F$ is surjective and $Y$ is compact.
+\end{theorem}
+
+\begin{proof}
+Open mapping theorem $\implies F(X) \subset Y$ is open
+$F$ continuous and $X$ compact $\implies F(X)$ compact hence closed (and $Y$ hausdorff) $\square$.
+\end{proof}
+
+\begin{corollary}
+Every holomorphic function on a compact Riemann Surface ($\mathbf{RS}$) is constant.
+\end{corollary}
+\textbf{Proof:}
+Let $f: X \to \mathbb{C}$ be a non-constant holomorphic function.
+Then $f$ is constant.
+\hfill $\square$
+
+\begin{theorem} [Riemann's extension theorem] \label{thm:2.8}
+Let $X$ be a $\mathbf{RS}$, $p \in U \subset_{\text{open}} X$. If $f: U \setminus \{p\} \to \mathbb{C}$ is holomorphic and bounded in a punctured neighborhood of $p$, then $f$ extends to a holomorphic function on $U$.
+\end{theorem}
+\textbf{Proof:}
+Follows from complex analysis using charts.
+\hfill $\square$
+
+\begin{theorem} [Maximum principle] \label{thm:2.9}
+Let $f: X \to \mathbb{C}$ be a non-constant holomorphic function on a $\mathbf{RS}$ $X$.
+Then $|f|$ has no local maximum.
+\end{theorem}
+
+\subsection{ Meromorphic functions on $\mathbf{RS}$}
+
+\begin{definition}
+Let $X$ be a $\mathbf{RS}$ and $p \in W \subset_{\text{open}} X$. If $f: W \setminus \{p\} \to \mathbb{C}$ is holomorphic, we say that $p$ is a
+$$
+\left\{
+\begin{array}{ll}
+\text{removable singularity} & \\
+\text{pole} &  \\
+\text{essential singularity} & 
+\end{array}
+\right\}
+\text{ if } \exists \text{ chart } \phi: U \to V , \text{ s.t. } \phi(p) \text{ is a }
+\left\{
+\begin{array}{l}
+\text{removable singularity} \\
+\text{pole} \\
+\text{essential singularity}
+\end{array}
+\right\}
+$$
+We say $f$ is **meromorphic** at $p$ if $p$ is a **non-essential singularity**.
+
+If $S \subset W \subset_{\text{open}} X$ and $f: W \setminus S \to \mathbb{C}$ is holomorphic, we say $f$ is **meromorphic** on $W$ if it is **meromorphic** at each $p \in S$.
+\end{definition}
+
+\section*{Notation}
+Let $U \subset_{\text{open}} X$.
+\begin{itemize}
+    \item $\mathcal{O}_X(U) = \{f: U \to \mathbb{C} \mid f \text{ is holomorphic}\}$
+    \item $\mathcal{M}_X(U) = \{f: U \setminus S \to \mathbb{C} \mid f \text{ is meromorphic on } U\}$
+\end{itemize}
+
+\begin{lemma}
+\begin{enumerate}[i)]
+    \item The above definition is independent of the choice of chart.
+    \item $\mathcal{O}(X) = \mathcal{O}_X(X)$ is a $\mathbb{C}$-algebra.
+    \item $\mathcal{M}(X) = \mathcal{M}_X(X)$ is a field, called the **function field of $X$**.
+    \item $\mathcal{M}(X) = \text{Frac}(\mathcal{O}(X))$.
+    \item $p$ has a
+    $$
+    \left\{
+    \begin{array}{l}
+    \text{removable singularity} \\
+    \text{pole} \\
+    \text{essential singularity}
+    \end{array}
+    \right\} \text{ at } p \text{ if }
+    \left\{
+    \begin{array}{l}
+    |f| \text{ is bounded in a neighborhood of } p \\
+    \lim_{z \to p} |f(z)| = \infty \\
+    \lim_{z \to p} f(z) \text{ doesn't exist}
+    \end{array}
+    \right\}
+    $$
+\end{enumerate}
+\end{lemma}
+
+\subsection{Laurent Expansions \& Orders of Singularities}
+Let $f: W \setminus \{p\} \to \mathbb{C}$ be a holomorphic function with $p \in W \subset_{\text{open}} X$, where $X$ is a **Riemann Surface**.
+Let $\phi: U \to V$ be a chart on $X$, such that $\phi(p) = 0$.
+Then $f \circ \phi^{-1}: V \setminus \{0\} \to \mathbb{C}$ is holomorphic and has a Laurent expansion at $0$.
+$$
+f \circ \phi^{-1}(z) = \sum_{n = -\omega}^{\infty} c_n z^n \quad \text{(\textbf{Note}: This depends on the choice of chart.)}
+$$
+
+\begin{definition}
+The **order of $f$** is defined as:
+$$
+\text{ord}_p(f) := \text{ord}_0(f \circ \phi^{-1}) = \min \{n \in \mathbb{Z} \mid c_n \neq 0\}
+$$
+If $f(z) = 0$ for all $z$, then $\text{ord}_p(0) = \infty$.
+\end{definition}
+
+\begin{lemma}
+\begin{enumerate}[i)]
+    \item $\text{ord}_p(f)$ is independent of the chart $\phi$ centered at $p$.
+    \item $X$ is a
+    $$
+    \left\{
+    \begin{array}{l}
+    \text{removable singularity} \\
+    \text{pole} \\
+    \text{essential singularity}
+    \end{array}
+    \right\} \text{ of } f \text{ if } \text{ord}_p(f) =
+    \left\{
+    \begin{array}{l}
+    \geq 0 \\
+    -m, \quad m > 0 \quad \text{(i.e., } < 0 \text{)} \\
+    -\infty
+    \end{array}
+    \right\}
+    $$
+    \item $\text{ord}_p(f^{-1}) = -\text{ord}_p(f)$.
+    \item $\text{ord}_p(f g) = \text{ord}_p(f) + \text{ord}_p(g)$.
+    \item $\text{ord}_p(f+g) \geq \min \{ \text{ord}_p(f), \text{ord}_p(g) \}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{example}
+The map $\exp: \mathbb{C} \to \mathbb{C}$ is holomorphic on $\mathbb{C}$. Is it holomorphic or meromorphic on $\mathbb{C}_{\infty}$?
+Consider $w=1/z$. For $f: \mathbb{C}_{\infty} \setminus \{0\} \to \mathbb{C}$ we have $\text{ord}_{\infty}(f) = \text{ord}_0(f(1/z))$.
+Thus, $\exp(w)$ has an essential singularity at $w=0$, so $\exp$ is not meromorphic on $\mathbb{C}_{\infty}$.
+\end{example}
+
+\begin{example} [Meromorphic functions on $\mathbb{C}_{\infty}$]
+Let $z=\phi_0: U_0 \to V_0 = \mathbb{C}$. $\text{ord}_0(z) = -1$ .
+Let $P, Q \in \mathbb{C}[z]$ with $Q \not\equiv 0$. We claim $f(z) = P(z)/Q(z) \in \mathcal{M}(\mathbb{C}_{\infty})$.
+We know $f \in \mathcal{M}(\mathbb{C})$: what about at $\infty$?
+Let $f(z) = \lambda \prod_{i} (z-a_i)^{k_i}$, where $a_i \in \mathbb{C}$ and $k_i \in \mathbb{Z}$. $x \in \mathbb{C}$.
+$f(z)$ is meromorphic at $\infty$ if $f(1/z)$ is meromorphic at $0$.
+$$
+f(1/z) =\lambda \prod_{i} (1/z - a_i)^{k_i} = \lambda z^{-\sum k_i} \prod_{i}  (1 - a_i z)^{k_i}
+$$
+$$
+\text{ord}_{\infty}(f) =
+\left\{
+\begin{array}{ll}
+-\sum k_i & p=\infty \\
+k_i & p=a_i \\
+0 & \text{otherwise}
+\end{array}
+\right.
+\quad \text{Note: } \sum_{p \in \mathbb{C}_{\infty}} \text{ord}_p(f) = 0.
+$$
+\end{example}
+
+\begin{theorem} [Meromorphic functions as holomorphic maps to $\mathbb{C}_{\infty}$] \label{thm:2.10}
+For a **Riemann Surface** $X$, there is a 1-1 correspondence:
+$$
+\mathcal{M}(X) = \{ \text{meromorphic functions on } X \} \longleftrightarrow \{ \text{holomorphic maps } F: X \to \mathbb{C}_{\infty} \mid F \not \equiv \infty \}
+$$
+The correspondence is given by:
+$$
+f \longmapsto F: X \to \mathbb{C}_{\infty}, \quad F(x) =
+\left\{
+\begin{array}{ll}
+f(x), & x \notin \text{Pole}(f) \\
+\infty, & x \in \text{Pole}(f)
+\end{array}
+\right.
+$$
+$$
+f = \phi_{\infty} \circ F \mid_{F^{-1}(\mathbb{C})} \longleftarrow F: X \to \mathbb{C}_{\infty}.
+$$
+and $f(x)=\infty$ if $F(x)=\infty$.
+\end{theorem}
+
+\begin{proof}
+The map $F$ associated to $f \in \mathcal{M}(X)$ is holomorphic on $X \setminus \text{Pole}(f)$.
+\textbf{We want to show:} $F$ is holomorphic at each $p \in \text{Pole}(f)$.
+$f$ has a pole at $p \iff f \circ \psi^{-1}$ has a pole at $\psi(p)=0$ (by definition).\\
+$\iff \phi_{\infty} \circ F \circ \psi^{-1} = \frac{1}{f \circ \phi^{-1}} \text{ has a zero at } \psi(p) = 0.$
+This means $F$ is holomorphic at $p$ (by definition of holomorphicity for a map to $\mathbb{C}_{\infty}$).
+\end{proof}
+
+\begin{lemma} [Relating the order of $f \in \mathcal{M}(X)$ and the multiplicity of the corresponding map $F: X \to \mathbb{C}_{\infty}$]
+For $f \in \mathcal{M}(X)$ non-constant, and $F: X \to \mathbb{C}_{\infty}$ the corresponding holomorphic map at $p \in X$:
+\begin{enumerate}[i)]
+    \item If $f(p)=0$, then $\text{mult}_p(F) = \text{ord}_p(f)$.
+    \item If $f(p)=\infty$, then $\text{mult}_p(F) = -\text{ord}_p(f)$.
+    \item Otherwise, $\text{mult}_p(F) = \text{ord}_p(f - f(p))$.
+\end{enumerate}
+\end{lemma}
+
+\begin{theorem} [Meromorphic functions on $\mathbb{C}_{\infty}$] 
+$$\mathcal{M}(\mathbb{C}_{\infty})=\mathbb{C}(z)$$
+\end{theorem}
+
+\textbf{Proof:}
+We've seen $\mathbb{C}(z) \subset \mathcal{M}(\mathbb{C}_{\infty})$. Let $f \in \mathcal{M}(\mathbb{C}_{\infty})$.
+Let $p_1, p_2, \dots, p_n$ be the zeros of $f$ in $\mathbb{C} \subset \mathbb{C}_{\infty}$.
+Let $g(z) := \prod_{i=1}^n (z-p_i)^{r_i}$, where $r_i = \text{ord}_{p_i}(f) \in \mathbb{Z}$.
+(Note that $g(z) \in \mathbb{C}(z)$).
+By construction, $\text{ord}_p(f) = \text{ord}_p(g)$ for all $p \in \mathbb{C}$. Then $h = f/g \in \mathcal{M}(\mathbb{C}_{\infty})$ has no zeros and no poles in $\mathbb{C}$.
+
+Let $h(z) = \sum c_n z^n$ be the Taylor expansion of $h$ at $0 \in \mathbb{C}$.
+Let $w = 1/z$ be a local coordinate at $\infty \in \mathbb{C}_{\infty}$. Then
+$$
+h(w) = \sum c_n w^{-n}
+$$
+is the Laurent expansion of $h$ at $\infty$.
+Since $h$ is meromorphic at $\infty$, then $h(z) = \sum_{n=0}^m c_n z^n \in \mathbb{C}[z]$ (polynomial).
+If $\deg(h) > 0$, then $h$ has a zero in $\mathbb{C}$. Thus $h(z) = \lambda$, a constant.
+And $f = \lambda g \in \mathbb{C}(z)$.
+\hfill $\square$
+
+\begin{corollary}
+For $f \in \mathcal{M}(\mathbb{C}_{\infty})$, $\sum_{p \in \mathbb{C}_{\infty}} \text{ord}_p(f) = 0$.
+\end{corollary}
+
+\subsection{The degree of a holomorphic map}
+
+\begin{theorem} 
+Let $F: X \to Y$ be a non-constant holomorphic map of compact **Riemann Surfaces**.
+For $q \in Y$, the quantity $\text{deg}_q(F) = \sum_{p \in F^{-1}(q)} \text{mult}_p(F)$ is independent of $q$.
+\end{theorem}
+
+\begin{definition}
+The **degree of $F$** is $\deg(F) = \deg_q(F)$ for any $q \in Y$.
+\end{definition}
+
+\begin{proof}
+For $q \in Y$, take $F^{-1}(q) = \{p_1, p_2, \dots, p_s\}$ and let $k_i = \text{mult}_{p_i}(F)$.
+By Theorem 2.2, $\exists$ local normal forms at each $p_i$, i.e.,
+$\exists$ charts $\phi_i: U_i \to V_i$ on $X$ and $\psi: U_i' \to V_i'$ on $Y$,
+such that $F(U_i) \subset U_i'$, $p_i \to 0$, $q \to 0$,
+and $\psi \circ F \circ \phi_i^{-1}(z) = z^{k_i}$. Assume the $U_i$ are pairwise disjoint.
+\begin{claim*}
+$\exists$ open neighborhood $W$ of $q$ in $Y$ such that $F^{-1}(W) \subset \bigcup_{i} U_i$.
+\end{claim*}
+\textbf{Proof of Claim:}
+Let $\overline{W}$ be an open neighborhood of $q$, $\overline{W} = \{q\} \cup \text{something else}$.
+Let $W$ be an open neighborhood of $q$ such that $W \cap F(X \setminus \bigcup_i U_i) = \emptyset$.
+Thus $F^{-1}(W) \cap (X \setminus \bigcup_i U_i) = \emptyset$.
+Since $X$ is compact, $F(X \setminus \bigcup_i U_i)$ is compact.
+$\exists$ an open neighborhood $W_i$ of $q$ in $Y$ such that $F^{-1}(W_i) \cap (X \setminus U_i) = \emptyset$.Let $W = \bigcap_{i=1}^s W_i$, which is an open neighborhood of $q$. Then $F^{-1}(W) \subset \bigcup_{i=1}^s U_i$. $\square$
+
+For any $q' \in W$, we have $\deg_{q'}(F) = \deg_q(F)$.
+This is because, for $q' \in W$, $F^{-1}(q') \cap U_i$ consists of $k_i$ points of multiplicity 1.
+Hence $\deg_q(F)$ is locally constant, and as $Y$ is connected, $\deg_q(F)$ is constant.
+\end{proof}
+
+\begin{remark}
+Let $f: X \to \mathbb{C}$. If $f$ is locally constant and $X$ is connected,
+then $f$ is a constant.
+\end{remark}
+
+\begin{proof}
+Take $p \in X$. $\exists U_p \subset X$ such that $f|_{U_p}$ is a constant $f(p)$.
+Consider $\mathcal{O} = \{x \in X \mid f(x) = f(p)\}$.
+\begin{enumerate}
+    \item $\mathcal{O}$ is open since $f$ is locally constant.
+    \item $\mathcal{O}$ is closed since $f$ is locally constant.
+\end{enumerate}
+If $y \in X \setminus \mathcal{O}$, then $f(y) \neq f(p)$. Then $\exists U_y$ such that $U_y \subset X \setminus \mathcal{O}$.
+Since $X$ is connected and $\mathcal{O}$ is non-empty (as $p \in \mathcal{O}$) and is both open and closed, we must have $\mathcal{O} = X$.
+Thus $f$ is constant.
+\end{proof}
+
+\begin{remark}
+\begin{enumerate}
+    \item At a ramification point $p$, $F$ looks locally like $\mathbb{C} \to \mathbb{C}, z \mapsto z^k$.
+    \item $F|_{X \setminus R(F)}: X \setminus R(F) \to Y \setminus B(F)$ is a $d$-sheeted covering, where $d = \deg(F)$.
+\end{enumerate}
+\end{remark}
+
+\begin{corollary}
+\begin{enumerate}[i)]
+    \item If $F$ is a degree 1 non-constant holomorphic map of compact **Riemann Surfaces** ($\mathbf{RS}$), then $F$ is a **biholomorphism** (surjectivity + injectivity).
+    \item If $X$ is compact and has a meromorphic function with a single simple pole, then $X \cong \mathbb{C}_{\infty}$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    Left as an exercise
+\end{proof}
+
+\begin{corollary}
+$\mathbb{C}\mathbb{P}^1 \cong \mathbb{C}_{\infty}$.
+\end{corollary}
+
+\begin{corollary}
+Let $X$ be a compact **Riemann Surface** ($\mathbf{RS}$) and $f \in \mathcal{M}(X)$ non-constant.
+Then $\sum_{p \in X} \text{ord}_p(f) = 0$.
+\end{corollary}
+
+\begin{proof}
+Let $F: X \to \mathbb{C}_{\infty}$ be the associated holomorphic map.
+We know that:
+$$
+\sum_{p \in X} \text{ord}_p(f) = \sum_{p \in \text{Zero}(f)} \text{ord}_p(f) + \sum_{p \in \text{Pole}(f)} \text{ord}_p(f)
+$$
+We use the relationship between order and multiplicity
+$$
+\sum_{p \in \text{Zero}(f)} \text{ord}_p(f) = \sum_{p \in F^{-1}(0)} \text{mult}_p(F)
+$$
+And
+$$
+\sum_{p \in \text{Pole}(f)} \text{ord}_p(f) = \sum_{p \in F^{-1}(\infty)} (-\text{mult}_p(F)) = -\sum_{p \in F^{-1}(\infty)} \text{mult}_p(F)
+$$
+Substituting these back:
+$$
+\sum_{p \in X} \text{ord}_p(f) = \sum_{p \in F^{-1}(0)} \text{mult}_p(F) - \sum_{p \in F^{-1}(\infty)} \text{mult}_p(F)
+$$
+Since $\sum_{p \in F^{-1}(q)} \text{mult}_p(F) = \deg(F)$ for any $q \in \mathbb{C}_{\infty}$:
+$$
+= \deg(F) - \deg(F) = 0.
+$$
+\end{proof}
+
+\subsection{ Germs of holomorphic functions}
+
+\begin{definition}
+For a complex manifold $X$ and $p \in X$, we define the ring of germs of holomorphic functions at $p$:
+$$
+\mathcal{O}_{X, p} = \left\{ (U, f) \mid U \text{ is an open neighborhood of } p, f: U \to \mathbb{C} \text{ is holomorphic} \right\} / \sim
+$$
+where $\sim$ is the equivalence relation defined by:
+$$
+(U, f) \sim (V, g) \iff \exists \text{ a neighborhood } W \text{ of } p \text{ s.t. } f|_W = g|_W
+$$
+The equivalence class $[(U, f)]$ is called the **germ of $f$ at $p$**.
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+    \item $\mathcal{O}_{X, p}$ is a ring whose non-invertible elements form an ideal.
+    \item The maximal ideal $\mathfrak{m}_p$ is given by:
+    $$
+    \mathfrak{m}_p = \{ [(U, f)] \mid f(p) = 0 \}. \quad (\text{germs vanishing at } p)
+    $$
+    This is the kernel of the evaluation map:
+    $$
+    \text{ker}(\text{ev}_p: \mathcal{O}_{X, p} \to \mathbb{C}).
+    $$
+    Thus $\mathcal{O}_{X, p} / \mathfrak{m}_p \cong \mathbb{C}$. This means $\mathfrak{m}_p$ is a **maximal ideal** (local ring).
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\begin{enumerate}
+    \item $\mathcal{O}_{\mathbb{C}^n, 0} \cong \mathbb{C} \{x_1, \dots, x_n\}$.
+    $$
+    [(U, f)] \mapsto \text{Taylor expansion of } f \text{ at } 0.
+    $$
+    \item If $X$ is an $n$-dimensional complex manifold and $p \in X$, then a local chart $\phi: U \to V$, centered at $p$, induces an isomorphism:
+    $$
+    \phi^*: \mathcal{O}_{\mathbb{C}^n, 0} \to \mathcal{O}_{X, p}
+    $$
+    which maps the germ $[(V, \psi)]$ to the germ $[(U, \psi \circ \phi)]$.
+\end{enumerate}
+\end{example}
+
+\subsection*{$\mathcal{O}_{X, p}$ for a Riemann Surface}
+The order of a **holomorphic** function at $p$ descends to a map
+$$
+\text{ord}_p: \mathcal{O}_{X, p} \to \mathbb{N} \cup \{\infty\} \text{ satisfying}
+$$
+
+\begin{enumerate}
+    \setcounter{enumi}{2} % Continue from the previous list on the previous page
+    \item $\text{ord}_p(f) = \infty \iff f \equiv 0$.
+    \item $\text{ord}_p(f g) = \text{ord}_p(f) + \text{ord}_p(g)$.
+    \item $\text{ord}_p(f+g) \geq \min \{\text{ord}_p(f), \text{ord}_p(g)\}$.
+\end{enumerate}
+This is known as a **discrete valuation**.
+
+We can extend $\text{ord}_p$ to $\text{Frac}(\mathcal{O}_{X, p})$ by $\text{ord}_p(f/g) = \text{ord}_p(f) - \text{ord}_p(g)$.
+
+\begin{lemma}
+For a **Riemann Surface** $X$, $\mathcal{O}_{X, p}$ is a **Discrete Valuation Ring** ($\mathbf{DVR}$) with valuation given by $\text{ord}_p: \text{Frac}(\mathcal{O}_{X, p}) \to \mathbb{Z} \cup \{\infty\}$.
+The **uniformizer** (element with valuation 1) is given by a local chart centered at $p$.
+\end{lemma}
+
 \end{document}
