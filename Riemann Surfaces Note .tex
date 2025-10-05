@@ -1,4 +1,3 @@
-
 % note-setup-borderless.tex
 % fenglielie@qq.com 2025-07-10
 
@@ -105,7 +104,7 @@
 \newtcbenvironment{example}{colframe=RawSienna, colback=RawSienna!5}
 \newtcbenvironment{problem}{colframe=WildStrawberry!30, colback=WildStrawberry!5}
 
-\newtheorem{homework}{Homework}
+\newtheorem{exercise}{Exercise}
 
 %define short cut notation
 \newcommand{\g}{\mathfrak{g}}
@@ -116,16 +115,17 @@
 
 \begin{document}
 \maketitle
-
 \section*{Introduction}
 Riemann Surfaces is the one-dimensional complex manifold. Also, it can be described as the one-dimensional complex algeraic curves. I first encounter the concept of Riemann Surfaces in complex analysis.Later I found that Riemann Surfaces is not only an interesting object to learn itself. Since it cna be described as algebraic curves, it also provides a path to the study of algebraic geometry. I want to learn algebraic geometry and Riemann Surfaces is a good place to start. 
 OUr goal in this note is to obtain Riemann-Roch theorem and its application.
+\newpage
+\tableofcontents 
 \newpage
 
 \section{Riemann Surfaces and complex \textbf{manifolds}.}
 \subsection{holomorphic functions in 1-variable}
 \subsection{holomorphic functions in $n$-variables}
-\subsection{Complex \textbf{manifolds} \& Riemann Surfaces.}
+\subsection{Complex manifolds \& Riemann Surfaces.}
 
 \begin{definition}
     Let $X$ be a \textbf{topological} space.
@@ -143,11 +143,12 @@ OUr goal in this note is to obtain Riemann-Roch theorem and its application.
     \end{enumerate}
 \end{definition}
 
-\textbf{Exercise :}
+\begin{exercise}
 \begin{enumerate}
     \item Equivalence of atlases is an equivalence relation.
     \item $\exists$ unique maximal $\mathbb{C} \text{ atlas}$.
 \end{enumerate}
+\end{exercise}
 
 \begin{remark}
     \begin{enumerate}[\upshape (i)]
@@ -250,7 +251,9 @@ $S^2 \setminus \{ (0,0,1) \}$
     (x, y, w) &\longmapsto \frac{x-iy}{1+w}
 \end{align*}
 
-\textbf{Exercise :} check these are charts.
+\begin{exercise}
+check these are charts.
+\end{exercise} 
 
 $\phi_0$ \& $\phi_{\infty}$ are compatible. On $U_0 \cap U_{\infty} = S^2 \setminus \{ (0,0,1), (0,0,-1) \}$, $\phi_0(U_0 \cap U_{\infty}) \subset \mathbb{C}^* \subset V_0$.
 
@@ -305,11 +308,11 @@ $$
 $$
 where $U_p = \pi(B_{\varepsilon}(p))$.
 
-\textbf{Claim :}
+\begin{claim*}
 $$
 \mathcal{A} = \{ \phi_p : U_p \to V_p \}_{p \in \mathbb{C}} \text{ is an atlas.}
 $$
-
+\end{claim*}
 Compatibility of $\phi_p$ \& $\phi_q$:
 Assume $U_{p, q} = U_p \cap U_q \neq \emptyset$.
 
@@ -350,7 +353,7 @@ $$
     \end{tikzpicture}
 \end{center}
 
-\subsection{Examples of complex \textbf{manifolds}.}
+\subsection{Examples of complex manifolds}
 
 \begin{example}[Complex Projective Plane]
 $$
@@ -384,9 +387,9 @@ $$
 where $\widehat{\frac{z_i}{z_i}}$ denotes the omission of the $i$-th coordinate.
 \end{example}
 
-\section{Morphisms of complex \textbf{manifolds} \& meromorphic functions.}
+\section{Morphisms of complex manifolds \& meromorphic functions.}
 
-\subsection{Morphisms of \textbf{manifolds}.}
+\subsection{Morphisms of manifolds}
 
 \begin{definition}
     Let $X$ \& $Y$ be complex \textbf{manifolds} of dimensions $n$ \& $m$ respectively.
@@ -489,9 +492,9 @@ $$
 Local form is $w \mapsto w^k$.
 \end{proof}
 
-\textbf{Exercise:}
+\begin{exercise}
 Show $k$ is independent of the choice of chart.
-
+\end{exercise}
 \begin{definition}
     The \textbf{multiplicity} of a non-constant holomorphic map $F: X \to Y$
     of Riemann Surfaces at $p \in X$ is the unique positive integer $k$ given by
@@ -552,19 +555,19 @@ Let $f: X \to \mathbb{C}$ be a non-constant holomorphic function.
 Then $f$ is constant.
 \hfill $\square$
 
-\begin{theorem} [Riemann's extension theorem] \label{thm:2.8}
+\begin{theorem} [Riemann's extension theorem] 
 Let $X$ be a $\mathbf{RS}$, $p \in U \subset_{\text{open}} X$. If $f: U \setminus \{p\} \to \mathbb{C}$ is holomorphic and bounded in a punctured neighborhood of $p$, then $f$ extends to a holomorphic function on $U$.
 \end{theorem}
 \textbf{Proof:}
 Follows from complex analysis using charts.
 \hfill $\square$
 
-\begin{theorem} [Maximum principle] \label{thm:2.9}
+\begin{theorem} [Maximum principle] 
 Let $f: X \to \mathbb{C}$ be a non-constant holomorphic function on a $\mathbf{RS}$ $X$.
 Then $|f|$ has no local maximum.
 \end{theorem}
 
-\subsection{ Meromorphic functions on $\mathbf{RS}$}
+\subsection{Meromorphic functions on Riemann Surfaces}
 
 \begin{definition}
 Let $X$ be a $\mathbf{RS}$ and $p \in W \subset_{\text{open}} X$. If $f: W \setminus \{p\} \to \mathbb{C}$ is holomorphic, we say that $p$ is a
@@ -590,7 +593,7 @@ We say $f$ is **meromorphic** at $p$ if $p$ is a **non-essential singularity**.
 If $S \subset W \subset_{\text{open}} X$ and $f: W \setminus S \to \mathbb{C}$ is holomorphic, we say $f$ is **meromorphic** on $W$ if it is **meromorphic** at each $p \in S$.
 \end{definition}
 
-\section*{Notation}
+\textbf{Notation}
 Let $U \subset_{\text{open}} X$.
 \begin{itemize}
     \item $\mathcal{O}_X(U) = \{f: U \to \mathbb{C} \mid f \text{ is holomorphic}\}$
@@ -693,7 +696,7 @@ k_i & p=a_i \\
 $$
 \end{example}
 
-\begin{theorem} [Meromorphic functions as holomorphic maps to $\mathbb{C}_{\infty}$] \label{thm:2.10}
+\begin{theorem} [Meromorphic functions as holomorphic maps to $\mathbb{C}_{\infty}$] 
 For a **Riemann Surface** $X$, there is a 1-1 correspondence:
 $$
 \mathcal{M}(X) = \{ \text{meromorphic functions on } X \} \longleftrightarrow \{ \text{holomorphic maps } F: X \to \mathbb{C}_{\infty} \mid F \not \equiv \infty \}
@@ -900,7 +903,7 @@ The equivalence class $[(U, f)]$ is called the **germ of $f$ at $p$**.
 \end{enumerate}
 \end{example}
 
-\subsection*{$\mathcal{O}_{X, p}$ for a Riemann Surface}
+\subsection{$\mathcal{O}_{X, p}$ for a Riemann Surface}
 The order of a **holomorphic** function at $p$ descends to a map
 $$
 \text{ord}_p: \mathcal{O}_{X, p} \to \mathbb{N} \cup \{\infty\} \text{ satisfying}
@@ -920,5 +923,455 @@ We can extend $\text{ord}_p$ to $\text{Frac}(\mathcal{O}_{X, p})$ by $\text{ord}
 For a **Riemann Surface** $X$, $\mathcal{O}_{X, p}$ is a **Discrete Valuation Ring** ($\mathbf{DVR}$) with valuation given by $\text{ord}_p: \text{Frac}(\mathcal{O}_{X, p}) \to \mathbb{Z} \cup \{\infty\}$.
 The **uniformizer** (element with valuation 1) is given by a local chart centered at $p$.
 \end{lemma}
+
+\subsection{Jacobians and the implicit function theorem}
+
+\begin{definition}
+The complex Jacobian of a holomorphic map $f: \mathbb{C}^n \to \mathbb{C}^m$ at $p \in \mathbb{C}^n$ is
+$$
+J_{\mathbb{C}} f(p) := \left( \frac{\partial f_j}{\partial z_k} (p) \right)_{j, k} = \begin{pmatrix}
+\frac{\partial f_1}{\partial z_1} (p) & \cdots & \frac{\partial f_1}{\partial z_n} (p) \\
+\vdots & \ddots & \vdots \\
+\frac{\partial f_m}{\partial z_1} (p) & \cdots & \frac{\partial f_m}{\partial z_n} (p)
+\end{pmatrix} \in M_{m \times n} (\mathbb{C})
+$$
+We say $p$ is a \textbf{regular point} of $f$ if $J_{\mathbb{C}} f(p): \mathbb{C}^n \to \mathbb{C}^m$ is surjective.
+We say $q \in \mathbb{C}^m$ is a \textbf{regular value} of $f$ if all of its preimages are regular points.
+\end{definition}
+
+\begin{example}
+If $n=m=1$, then $J_{\mathbb{C}} f(p) = \left( \frac{\partial f}{\partial z} (p) \right)$.
+\end{example}
+
+\textbf{Relationship with the Real Jacobian}\\
+Consider $f: \mathbb{C}^n \to \mathbb{C}^m$ real differentiable.
+$$
+\begin{array}{ccc}
+\mathbb{C}^n & \to & \mathbb{C}^m \\
+\mathbb{R}^{2n} & & \mathbb{R}^{2m}
+\end{array}
+$$
+
+$$
+J_{\mathbb{R}} f(p) = \begin{pmatrix}
+\left( \frac{\partial u_j}{\partial x_k} (p) \right)_{j, k} & \left( \frac{\partial u_j}{\partial y_k} (p) \right)_{j, k} \\
+\left( \frac{\partial v_j}{\partial x_k} (p) \right)_{j, k} & \left( \frac{\partial v_j}{\partial y_k} (p) \right)_{j, k}
+\end{pmatrix} \in M_{2m \times 2n} (\mathbb{R})
+$$
+If $f$ is holomorphic at $p$:
+$$
+\begin{pmatrix}
+\left( \frac{\partial u_j}{\partial x_k} (p) \right)_{j, k} & \left( \frac{\partial u_j}{\partial y_k} (p) \right)_{j, k} \\
+- \left( \frac{\partial u_j}{\partial y_k} (p) \right)_{j, k} & \left( \frac{\partial u_j}{\partial x_k} (p) \right)_{j, k}
+\end{pmatrix}
+$$
+
+Extend coordinates from $\mathbb{R}$ to $\mathbb{C}$ and consider the change of basis:
+$$
+\frac{\partial}{\partial \bar{z}_k} \quad \frac{\partial}{\partial z_k}
+$$
+$$
+\frac{\partial}{\partial z_k} = \frac{1}{2} \left( \frac{\partial}{\partial x_k} - i \frac{\partial}{\partial y_k} \right) \quad \text{and} \quad \frac{\partial}{\partial \bar{z}_k} = \frac{1}{2} \left( \frac{\partial}{\partial x_k} + i \frac{\partial}{\partial y_k} \right)
+$$
+In the language of manifolds, $J_{\mathbb{R}}$ is written under the basis $\frac{\partial}{\partial x_k}$ and $\frac{\partial}{\partial y_k}$.
+Now we do change of basis to $\frac{\partial}{\partial z_k}$ and $\frac{\partial}{\partial \bar{z}_k}$.
+
+$$
+\left[ \frac{\partial}{\partial x_1}, \ldots, \frac{\partial}{\partial x_n}, \frac{\partial}{\partial y_1}, \ldots, \frac{\partial}{\partial y_n} \right] A = T \left[ \frac{\partial}{\partial x_1}, \ldots, \frac{\partial}{\partial x_n}, \frac{\partial}{\partial y_1}, \ldots, \frac{\partial}{\partial y_n} \right] \quad (\ast)
+$$
+$$
+\left[ \frac{\partial}{\partial z_1}, \ldots, \frac{\partial}{\partial z_n}, \frac{\partial}{\partial \bar{z}_1}, \ldots, \frac{\partial}{\partial \bar{z}_n} \right] B = T \left[ \frac{\partial}{\partial z_1}, \ldots, \frac{\partial}{\partial \bar{z}_n} \right] \quad (\ast\ast)
+$$
+Also note that
+$$
+\left[ \frac{\partial}{\partial z_1}, \ldots, \frac{\partial}{\partial z_n}, \frac{\partial}{\partial \bar{z}_1}, \ldots, \frac{\partial}{\partial \bar{z}_n} \right] = \left[ \frac{\partial}{\partial x_1}, \ldots, \frac{\partial}{\partial x_n}, \frac{\partial}{\partial y_1}, \ldots, \frac{\partial}{\partial y_n} \right] P
+$$
+$$
+P = \frac{1}{2} \begin{pmatrix}
+I & I \\
+-iI & iI
+\end{pmatrix}
+$$
+$$
+P^{-1} = 2 \begin{pmatrix}
+I & iI \\
+I & -iI
+\end{pmatrix} \quad (\text{correct the mistake})
+$$
+and then plug it in we get $B = P^{-1} A P$.
+
+With respect to this basis, $J_{\mathbb{R}} f$ has form
+$$
+\begin{pmatrix}
+\left( \frac{\partial f_j}{\partial x_k} (p) \right)_{j, k} & \left( \frac{\partial f_j}{\partial y_k} (p) \right)_{j, k} \\
+\left( \frac{\partial \bar{f}_j}{\partial x_k} (p) \right)_{j, k} & \left( \frac{\partial \bar{f}_j}{\partial y_k} (p) \right)_{j, k}
+\end{pmatrix}
+$$
+If $f$ is holomorphic at $p$:
+$$
+\begin{pmatrix}
+J_{\mathbb{C}} f(p) & 0 \\
+0 & \overline{J_{\mathbb{C}} f(p)}
+\end{pmatrix}
+$$
+
+\begin{example}
+$n=m=1$
+$$
+P^{-1} \begin{pmatrix} u_x & u_y \\ v_x & v_y \end{pmatrix} P =
+$$
+\end{example}
+
+\begin{lemma}
+Suppose $n=m$ and $f: \mathbb{C}^n \to \mathbb{C}^n$ is holomorphic at $p \in \mathbb{C}^n$.
+\begin{enumerate}[(i)]
+    \item $\det J_{\mathbb{R}} f(p) = | \det J_{\mathbb{C}} f(p) |^2 \ge 0$.
+    \item $\det J_{\mathbb{R}} f(p) \ne 0 \iff \det (J_{\mathbb{C}} f(p)) \ne 0 \iff p$ is a regular point of $f$.
+\end{enumerate}
+\end{lemma}
+
+\begin{theorem}[Holomorphic inverse function theorem]
+Let $F: U \to V$ be a holomorphic map of open sets $U, V \subset \mathbb{C}^n$ and let $p \in U$ be a regular point of $F$. Then there exist open sets $U' \subset U$, and $V' \subset V$ such that $p \in U'$ and $F(U') \subset V'$ and $F|_{U'} : U' \to V'$ is a holomorphism.
+\end{theorem}
+
+\begin{proof}
+By the lemma, $p$ is a regular point of $F$
+$$
+\implies \det (J_{\mathbb{R}} F(p)) \ne 0
+$$
+Then by the real inverse function theorem,
+$$
+\exists \text{ real differentiable inverse of } F \text{ locally at } p, \text{ say } F^{-1}: V' \to U'.
+$$
+We need to check $F^{-1}$ is holomorphic at $p$.
+$F$ is holomorphic at $p$
+$$
+\implies dF|_{p} : \mathbb{R}^{2n} \to \mathbb{R}^{2n} \text{ is } \mathbb{C}\text{-linear}
+$$
+$$
+\implies dF^{-1}|_{F(p)} : \mathbb{R}^{2n} \to \mathbb{R}^{2n} \text{ is } \mathbb{C}\text{-linear}
+$$
+$$
+\implies F^{-1} \text{ is holomorphic at } p'.
+$$
+\end{proof}
+
+\begin{theorem}[Holomorphic implicit function theorem]
+Let $F: U \to \mathbb{C}^m$ be holomorphic, and $p = (a, b) \in U$.
+$$
+U \underset{\text{open}}{\subset} \mathbb{C}^n \times \mathbb{C}^m
+$$
+Suppose $\det \left( J_p^w (F) \right) \ne 0$, where $J_p^w (F) = \left( \frac{\partial F_i}{\partial w_k} (p) \right)_{\substack{1 \le i \le m \\ 1 \le k \le m}}$.
+Then there exist open sets $V \subset \mathbb{C}^n$ and $W \subset \mathbb{C}^m$, $(a, b) \in V \times W \subset U$, and a holomorphic function $g: V \to W$ such that
+$$
+\{ (z, w) \in V \times W \mid F(z, w) = F(a, b) \} = \text{Graph}(g).
+$$
+i.e., locally the fibre of $F$ at $F(a, b)$ is the graph of the holomorphic function $g$.
+\end{theorem}
+
+\begin{proof}
+Same as in the real case, except we use the holomorphic inverse theorem.
+\end{proof}
+
+\newpage
+\section{Algebraic Curves as Riemann Surfaces}
+
+\begin{example}
+(\textbf{Motivating Example}) \\
+For $f: \mathbb{C} \to \mathbb{C}$ holomorphic, $\text{Graph}(f) = \{ (z, w) \in \mathbb{C}^2 \mid f(z) = w \}$ is a \textbf{Riemann Surface} with charts given by $\pi_z: \text{Graph}(f) \xrightarrow{\cong} \mathbb{C}$.
+\end{example}
+
+\subsection{Affine plane curves}
+
+\begin{definition}
+A \textbf{complex affine curve} is the zero locus of non-constant $f \in \mathbb{C}[z, w]$.
+$$
+X := V(f) = \{ (z, w) \in \mathbb{C}^2 \mid f(z, w) = 0 \} \subset \mathbb{C}^2.
+$$
+\end{definition}
+
+\begin{remark}
+By the holomorphic inverse function theorem: for $p \in X$.
+\begin{itemize}
+    \item If $\frac{\partial f}{\partial w} (p) \ne 0$, then locally at $p$, $X$ is graph of a holomorphic function $g(z) = w$.
+    \item If $\frac{\partial f}{\partial z} (p) \ne 0$, then locally at $p$, $X$ is the graph of a holomorphic function $h(w) = z$.
+\end{itemize}
+\end{remark}
+
+\begin{definition}[Singular points]
+Let $f \in \mathbb{C}[z, w]$ and $X = V(f)$, and $p \in X$.
+\begin{enumerate}[(i)]
+    \item $f$ is
+    $$
+    \begin{cases}
+    \text{non-singular at } p & \text{if } \frac{\partial f}{\partial z} (p) \ne 0 \text{ or } \frac{\partial f}{\partial w} (p) \ne 0 \\
+    \text{singular at } p & \text{if } \frac{\partial f}{\partial z} (p) = \frac{\partial f}{\partial w} (p) = 0.
+    \end{cases}
+    $$
+    \item $X$ is \textbf{non-singular} or \textbf{smooth} if $f$ has no singular points.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Multiplicity of $p \in X = V(f)$]
+At $p = (a, b) \in X = V(f)$, we have the Taylor Expansion
+$$
+f(z, w) = \sum_{n \ge 0} \frac{1}{n!} \sum_{k=0}^n \binom{n}{k} C_{k, n-k} (z-a)^k (w-b)^{n-k}
+$$
+where $C_{k, n-k} = \frac{\partial^n f}{\partial z^k \partial w^{n-k}} (p)$.
+
+Let $\text{mult}_p(X) = \min \{ n \ge 0 : \exists k \text{ with } C_{k, n-k} \ne 0 \} \ge 1$.
+If $\text{mult}_p(X) = n > 1$, we say $p$ is an \textbf{$n$-fold point} of $X$.
+\end{definition}
+
+\begin{remark}
+$\text{mult}_p(X) > 1 \iff \frac{\partial f}{\partial z} (p) = \frac{\partial f}{\partial w} (p) = 0 \iff p$ is a singular point.
+\end{remark}
+
+\begin{definition}[Tangent lines]
+Let $p = (a, b) \in X = V(f) \subset \mathbb{C}^2$ be a smooth point. The \textbf{tangent line} of $X$ at $p$ is the line
+$$
+\frac{\partial f}{\partial z} (p) (z-a) + \frac{\partial f}{\partial w} (p) (w-b) = 0.
+$$
+\end{definition}
+
+\begin{theorem} \label{planecurvesaresurfaces}
+If $f(z, w) \in \mathbb{C}[z, w]$ is non-singular, then the associated smooth affine plane curve $X = V(f) \subset \mathbb{C}^2$ is a Riemann surface.
+(But may not be compactified.)
+\end{theorem}
+
+\begin{proof}
+$\forall p \in X$:
+$$
+\text{i) } \frac{\partial f}{\partial z} (p) \ne 0 \quad \text{or} \quad \text{ii) } \frac{\partial f}{\partial w} (p) \ne 0.
+$$
+By the holomorphic implicit function theorem: $\exists$ holomorphic function $g: V_p \to W_p$,
+for $V_p, W_p \subset \mathbb{C}$ and an open neighborhood $U_p \subset X$ such that
+\begin{enumerate}[(i)]
+    \item $W_p \times V_p \subset U_p$.
+    \item $V_p \times W_p \subset U_p$.
+\end{enumerate}
+and $\quad \text{(i) } g_p(w) = z \quad \text{or} \quad \text{(ii)} g_p(z) = w.$
+$$
+\text{Consider} \quad \text{(i) } \pi_w : U_p \to \mathbb{C}, \quad \text{(ii) } \pi_z : U_p \to \mathbb{C}.
+$$
+$$
+(z, w) \mapsto w \quad (z, w) \mapsto z.
+$$
+We define a chart $\phi_p: U_p \xrightarrow{\cong} \pi_{w/z}(U_p)$.
+
+\begin{claim*}
+$\mathcal{A} = \{ \phi_p \mid p \in X \}$ is an atlas.
+\end{claim*}
+
+We only have to show the compatibility. We only consider the hard case. $\phi_p = \pi_w$ and $\phi_q = \pi_z$, for $s \in U_p \cap U_q$.
+One partial derivative of $f$ is non-zero at $s$.
+Without loss of generality, $\frac{\partial f}{\partial w} (s) \ne 0$. $\implies \exists$ holomorphic $h: V_s \to W_s$ such that $w = h(z)$.
+$$
+\pi_w \circ \pi_z^{-1} : \pi_z (U_p \cap U_q) \cap V_s \to \pi_w (U_p \cap U_q) \cap W_s
+$$
+$$
+z \longmapsto \pi_w \circ \pi_z^{-1} (z) = \pi_w (z, h(z)) = h(z)
+$$
+which is holomorphic.
+\end{proof}
+
+\begin{remark}
+\begin{enumerate}[(i)]
+    \item $X = V(f)$ is not compact.
+    (Since $\pi_z$ has non-constant holomorphic functions, and $X$ has only constant holomorphic functions if $X$ is compact).
+    \item \textbf{Algebraic Geometry}: If $f$ is irreducible $\implies V(f)$ is connected.
+\end{enumerate}
+\end{remark}
+
+\textbf{Assume}: $f$ is irreducible, so $V(f)$ is connected.
+
+\subsection{Projective Plane Curve}
+
+\textbf{Motivation}: We want to compactify affine plane curves.
+
+\textbf{Idea}:
+$$
+\mathbb{C}^2 \hookrightarrow \mathbb{C} P^2
+$$
+$$
+(x, y) \mapsto [x: y: 1]
+$$
+
+\begin{definition}
+A \textbf{complex projective plane curve} is the zero locus of a homogeneous polynomial $F \in \mathbb{C}[x, y, z]$ in the projective plane $\mathbb{C} P^2$.
+$$
+V(F) = \{ [x: y: z] \in \mathbb{C} P^2 \mid F(x, y, z) = 0 \}.
+$$
+\end{definition}
+
+\textbf{From affine to projective}: homogenization and dehomogenization
+$$
+\mathbb{C} P^2 = \bigcup_{i=0}^2 U_i, \quad U_i \cong \mathbb{C}^2. \quad U_0 = \{ x \ne 0 \}, \quad U_1 = \{ y \ne 0 \}, \quad U_2 = \{ z \ne 0 \}.
+$$
+
+$$
+\{ \text{projective plane curves} \} \longleftrightarrow \{ \text{affine plane curves} \}.
+$$
+
+$X = V(F) \subset \mathbb{C} P^2$
+$$
+= \bigcup_{i=0}^2 X_i \quad \implies \quad X_i = U_i \cap X \subset \mathbb{C}^2.
+$$
+Example: $X_2 = U_2 \cap X = V(f)$, $f(x, y) = F(x, y, 1)$.
+$$
+F(x, y, z) = \sum_{i+j+k=d} a_{i, j, k} x^i y^j z^k
+\longleftarrow \longrightarrow
+f(x, y) = \sum_{i+j \le d} a_{i, j, d-i-j} x^i y^j
+$$
+$$
+V(F) \cap X_z = V(f).
+$$
+
+\begin{definition}
+A projective plane curve $X = V(F) \subset \mathbb{C} P^2$ is \textbf{singular} at $p$ if
+$$
+\frac{\partial F}{\partial x} (p) = \frac{\partial F}{\partial y} (p) = \frac{\partial F}{\partial z} (p) = 0.
+$$
+Otherwise $p$ is \textbf{non-singular}. $X$ is \textbf{smooth} if it's smooth at every $p \in X$.
+\end{definition}
+
+\begin{exercise}
+$X$ smooth $\iff X_i = X \cap U_i \subset \mathbb{C}^2$ is smooth. $\forall 0 \le i \le 2$.
+\end{exercise}
+
+\begin{theorem} \label{projplanecurvesarers}
+A smooth projective plane curve $X = V(F) \subset \mathbb{C} P^2$ is a \textbf{compact Riemann Surface}.
+\end{theorem}
+
+\begin{proof}
+
+We cover the complex projective plane $\mathbb{C}P^2$ with its three standard affine charts:
+\begin{itemize}
+    \item $U_0 = \{[Z_0:Z_1:Z_2] \mid Z_0 \neq 0\}$, with affine coordinates $(x,y) = (Z_1/Z_0, Z_2/Z_0)$.
+    \item $U_1 = \{[Z_0:Z_1:Z_2] \mid Z_1 \neq 0\}$, with affine coordinates $(u,v) = (Z_0/Z_1, Z_2/Z_1)$.
+    \item $U_2 = \{[Z_0:Z_1:Z_2] \mid Z_2 \neq 0\}$, with affine coordinates $(s,t) = (Z_0/Z_2, Z_1/Z_2)$.
+\end{itemize}
+Let $X_i = X \cap U_i$ for $i=0,1,2$. Each $X_i$ is a smooth affine plane curve. From a previous theorem, we know that a smooth affine curve is a Riemann surface.
+
+We construct an atlas for $X$ by taking the union of the atlases for the Riemann surfaces $X_0, X_1,$ and $X_2$. We only need to check that the transition maps between charts from different affine pieces are holomorphic.
+
+Consider the transition from a chart on $X_0$ to one on $X_1$. The coordinate change from $U_0$ to $U_1$ is given by:
+$$ u = \frac{Z_0}{Z_1} = \frac{1}{x}, \quad v = \frac{Z_2}{Z_1} = \frac{y}{x} $$
+This map is a biholomorphism on the overlap $U_0 \cap U_1$. A transition map for the atlas of $X$ is a composition of a local chart map (a projection), the coordinate change map above, and another local chart map. Since all of these maps are holomorphic, their composition is holomorphic. The same logic applies to all other pairs of affine charts.
+
+Thus, the union of the atlases for the $X_i$ forms a valid complex atlas for $X$, making it a \textbf{Riemann Surface}.
+.
+\end{proof}
+
+
+\subsection{Algebraic varieties (affine \& projective)}
+Affine space $\mathbb{A}_{\mathbb{C}}^n := \mathbb{C}^n$ with the \textbf{Zariski topology}: where closed sets are algebraic subsets.
+
+There are maps
+$$
+\{ \text{aly subsets of } \mathbb{A}_{\mathbb{C}}^n \} \underset{V}{\overset{I}{\longleftrightarrow}} \{ \text{ideals } I \subset \mathbb{C}[z_1, \ldots, z_n] \}
+$$
+$$
+X \in \mathbb{A}_{\mathbb{C}}^n \quad \longrightarrow \quad I(X) = \{ f : f|_X = 0 \}
+$$
+$$
+V(J) = V(f_1, \ldots, f_n) \quad \longleftarrow \quad J = \langle f_1, \ldots, f_n \rangle
+$$
+This is not a bijective map. Roughly the take-away message is that we have a way to move between algebra and geometry.
+
+\begin{definition}
+An \textbf{affine algebraic variety} is an algebraic subset $X \in \mathbb{A}_{\mathbb{C}}^n$ such that $I(X)$ is prime.
+\begin{itemize}
+    \item The \textbf{coordinate ring} of $X$ is $\mathbb{C}[z_1, \ldots, z_n] / I(X)$.
+    \item The \textbf{function field} of $X$ is $\mathbb{C}(X) = \text{Frac} (\mathbb{C}[X])$.
+    \item At $p = (a_1, \ldots, a_n) \in \mathbb{A}_{\mathbb{C}}^n$, $\mathfrak{m}_p = \langle z_1 - a_1, \ldots, z_n - a_n \rangle \subset \mathbb{C}[z_1, \ldots, z_n]$ is a \textbf{maximal ideal}.
+    \item $\mathcal{O}_{X, p}^{\text{alg}} := \mathbb{C}[X]_{\mathfrak{m}_p} = \left\{ \frac{f}{g} : f, g \in \mathbb{C}[X] \text{ such that } g(p) \ne 0 \right\}$.
+\end{itemize}
+Unlike for complex manifolds, we have $\mathcal{O}_{X, p}^{\text{alg}} \ne \mathcal{O}_{X, p}^{\text{holo}}$ in general.
+\end{definition}
+
+\begin{definition}[Dimension \& smoothness]
+For $p \in X = V(f_1, \ldots, f_m) \subset \mathbb{C}^n$, the \textbf{Jacobian} of $X$ at $p$ is
+$$
+J_{X, p} = \left( \frac{\partial f_i}{\partial z_j} (p) \right)_{i, j} \quad \text{w.r.t. to generators } f_1, \ldots, f_m.
+$$
+\begin{enumerate}[(i)]
+    \item $\dim(X) = \min_{p \in X} \{ n - \text{rank} J_{X, p} \}$. \textbf{Dimension} of $X$.
+    If $\dim(X) = 1$, we call $X$ a \textbf{curve}.
+    \item $p \in X$ is \textbf{smooth} if $\dim(X) = n - \text{rank} J_{X, p}$.
+    (Singular otherwise). $X$ is smooth if all $p \in X$ are smooth.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+$\text{rank } J_{X, p}$ is independent of choice of generators. (Why?)
+\end{remark}
+
+\subsection{Projective algebraic curves}
+
+Projective space $\mathbb{C} P^n$ has \textbf{Zariski topology}: where closed sets are again algebraic sets. $V(\{ F_i \mid i \in I \})$ where $F_i \in \mathbb{C}[x_0, \ldots, x_n]$ are homogeneous.
+$$
+V(\{ F_i \mid i \in I \}) = \{ [x_0: \ldots: x_n] \in \mathbb{C} P^n : F_i(x_0, \ldots, x_n) = 0, \forall i \in I \}.
+$$
+
+There are (non-bijective) maps
+$$
+\{ \text{alg subsets in } \mathbb{C} P^n \} \underset{V}{\overset{I}{\longleftrightarrow}} \{ \text{homo. ideals in } \mathbb{C}[x_0, \ldots, x_n] \}.
+$$
+
+\begin{definition}
+A \textbf{projective algebraic variety} is an algebraic subset $X \subset \mathbb{C} P^n$ such that $I(X)$ is prime.
+\end{definition}
+
+\textbf{(De)homogenization: from proj to affine \& back}\\
+We can do the same as before.
+
+\begin{definition}
+For $X = V(F_1, \ldots, F_m) \subset \mathbb{C} P^n$
+\begin{itemize}
+    \item The \textbf{homogeneous coordinate ring} of $X$ is $\mathbb{C}[x_0, \ldots, x_n] / I(X)$.
+    \item The \textbf{function field} of $X = \text{function field of } X_i \text{ for any } i$.
+    \item The \textbf{algebraic local ring} of $X$ at $p$ is $\mathcal{O}_{X, p}^{\text{alg}} := \mathcal{O}_{X_i, p}^{\text{alg}} \text{ for } p \in X_i$.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Smoothness \& Dimensions]
+$p \in X$. The \textbf{Jacobian} $J_{X, p} = \left( \frac{\partial F_i}{\partial x_j} (p) \right)_{i, j}$
+\end{definition}
+
+\begin{enumerate}[(i)]
+    \item $\dim(X) = \min_{p \in X} \{ n - \text{rank} J_{X, p} \}$. If $\dim(X) = 1$, $X$ a curve.
+    \item $p \in X$ smooth if $\dim(X) = n - \text{rank} J_{X, p}$, otherwise $p$ is singular.
+    \item $X$ is smooth if all $p \in X$ smooth.
+\end{enumerate}
+
+\begin{exercise}
+$X \subset \mathbb{C} P^n$ is smooth $\iff X_i \in \mathbb{A}_{\mathbb{C}}^n$ is smooth $\forall 0 \le i \le n$.
+\end{exercise}
+
+\begin{theorem} \label{curvesaresurfaces}
+\text{(Generalized Version for the Plane Curve Version)}
+\begin{enumerate}[1.]
+    \item Smooth affine curves are Riemann Surfaces.
+    \item Smooth projective curves are compact Riemann Surfaces.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof of 1.]
+Let $X = V(f_1, \ldots, f_m) \subset \mathbb{A}_{\mathbb{C}}^n$ be a smooth affine curve.
+To define a complex structure on $X$, we define local charts at each $p \in X$.
+$X$ smooth of $\dim 1 \implies \forall p \in X$, $J_{X, p} : \mathbb{C}^n \to \mathbb{C}^m$ has rank $n-1$.
+After a change of coordinates, we can assume without loss of generality that $\frac{\partial f_i}{\partial z_j} (p)|_{j \in \{ 1, \ldots, n \}} \ne 0$.
+The holomorphic implicit function theorem $\implies$ locally at $p$,
+$$
+X = \text{Graph}(g), \quad g: \mathbb{C} \to \mathbb{C}^{n-1}.
+$$
+Then $\pi_{z_1}: X \to \mathbb{C}$ is a homeomorphism onto its image and this defines a local chart $\phi_p$ at $p$.\\
+\noindent As for compatibility of charts,we do the same as in the proof of  \ref{planecurvesaresurfaces}
+
+\end{proof}
+\begin{proof}[Proof of 2.]
+    Note that $X=\cup X_i$, with $X_i=U_i \cap X$ are affine curves, then we proceed as the proof in \ref{projplanecurvesarers}
+\end{proof}
 
 \end{document}
