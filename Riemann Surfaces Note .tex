@@ -123,8 +123,8 @@ OUr goal in this note is to obtain Riemann-Roch theorem and its application.
 \newpage
 
 \section{Riemann Surfaces and complex \textbf{manifolds}.}
-\subsection{holomorphic functions in 1-variable}
-\subsection{holomorphic functions in $n$-variables}
+\subsection{Holomorphic functions in 1-variable}
+\subsection{Holomorphic functions in $n$-variables}
 \subsection{Complex manifolds \& Riemann Surfaces.}
 
 \begin{definition}
@@ -762,7 +762,7 @@ For $f \in \mathcal{M}(\mathbb{C}_{\infty})$, $\sum_{p \in \mathbb{C}_{\infty}} 
 
 \subsection{The degree of a holomorphic map}
 
-\begin{theorem} 
+\begin{theorem} \label{degree of holo map between copt rs}
 Let $F: X \to Y$ be a non-constant holomorphic map of compact **Riemann Surfaces**.
 For $q \in Y$, the quantity $\text{deg}_q(F) = \sum_{p \in F^{-1}(q)} \text{mult}_p(F)$ is independent of $q$.
 \end{theorem}
@@ -824,7 +824,9 @@ Thus $f$ is constant.
 \end{corollary}
 
 \begin{proof}
-    Left as an exercise
+    \begin{exercise}
+        
+    \end{exercise}
 \end{proof}
 
 \begin{corollary}
@@ -860,7 +862,7 @@ $$
 $$
 \end{proof}
 
-\subsection{ Germs of holomorphic functions}
+\subsection{Germs of holomorphic functions}
 
 \begin{definition}
 For a complex manifold $X$ and $p \in X$, we define the ring of germs of holomorphic functions at $p$:
@@ -1372,6 +1374,425 @@ Then $\pi_{z_1}: X \to \mathbb{C}$ is a homeomorphism onto its image and this de
 \end{proof}
 \begin{proof}[Proof of 2.]
     Note that $X=\cup X_i$, with $X_i=U_i \cap X$ are affine curves, then we proceed as the proof in \ref{projplanecurvesarers}
+\end{proof}
+
+\subsection{Holomorphic \& Meromorphic Functions on Smooth Curves}
+
+\begin{itemize}
+    \item \textbf{Smooth affine curves}
+    \begin{itemize}
+        \item $X = V(f_1, \dots, f_m)$ for $f_i$ poly in $\mathbb{A}^n$.
+        \item $X$ is a non-compact RS (Riemann Surface).
+        \item The coordinate functions $x_i$ are \textbf{holomorphic}.
+        \item Any poly $g(x_1, \dots, x_n) \in \mathcal{O}(X)$.
+        \item Any ratio $\frac{g(x_1, \dots, x_n)}{h(x_1, \dots, x_n)}$ of polynomials with $h \notin I(X)$ is a \textbf{meromorphic} function on $X$.
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Smooth Projective curves}
+    \begin{itemize}
+        \item $X = V(F_1, \dots, F_m)$ for homogeneous $F_i$ in $\mathbb{P}^n$.
+        \item $X$ is a \textbf{compact} RS.
+        \item $X$ is compact $\implies \mathcal{O}(X) = \mathbb{C}$.
+        \item Let $G, H \in \mathbb{C}[x_1, \dots, x_{n+1}]$ be homogeneous polynomials of the same degree.
+        \item $G/H: \mathbb{P}^n \setminus V(H) \to \mathbb{C}$
+        \item If $H \notin I(X)$, then $G/H \in \mathcal{M}(X)$.
+    \end{itemize}
+\end{itemize}
+
+\newpage
+\section{Divisors on Riemann Surfaces}
+
+\subsection{Divisors, principal divisors and the class group.}
+
+\begin{definition}
+    \begin{enumerate}[(i)]
+        \item A \textbf{divisor} on a Riemann Surface $X$ is a function
+        $$D: X \to \mathbb{Z}$$
+        whose support $\text{supp}(D) = \{x \in X: D(x) \neq 0\}$ is \textbf{discrete}.
+        \item A divisor $D$ is \textbf{effective} ($D \ge 0$) if $\text{Im}(D) \subseteq \mathbb{N}$.
+    \end{enumerate}
+\end{definition}
+
+\noindent \textbf{Notation}
+    \begin{itemize}
+        \item $D = \sum_{x \in X} m_x \cdot x$ with $m_x \in \mathbb{Z}$.
+        \item $\text{Div}(X)$ $\coloneqq$ set of divisors on $X$.
+    \end{itemize}
+
+\begin{remark}
+    $\text{Div}(X)$ is an \textbf{abelian group} under pointwise addition
+    $$\sum_{x \in X} m_x \cdot x + \sum_{x \in X} n_x \cdot x = \sum_{x \in X} (m_x + n_x) \cdot x$$
+    with identity the \textbf{zero-divisor}.
+\end{remark}
+
+\begin{example}
+    For any $p \in X$, there is an associated divisor $\tau_p \coloneqq 1 \cdot p$.
+\end{example}
+
+\begin{definition}
+    For a \textbf{compact} RS $X$, we define
+    $$\text{deg}: \text{Div}(X) \to \mathbb{Z}$$
+    $$D = \sum_{x \in X} m_x \cdot x \mapsto \sum_{x \in X} m_x = \deg(D)$$
+\end{definition}
+
+\begin{remark}
+    $\deg$ is a \textbf{group homomorphism}.
+\end{remark}
+
+\begin{definition}
+    \begin{enumerate}[(i)]
+        \item The \textbf{divisor of a meromorphic function} $f \in \mathcal{M}(X)^\times$ is
+        $$\text{div}(f) \coloneqq \sum_{p \in X} \text{ord}_p(f) \cdot p \in \text{Div}(X).$$
+        \item $D \in \text{Div}(X)$ is \textbf{principal} if there exists $f \in \mathcal{M}(X)^\times$ such that
+        $$D = \text{div}(f).$$
+    \end{enumerate}
+\end{definition}
+
+\noindent \textbf{Notation:}\\
+    $P\text{Div}(X) \subset \text{Div}(X)$ subset of principal divisors.
+
+
+\begin{remark}
+    \begin{enumerate}[(i)]
+        \item $\text{div}(f)$ is a divisor with support $\text{supp}(\text{div}(f)) = Z(f) \cup P(f)$ (zeros and poles of $f$).
+        \item For $X$ compact, $\deg(\text{div}(f)) = \sum_{p \in X} \text{ord}_p(f) = 0$.
+        \item $\text{div}: \mathcal{M}(X)^\times \to \text{Div}(X)$ is a group homomorphism.
+        \item $\text{div}(f) = \text{div}_0(f) - \text{div}_\infty(f)$ where
+        $$\text{div}_0(f) = \sum_{p \in Z(f)} \text{ord}_p(f) \cdot p$$
+        $$\text{div}_\infty(f) = \sum_{p \in P(f)} -\text{ord}_p(f) \cdot p$$
+    \end{enumerate}
+\end{remark}
+
+\begin{example}
+    \begin{enumerate}[(a)]
+        \item If $f = \lambda \in \mathcal{M}(X)^\times$ is a constant function, then $\text{div}(\lambda) = 0$.
+        \item If $f(z) = \lambda \prod_{i=1}^m (z-a_i)^{n_i} \in \mathbb{C}(z) = \mathcal{M}(\mathbb{C} \cup \{\infty\})$, then
+        $$\text{div}(f) = \sum_{i=1}^m n_i \cdot a_i - \left(\sum_{i=1}^m n_i\right) \cdot \infty.$$
+    \end{enumerate}
+\end{example}
+
+\begin{lemma}
+    $P\text{Div}(X) \subset \text{Div}(X)$ is a subgroup.
+\end{lemma}
+\begin{proof}
+    $\text{div}(fg^{\pm 1}) = \text{div}(f) \pm \text{div}(g)$.
+\end{proof}
+
+\begin{definition}
+    \begin{enumerate}[(i)]
+        \item Two divisors $D, E \in \text{Div}(X)$ are \textbf{linearly equivalent}, written $D \sim E$,
+        if $E - D \in P\text{Div}(X)$.
+        \item The \textbf{class group} of $X$ is
+        $$\text{Cl}(X) = \text{Div}(X) / P\text{Div}(X) = \text{Div}(X) / \sim.$$
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    $\sim$ is an equivalence relation and $D \sim 0 \iff D \in P\text{Div}(X)$.
+\end{remark}
+
+\begin{lemma}
+    For $X$ compact, $D \sim E$ then $\deg(D) = \deg(E)$.
+    Thus $\deg: \text{Div}(X) \to \mathbb{Z}$ factors via $\text{Cl}(X)$.
+\end{lemma}
+\begin{proof}
+    $D - E$ is Principal and Principal divisors have degree $0$.
+\end{proof}
+
+\begin{example}
+    \begin{enumerate}[(a)]
+        \item If $f \in \mathcal{M}(X)$, $\text{div}(f) \sim 0$ but $\text{div}(f) \neq 0$.
+        \item Let $X = \mathbb{C} \cup \{\infty\} = \mathbb{P}^1$. Any two points $p, q \in \mathbb{C} \cup \{\infty\}$ are linearly equivalent.
+        $$p - q = \text{div} \left(\frac{z - p}{z - q}\right) \quad \text{if } p, q \neq \infty.$$
+    \end{enumerate}
+\end{example}
+
+\begin{lemma}
+    $$\deg: \text{Cl}(\mathbb{P}^1) \to \mathbb{Z}$$
+    is an \textbf{isomorphism}.
+\end{lemma}
+
+\begin{proof}
+    Clearly $\deg$ is surjective. For injectivity, we claim
+    $$D \in P\text{Div}(\mathbb{P}^1) \iff \deg(D) = 0.$$
+    We've seen $(\implies)$. For $(\impliedby)$, take $D = \sum_{i} n_i \cdot a_i + n_{\infty} \cdot \infty$.
+    $$\deg(D) = 0 \implies n_{\infty} = - \sum n_i \implies D = \text{div}\left( \prod_i (z-a_i)^{n_i} \right).$$
+\end{proof}
+
+\subsection{Pullbacks of divisors.}
+
+\begin{definition}
+    For a \textbf{non-constant holomorphic map} $F: X \to Y$ of RS, we define the \textbf{pullback map} $F^*: \text{Div}(Y) \to \text{Div}(X)$ by
+    $$D = \sum_{q \in Y} n_q \cdot q \mapsto F^*(D) = \sum_{q \in Y} n_q \cdot \sum_{p \in F^{-1}(q)} \text{mult}_p(F) \cdot p$$
+    $$= \sum_{p \in X} \text{mult}_p(F) \cdot n_{F(p)} \cdot p$$
+\end{definition}
+
+\begin{example}
+    Recall $f \in \mathcal{M}(X)$. Corresponds to $F: X \to \mathbb{P}^1$.
+    $$\text{div}_0(f) = F^*([0]) \quad \& \quad \text{div}_\infty(f) = F^*([\infty]) \quad \& \quad \text{div}(f) = F^*([0] - [\infty]).$$
+\end{example}
+
+\begin{lemma}
+    \begin{enumerate}[(i)]
+        \item $F^*$ is a group homomorphism.
+        \item $F^*(\text{div}(g)) = \text{div}(F^*g)$ for $g \in \mathcal{M}(Y)$
+        $$\text{where } F^*: \mathcal{M}(Y) \to \mathcal{M}(X)$$
+        $$g \mapsto F^*g = g \circ F.$$
+        \item $D_1 \sim D_2 \text{ in } \text{Div}(Y) \implies F^* D_1 \sim F^* D_2 \text{ in } \text{Div}(X)$
+        i.e. $F^*$ descends to the class group.
+        \item If $X$ and $Y$ are compact, then $\deg(F^*(D_1)) = \deg(D_1) \cdot \deg(F)$.
+    \end{enumerate}
+\end{lemma}
+    \begin{exercise}
+        Prove the above lemma
+    \end{exercise}
+
+
+\begin{example}
+    If $F: X \to \mathbb{C} \cup \{\infty\}$ is holomorphic, for any $p, q \in \mathbb{C} \cup \{\infty\}$ we have $F^*([p] - [q]) \sim 0$.
+\end{example}
+
+\subsection{Intersection divisors}
+
+Fix a smooth projective algebraic curve $X \subset \mathbb{P}^n$.
+
+\begin{definition}
+    The \textbf{intersection divisor} of $X$ with a hypersurface
+    $V(G) \subset \mathbb{P}^n$ defined by a homogeneous polynomial $G \in \mathbb{C}[x_0, \dots, x_n]$
+    with $G \notin I(X)$ is
+    $$\text{div}_X(G) := \sum_{p \in X} \text{ord}_p(G) \cdot p \in \text{Div}(X)$$
+    where
+    $$\text{ord}_p(G) := \text{ord}_p(G/H)$$
+    where $H \in \mathbb{C}[x_0, \dots, x_n]_{\deg(G)}$ is a homogeneous polynomial of the same degree as $G$ and $H(p) \neq 0$.
+
+    If $\deg(G) = 1$, then we call $\text{div}_X(G)$ a \textbf{hyperplane divisor}.
+    i.e. $V(G) \subset \mathbb{P}^n$ is a hyper plane.
+\end{definition}
+
+\begin{remark}
+    People may wonder why we have to define $\text{ord}_p(G)$ as $\text{ord}_p(G/H)$, it is because G is not a well defined function on the projective curves, but once we we divide the $H$ we get a well-defined meromorphic functions on the projective curves (as a Riemann Surface), and hence the $\text{ord}_p$ make sense. Also, We need to check the definitnoin is independent of choice of $H$.
+\end{remark}
+
+\begin{exercise}
+    Check $\text{div}_X(G)$ is well-defined.
+\end{exercise}
+
+\begin{lemma}
+    If $G_1, G_2 \in \mathbb{C}[x_0, \dots, x_n]_{\deg(G)}$ with $G_1, G_2 \notin I(X)$,
+    for $X \subset \mathbb{P}^n$, then $\text{div}_X(G_1) \sim \text{div}_X(G_2)$.
+\end{lemma}
+\begin{proof}
+    $f = G_1/G_2 \in \mathcal{M}(X)$. $\text{div}(f) = \text{div}_X(G_1) - \text{div}_X(G_2)$.
+\end{proof}
+
+\begin{definition}
+    The \textbf{degree of a smooth projective curve} $X \subset \mathbb{P}^n$
+    is $\deg(X) = \deg(\text{div}_X(G))$ for any homogeneous polynomial of degree 1 $G \in \mathbb{C}[x_0, \dots, x_n]$
+    with $G \notin I(X)$.
+\end{definition}
+
+\begin{exercise}
+    For a smooth projective plane curve $X = V(F) \subset \mathbb{P}^2$
+    we have $\deg(X) = \deg(F)$.
+\end{exercise}
+
+Now we are going to prove Bézout's theorem.
+
+\begin{proposition}
+For $G \in k[x_0, \ldots, x_n]_d$ with $G \notin I(X)$, for $X \subseteq \mathbb{P}^n$.
+Then $\deg(\mathrm{div}_X(G)) = \deg(X)\deg(G)$.
+\end{proposition}
+
+\begin{proof}
+Let $H \in k[x_0, \ldots, x_n]_d$, then $H^e \in k[x_0, \ldots, x_n]_{de}$.
+
+By the lemma $\mathrm{div}_X(G) \sim \mathrm{div}_X(H^e) = e \cdot \mathrm{div}_X(H)$.
+
+Thus $\deg(\mathrm{div}_X(G)) = e \cdot \deg(\mathrm{div}_X(H)) = \deg(G)\deg(X)$.
+\end{proof}
+
+\begin{corollary}[Bézout's theorem]
+For smooth projective plane curves, $X=V(F)$ and $Y=V(G) \subseteq \mathbb{P}^2$.
+$$ \#(X \cap Y) = \deg(\mathrm{div}_X(G)) = \deg(X)\deg(G) = \deg(Y)\deg(X) $$
+or
+$$ = \deg(F)\deg(G) \quad (\text{by the exercise above}) $$
+\end{corollary}
+
+\subsection*{4.4 Spaces of meromorphic functions bounded by a divisor.}
+
+\begin{definition}
+For $D = \sum_{p \in X} m_p \cdot p \in \mathrm{Div}(X)$, the space of meromorphic functions bounded by $D$ is
+$$ \mathcal{L}(D) := \{0\} \cup \{ f \in \mathcal{M}(X) : \mathrm{div}(f)+D \ge 0 \} $$
+$$ = \{ f \in \mathcal{M}(X) : \mathrm{ord}_p(f) + m_p \ge 0, \ \forall p \in X \} $$
+\end{definition}
+
+\begin{remark}
+If $m_p > 0 \implies f$ can have a pole at $p$ of order $\le m_p$. \\
+If $m_p < 0 \implies f$ can have a zero at $p$ of order $\ge -m_p$.\\
+That is, $\mathcal{L}(D)$ is the space of all meromorphic fucntion that is somehow bounded in the sense of its order of zeros and poles is bounded.
+\end{remark}
+
+\begin{lemma}
+(i) $\mathcal{L}(D)$ is a $\mathbb{C}$-vector space.
+(ii) If $D_1 \le D_2$, then $\mathcal{L}(D_1) \subseteq \mathcal{L}(D_2)$.
+(iii) $\mathcal{L}(0) = \mathcal{O}(X)$.
+\end{lemma}
+
+\begin{exercise}
+    Prove the above lemma
+\end{exercise}
+
+\begin{definition}
+$l(D) := \dim \mathcal{L}(D) \in \mathbb{N} \cup \{0\}$.
+\end{definition}
+
+\begin{example}
+If $D \ge 0$, then $l(D) \ge 1$ as $\mathbb{C} \subseteq \mathcal{L}(D)$.
+\end{example}
+
+\begin{lemma}
+If $D \sim E$, then $\mathcal{L}(D) \cong \mathcal{L}(E)$.
+\end{lemma}
+
+\begin{proof}
+Write $E = D + \mathrm{div}(g)$ for $g \in \mathcal{M}(X)^\times$ and consider
+$$ \mu_g : \mathcal{L}(E) \to \mathcal{L}(D) $$
+$$ f \mapsto f \cdot g $$
+It's well-defined since $\mathrm{div}(f \cdot g) = \mathrm{div}(f) + \mathrm{div}(g)$
+$$ \mathrm{div}(f) + E \ge 0 \iff \mathrm{div}(f) + D + \mathrm{div}(g) \ge 0 $$
+Thus $\mathrm{div}(f \cdot g) + D \ge 0$.
+
+Thus is an isomorphism since $\mu_{g^{-1}} : \mathcal{L}(D) \to \mathcal{L}(E)$.
+\end{proof}
+
+\begin{lemma}
+For a compact Riemann Surface $X$, and $D \in \mathrm{Div}(X)$ we have
+\begin{enumerate}[(i)]
+    \item $\deg(D) < 0 \implies l(D) = 0$.
+    \item $\deg(D) = 0 \implies l(D) = \begin{cases} 1 & \text{if } D \text{ is principal} \\ 0 & \text{otherwise} \end{cases}$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Suppose $f \in \mathcal{L}(D) \setminus \{0\}$, i.e., $E = \mathrm{div}(f) + D \ge 0$.
+$$ \implies \deg(E) \ge 0, \text{ but } \deg(E) = \deg(\mathrm{div}(f)) + \deg(D) = 0 + \deg(D) < 0. $$
+Here contradiction.
+
+(ii) Suppose $f \in \mathcal{L}(D) \setminus \{0\}$, i.e., $E = \mathrm{div}(f) + D \ge 0$, with $\deg(E) = 0$.
+$$ \implies E = 0. $$
+and hence $D = -\mathrm{div}(f) \in \mathrm{Div}(X) \cap \mathrm{PDiv}(X)$.
+
+In this case for $g \in \mathcal{L}(D)$, then $\mathrm{div}(g) + D = \mathrm{div}(f/g) + \mathrm{div}(f) + D = \mathrm{div}(f/g) \ge 0$.
+i.e., $\mathrm{ord}_p(f/g) \ge 0, \ \forall p \in X$.
+$$ \implies f/g \in \mathcal{O}(X) = \mathbb{C}. $$
+$$ \implies \mathcal{L}(D) = \mathrm{span}(f) \text{ so } l(D) = 1. $$
+\end{proof}
+
+\begin{proposition}
+For $D \in \mathrm{Div}(X)$ and $p \in X$, we have
+\begin{enumerate}[(i)]
+    \item $\mathcal{L}(D) \subseteq \mathcal{L}(D+p)$ as $\mathcal{L}(D) \subset \mathcal{L}(D+p)$.
+    \item $\dim \mathcal{L}(D+p)/\mathcal{L}(D) \le 1$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) Let $f \in \mathcal{L}(D)$, $f \ne 0$. By definition, $\mathrm{div}(f) + D \ge 0$.
+The divisor $D+p$ has coefficient $m_p+1$ at $p$, and $m_q$ for $q \ne p$.
+We need to check that $\mathrm{div}(f) + (D+p) \ge 0$.
+For $q \ne p$, $\mathrm{ord}_q(f) + m_q \ge 0$ is satisfied since $f \in \mathcal{L}(D)$.
+At $p$, we have $\mathrm{ord}_p(f) + (m_p+1) = (\mathrm{ord}_p(f) + m_p) + 1$.
+Since $f \in \mathcal{L}(D)$, $\mathrm{ord}_p(f) + m_p \ge 0$.
+Thus, $(\mathrm{ord}_p(f) + m_p) + 1 \ge 1 > 0$.
+Hence, $\mathrm{div}(f) + (D+p) \ge 0$ for all points, so $f \in \mathcal{L}(D+p)$.
+
+(ii) Consider the linear map $r_p: \mathcal{L}(D+p) \to \mathbb{C}$ that extracts the coefficient of the highest possible pole allowed by $D+p$ at the point $p$. Specifically, if $t$ is a local coordinate at $p$, $r_p(f)$ is the coefficient $c_{-(m_p+1)}$ in the Laurent series of $f$ near $p$.
+The kernel of this map, $\mathrm{ker}(r_p)$, consists of functions $f$ such that $c_{-(m_p+1)} = 0$.
+If $c_{-(m_p+1)} = 0$, the strongest pole $f$ can have at $p$ is of order $m_p$, meaning $\mathrm{ord}_p(f) \ge -m_p$, or $\mathrm{ord}_p(f) + m_p \ge 0$.
+Since $f \in \mathcal{L}(D+p)$ already satisfies the condition at all $q \ne p$, we have $\mathrm{ker}(r_p) = \mathcal{L}(D)$.
+By the First Isomorphism Theorem for Vector Spaces:
+$$ \mathcal{L}(D+p) / \mathcal{L}(D) \cong \mathrm{Im}(r_p) $$
+Since $\mathrm{Im}(r_p)$ is a subspace of the one-dimensional space $\mathbb{C}$, its dimension must be $0$ or $1$.
+$$ \dim \mathcal{L}(D+p)/\mathcal{L}(D) = \dim(\mathrm{Im}(r_p)) \le 1. $$
+\end{proof}
+
+\begin{remark}
+We have an exact sequence
+$$ 0 \to \mathcal{L}(D) \to \mathcal{L}(D+p) \to \mathbb{C}. $$
+\end{remark}
+
+\begin{proposition}
+For $X$ compact, $l(D) < \infty$.
+\end{proposition}
+
+\begin{proof}
+First, we note that $l(D)$ depends only on the linear equivalence class of $D$. We can choose an effective divisor $E$ such that $D' = D + E$ is effective (i.e., $D' \ge 0$) and $D' \sim D$. It suffices to show $l(D') < \infty$.
+
+Let $k = \deg(D')$. We can write $D'$ as a sum of points (counting multiplicity):
+$$ D' = p_1 + p_2 + \cdots + p_k. $$
+Let $D_j = p_1 + \cdots + p_j$, with $D_0 = 0$.
+We have a chain of subspaces:
+$$ \mathcal{L}(D_0) \subseteq \mathcal{L}(D_1) \subseteq \cdots \subseteq \mathcal{L}(D_k) = \mathcal{L}(D'). $$
+Using the property of nested vector spaces, the dimension is given by the sum of the changes:
+$$ l(D') = l(D_k) = l(D_0) + \sum_{j=1}^{k} (l(D_j) - l(D_{j-1})) $$
+Since $D_j = D_{j-1} + p_j$, we apply the result from Proposition 1 (ii):
+$$ l(D_j) - l(D_{j-1}) = \dim \mathcal{L}(D_j)/\mathcal{L}(D_{j-1}) \le 1. $$
+Also, $l(D_0) = l(0) = \dim \mathcal{O}(X)$. Since $X$ is a compact Riemann Surface, the only holomorphic functions are constants, so $l(0)=1$.
+Therefore:
+$$ l(D') \le l(0) + \sum_{j=1}^{k} 1 = 1 + k = 1 + \deg(D'). $$
+Since $\deg(D')$ is a finite integer, $l(D') < \infty$.
+\end{proof}
+
+\section{Holomorphic Tangent and Cotangent Spaces}
+
+Recall that for a point $p$ on the Riemann surface $X$:
+\begin{itemize}
+    \item $\mathcal{O}_{X,p}$ is the $\mathbb{C}$-algebra of germs of holomorphic functions at $p$.
+    \item $\mathfrak{m}_p = \{f \in \mathcal{O}_{X,p} : f(p) = 0\}$ is the unique maximal ideal of $\mathcal{O}_{X,p}$.
+    \item The quotient $\mathfrak{m}_p / \mathfrak{m}_p^2$ is a $\mathbb{C}$-vector space (the complex dimension of $X$ is $\dim_{\mathbb{C}}(\mathfrak{m}_p / \mathfrak{m}_p^2) = 1$).
+\end{itemize}
+
+
+\begin{definition}[Holomorphic Tangent Space]
+The tangent space at $p$, $T_p X$, is the space of $\mathbb{C}$-derivations of $\mathcal{O}_{X,p}$ into $\mathbb{C}$:
+$$ T_p X := \mathrm{Der}(\mathcal{O}_{X,p}, \mathbb{C}). $$
+\end{definition}
+
+\begin{definition}[Holomorphic Cotangent Space]
+The cotangent space at $p$, $T_p^* X$, is the dual of the tangent space:
+$$ T_p^* X := (T_p X)^*. $$
+\end{definition}
+
+\begin{lemma}
+The holomorphic tangent space is canonically isomorphic to the quotient of the maximal ideal by its square:
+$$ T_p X \cong (\mathfrak{m}_p / \mathfrak{m}_p^2)^*. $$
+Consequently, the cotangent space is:
+$$ T_p^* X \cong \mathfrak{m}_p / \mathfrak{m}_p^2. $$
+(For a 1-dimensional manifold, $\mathfrak{m}_p / \mathfrak{m}_p^2 \cong \mathbb{C}$, so $T_p^* X \cong \mathfrak{m}_p / \mathfrak{m}_p^2$ holds up to non-canonical isomorphism.)
+\end{lemma}
+
+\begin{proof}
+We construct the canonical isomorphism $\Phi: \mathrm{Der}(\mathcal{O}_{X,p}, \mathbb{C}) \to (\mathfrak{m}_p / \mathfrak{m}_p^2)^*$.
+
+\textbf{1. Derivations Vanish on $\mathfrak{m}_p^2$:}
+Let $D \in T_p X$. For any $f, g \in \mathfrak{m}_p$ (so $f(p)=0, g(p)=0$), the Leibniz rule gives:
+$$ D(fg) = f(p)D(g) + D(f)g(p) = 0. $$
+This means $D$ vanishes on $\mathfrak{m}_p^2$, and thus induces a linear functional $\Phi(D) \in (\mathfrak{m}_p / \mathfrak{m}_p^2)^*$:
+$$ \Phi(D): [f] \mapsto D(f) \quad \text{for } f \in \mathfrak{m}_p. $$
+
+\textbf{2. $\Phi$ is Injective:}
+If $D \in \mathrm{ker}(\Phi)$, then $D(f)=0$ for all $f \in \mathfrak{m}_p$. For any $h \in \mathcal{O}_{X,p}$, write $h = h(p)\mathbf{1} + f$ where $f \in \mathfrak{m}_p$. Since $D(\mathbf{1})=0$ and $D(f)=0$, we have:
+$$ D(h) = h(p)D(\mathbf{1}) + D(f) = 0 + 0 = 0. $$
+Thus $D$ is the zero map, and $\Phi$ is injective.
+
+\textbf{3. $\Phi$ is Surjective:}
+For any $\ell \in (\mathfrak{m}_p / \mathfrak{m}_p^2)^*$, define $D_\ell: \mathcal{O}_{X,p} \to \mathbb{C}$ by $D_\ell(h) = \ell([h - h(p)\mathbf{1}])$. This map $D_\ell$ is a derivation because it is $\mathbb{C}$-linear, and it satisfies the Leibniz rule (since $\ell$ vanishes on $\mathfrak{m}_p^2$):
+$$ D_\ell(fg) = f(p)D_\ell(g) + g(p)D_\ell(f). $$
+By construction, $\Phi(D_\ell) = \ell$. Thus $\Phi$ is surjective.
+
+Since $\Phi$ is linear, injective, and surjective, it is an isomorphism.
 \end{proof}
 
 \end{document}
