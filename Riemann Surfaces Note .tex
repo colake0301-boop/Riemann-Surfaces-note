@@ -1795,4 +1795,449 @@ By construction, $\Phi(D_\ell) = \ell$. Thus $\Phi$ is surjective.
 Since $\Phi$ is linear, injective, and surjective, it is an isomorphism.
 \end{proof}
 
+\newpage
+\section*{Appendix: The Riemann Mappinng theorem}
+The following note is taken from Stein.
+
+\subsection*{Conformal Equivalence}
+
+\begin{definition}
+A bijective holomorphic function $f: U \to V$ is called a \textbf{conformal map} or \textbf{biholomorphism}. We say that $U$ and $V$ are \textbf{conformally equivalent} or \textbf{biholomorphic}.
+\end{definition}
+
+An important fact is that the inverse of $f$ is then automatically holomorphic.
+
+\begin{proposition}
+If $f: U \to V$ is holomorphic and injective, then $f'(z) \ne 0$ for all $z \in U$. In particular, the inverse of $f$ defined on its image is holomorphic, and thus the inverse of a conformal map is also holomorphic.
+\end{proposition}
+
+\begin{proof}
+We argue by contradiction. Suppose that $f'(z_0) = 0$ for some $z_0 \in U$. Then
+$$f(z) - f(z_0) = a(z-z_0)^k + G(z), \quad \text{for } z \text{ near } z_0,$$
+where $a \ne 0$, $k \ge 2$, and $G$ vanishing to order $k+1$ at $z_0$.
+Then there exists a small enough circle such that
+$$|a(z-z_0)^k| > |G(z)|, \quad \text{for } z \text{ on the small circle.}$$
+Now we can select a small $\omega$ such that
+$$\cdot |f(z_0) | > |G(z_0)|, \quad \text{where } F(z) = a(z-z_0)^k - \omega.$$
+Roots of $F(z)$ lies inside the small circle.
+Then by \textbf{Rouch\'e's theorem} we conclude that
+$$f(z) - f(z_0) - \omega = F(z) + G(z) \text{ has the same number of}$$
+
+roots as $F(z)$, and hence $f(z) - f(z_0) - \omega$ has at least two roots.
+Hence $f$ is not injective, a contradiction.
+
+Now let $g = f^{-1}$ denote the inverse of $f$ on its range, which we can assume is $V$. Suppose $w_0 \in V$ and $w$ is close to $w_0$. Write $w = f(z)$ and $w_0 = f(z_0)$. If $w \ne w_0$, we have
+$$\frac{g(w) - g(w_0)}{w - w_0} = \frac{1}{\frac{f(z) - f(z_0)}{z - z_0}} = \frac{1}{\frac{f(z) - f(z_0)}{z - z_0}}.$$
+Since $f'(z_0) \ne 0$, then let $w \to w_0$, we have $z \to z_0$.
+And hence we can conclude that $g'(w_0) = \frac{1}{f'(g(w_0))}$.
+Then $g$ is holomorphic at $w_0$. Since $w_0$ is arbitrary, we conclude that $g = f^{-1}$ is holomorphic.
+\end{proof}
+
+\begin{remark}
+From the \textbf{Proposition} we conclude that $U$ and $V$ are biholomorphic if and only if $\exists f: U \to V$ and $g: V \to U$ (e.g., $g = f^{-1}$) such that $f$ and $g$ are holomorphic and inverses of each other.
+\end{remark}
+
+\begin{exercise}
+$f: U \to V$, and $f'(z) \ne 0 \ \forall z \in U$. Then $f$ is a local bijection, and have a local biholomorphism.
+\end{exercise}
+\begin{enumerate}
+    \item If the global inverse exists, then this is a global biholomorphism. The question is that global inverse may not exist. For example
+    $$f: \mathbb{C} \setminus \{0\} \to \mathbb{C} \setminus \{0\}$$
+    $$z \mapsto z^2$$
+    is not a global biholomorphism
+    but a local biholomorphism.
+\end{enumerate}
+
+\subsection*{Disc and Upper half plane}
+
+The \textbf{upper half plane}, which we denoted by $\mathbb{H}$, consists of those complex numbers with positive imaginary part; that is
+$$\mathbb{H} = \{z \in \mathbb{C} : \text{Im}(z) > 0\}.$$
+
+A remarkable fact, which at first seems surprising is that the unbounded set $\mathbb{H}$ is \textbf{conformally equivalent} to the \textbf{unit disc} $\mathbb{D}$. Moreover, an explicit formula giving this equivalence exists. Indeed, let
+$$F(z) = i \frac{z-i}{z+i} \quad \text{and } G(w) = i \frac{1+w}{1-w}.$$
+
+\begin{theorem}
+The map $F: \mathbb{H} \to \mathbb{D}$ is a conformal map with inverse $G: \mathbb{D} \to \mathbb{H}$.
+\end{theorem}
+
+\begin{proof}
+It suffices to check $F$ and $G$ are well-defined and $F$ and $G$ are inverses of each other.
+\end{proof}
+
+\subsection*{Schwarz lemma, automorphism of disc and half-plane}
+
+The statement and proof of \textbf{Schwarz lemma} are both simple, but the applications of this result are far-reaching.
+
+\begin{lemma}
+Let $f: \mathbb{D} \to \mathbb{D}$ be biholomorphic with $f(0)=0$. Then
+\begin{enumerate}
+    \item $|f(z)| \le |z|$, for all $z \in \mathbb{D}$.
+    \item If for some $z_0 \ne 0$, we have $|f(z_0)| = |z_0|$, then $f$ is a rotation.
+    \item $|f'(0)| \le 1$, and if equality holds, then $f$ is a rotation.
+\end{enumerate}
+\end{lemma}
+
+
+\begin{proof} 
+    \begin{enumerate}
+\item
+First expand $f$ in a power series centered at $0$.
+$$f(z) = a_0 + a_1 z + a_2 z^2 + \dots$$
+and convergent in all of $\mathbb{D}$. Since $f(0) = 0$, we have $a_0 = 0$.
+And therefore $\frac{f(z)}{z}$ is holomorphic in $\mathbb{D}$. If $|z| = r < 1$, then since $|f(z)| \le 1$, we have $|\frac{f(z)}{z}| \le \frac{1}{r}$. Then by \textbf{maximal modulus principal} (or maximum modulus principle), this is true whenever $|z| \le r$.
+Letting $r \to 1$, we conclude the proof of (i).
+\item 
+We see that if $|f(z_0)| = |z_0|$, then $\frac{|f(z)|}{|z|}$ attains its maximal inside $\mathbb{D}$, and hence $\frac{f(z)}{z} = c \implies f(z) = c z$.
+And we can conclude that $|c| = 1$.
+\item 
+Observe that $g(z) = \frac{f(z)}{z} \le 1$ throughout $\mathbb{D}$.
+Take $z \to 0$. We have $|f'(0)| \le 1$. If $|f'(0)| = 1$, then $|g(0)| = 1$.
+And hence by maximal principle $g$ is constant.
+    \end{enumerate}
+\end{proof}
+
+Now we are going to study the \textbf{automorphism} of a disc.
+Obviously we have
+\begin{itemize}
+    \item Any \textbf{rotation} by an angle $\theta \in \mathbb{R}$ is an automorphism.
+    \item More interesting, are the automorphisms of the form
+    $$\Psi_\alpha(z) = \frac{\alpha - z}{1 - \bar{\alpha} z}, \quad \text{where } \alpha \in \mathbb{C}, \ |\alpha| < 1.$$
+\end{itemize}
+
+The \textbf{Proof} of the $\Psi_\alpha(z)$ is an automorphism is very simple.
+First observe that since $|\alpha| < 1$, the map $\Psi_\alpha$ is holomorphic in the unit disc. If $|z| = 1$, $z = e^{i\theta}$, then
+$$\Psi_\alpha(e^{i\theta}) = \frac{\alpha - e^{i\theta}}{1 - \bar{\alpha} e^{i\theta}} = e^{-i\theta} \frac{\alpha e^{i\theta} - 1}{e^{-i\theta} - \bar{\alpha}},$$
+where $\omega = \alpha - e^{-i\theta}$.
+
+$\text{Therefore } |\Psi_\alpha(z)| = 1. \text{ By the maximum modulus principal}
+\text{ we conclude that } |\Psi_\alpha(z)| < 1 \text{ for all } z \in \mathbb{D}.$
+
+\text{Finally we make the following computation}
+\begin{align*}
+(\Psi_\alpha \circ \Psi_\alpha)(z) &= \frac{\alpha - \Psi_\alpha(z)}{1 - \bar{\alpha} \Psi_\alpha(z)} \\
+&= \frac{\alpha - \frac{\alpha - z}{1 - \bar{\alpha} z}}{1 - \bar{\alpha} \frac{\alpha - z}{1 - \bar{\alpha} z}} \\
+&= \frac{\alpha(1 - \bar{\alpha} z) - (\alpha - z)}{(1 - \bar{\alpha} z) - \bar{\alpha}(\alpha - z)} \\
+&= \frac{\alpha - |\alpha|^2 z - \alpha + z}{1 - \bar{\alpha} z - |\alpha|^2 + \bar{\alpha} z} \\
+&= z.
+\end{align*}
+From which we conclude that $\Psi_\alpha(z)$ is its own inverse.
+
+Another important property of $\Psi_\alpha$ is that it vanishes at $z = \alpha$. Moreover it interchanges $\alpha$ and $0$.
+
+The next \textbf{theorem} says that the rotations combined with the maps $\Psi_\alpha$ exhaust all the automorphism of the disc.
+
+\begin{theorem}
+If $f$ is an automorphism of the disc, then there exists $\theta \in \mathbb{R}$ and $\alpha \in \mathbb{D}$ such that
+$$f(z) = e^{i\theta} \frac{\alpha - z}{1 - \bar{\alpha} z}.$$
+\end{theorem}
+
+\begin{proof}
+Since $f$ is an automorphism of the disc, there exists a unique complex number $\alpha \in \mathbb{D}$ such that $f(\alpha) = 0$.
+Now we consider the automorphism $g$ defined by
+$$g = f \circ \Psi_\alpha.$$
+Then $g(0) = 0$, and $g$ is an automorphism.
+Now applying \textbf{Schwarz lemma} to $g$ and $g^{-1}$, we find that
+$$|g^{-1}(w)| \le |w| \quad \text{for } w \in \mathbb{D}$$
+
+using this last equality for $w = g(z)$, we have
+$$|z| \ge |g(z)|.$$
+Then by \textbf{Schwarz lemma} on $g$ we conclude that $|g(z)| = |z|$. And hence by \textbf{Schwarz lemma} again, we have
+$$g(z) = e^{i\theta} z.$$
+Replacing $z$ by $\Psi_\alpha(z)$ we get
+$$f(z) = e^{i\theta} \Psi_\alpha(z), \quad \text{as claimed.}$$
+\end{proof}
+
+By setting $\alpha = 0$ we get the following.
+
+\begin{corollary}
+The only automorphism of the unit disc that fix the origin are the rotations.
+\end{corollary}
+\begin{remark}
+The explicit formula for the automorphism of $\mathbb{D}$ gives a good description of the group $\text{Aut}(\mathbb{D})$. In fact, the group of automorphism is "almost" isomorphic to $\text{SU}(1,1)$.
+\begin{itemize}
+    \item The group consists of all $2 \times 2$ matrices that preserves the inner product defined by $\langle Z, W \rangle = z_1 \bar{w}_1 - z_2 \bar{w}_2$, where $Z = \langle z_1, z_2 \rangle$, $W = \langle w_1, w_2 \rangle$.
+\end{itemize}
+
+For more information, see \textbf{Problem 4} in \textbf{Stein II}.
+\end{remark}
+
+Now with the knowledge of automorphism of $\mathbb{D}$ with the conformal map $F: \mathbb{H} \to \mathbb{D}$ in the previous section, we can determine the group of automorphism of $\mathbb{H}$, which we denote by $\text{Aut}(\mathbb{H})$.
+
+\textbf{Consider the map}
+$$P: \text{Aut}(\mathbb{D}) \to \text{Aut}(\mathbb{H})$$
+given by "\textbf{conjugation by $F$}"
+$$P(\varphi) = F^{-1} \circ \varphi \circ F.$$
+
+It's easily seen that $P$ is a \textbf{group homomorphism}.
+Also $P$ is a \textbf{bijection}, and hence $P$ is an \textbf{isomorphism}.
+
+We are still left with the task of giving a description of elements of $\text{Aut}(\mathbb{H})$.
+
+\begin{definition}
+$\text{SL}_2(\mathbb{R}) = \left\{ M = \begin{pmatrix} a & b \\ c & d \end{pmatrix} : a, b, c, d \in \mathbb{R}, \det(M) = 1 \right\}$.
+Given $M \in \text{SL}_2(\mathbb{R})$, $f_M: \mathbb{H} \to \mathbb{H}$ is defined by
+$$f_M(z) = \frac{az + b}{cz + d}.$$
+\end{definition}
+
+\begin{theorem}
+Every automorphism of $\mathbb{H}$ takes the form $f_M$ for some $M \in \text{SL}_2(\mathbb{R})$. Conversely, every map of this form is an automorphism of $\mathbb{H}$.
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1}: $f_M$ maps $\mathbb{H}$ to itself.
+Let $M \in \text{SL}_2(\mathbb{R})$. Then $\text{Im}(f_M(z)) > 0$.
+
+
+$\textbf{Step 2}: \text{If } M \text{ and } M' \text{ are two matrices in } \text{SL}_2(\mathbb{R}), \text{ then }$
+$$f_M \circ f_{M'} = f_{MM'}.$$
+\textbf{A direct Calculation}
+\begin{align*}
+f_M(f_{M'}(z)) &= \frac{a f_{M'}(z) + b}{c f_{M'}(z) + d} \\
+&= \frac{a \left( \frac{a' z + b'}{c' z + d'} \right) + b}{c \left( \frac{a' z + b'}{c' z + d'} \right) + d} \\
+&= \frac{a (a' z + b') + b (c' z + d')}{c (a' z + b') + d (c' z + d')} \\
+&= \frac{(a a' + b c') z + (a b' + b d')}{(c a' + d c') z + (c b' + d d')}.
+\end{align*}
+Let $M M' = \begin{pmatrix} A & B \\ C & D \end{pmatrix}$. We have $A = a a' + b c'$, $B = a b' + b d'$, $C = c a' + d c'$, $D = c b' + d d'$
+$$= f_{MM'}(z).$$
+As a consequence, we can prove that every $f_M$ is an automorphism since $(f_M)^{-1} = f_{M^{-1}}$ exists.
+
+\textbf{Step 3}: $\text{SL}_2(\mathbb{R})$ acts \textbf{transitively} on $\mathbb{H}$. That is,
+Given any two $\text{pts } z, w \in \mathbb{H}$, $\exists M \text{ s.t. } f_M(z) = w$.
+
+To prove this, it suffices to show that we can map any $z \in \mathbb{H}$ to $i$.
+Setting $d = 0$, the above calculation gives
+$$\text{Im}(f_M(z)) = \frac{\text{Im}(z)}{|cz + d|^2}, \quad \text{(incorrect formula as written)}$$
+$$\text{Im}(f_M(z)) = \frac{\text{Im}(z)}{|cz + d|^2}, \text{ and we can chose a real number } c$$
+\text{so that } $\text{Im}(f_M(z)) = 1$.
+
+Next we chose the matrix $M_1 = \begin{pmatrix} 0 & -c^{-1} \\ c & 0 \end{pmatrix}$
+so that $f_{M_1}(z)$ has imaginary part equal to $1$.
+
+$\text{Then we translate by a matrix of the form } \begin{pmatrix} 1 & b \\ 0 & 1 \end{pmatrix} \text{ to bring } f_{M_1}(z) \text{ to } i. \text{ Finally, the map } f_M \text{ with } M = M_2 M_1 \text{ takes } z \text{ to } i.$
+
+\textbf{Step 4}
+Let $M_\theta = \begin{pmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix} \in \text{SL}_2(\mathbb{R})$.
+Then $F \circ f_{M_\theta} \circ F^{-1}$ corresponds to the \textbf{rotation} of angle $-2\theta$ in the disc.
+\begin{align*}
+F \circ f_{M_\theta}(z) &= i \frac{\frac{\cos \theta z - \sin \theta}{\sin \theta z + \cos \theta} - i}{\frac{\cos \theta z - \sin \theta}{\sin \theta z + \cos \theta} + i} \\
+&= i \frac{(\cos \theta z - \sin \theta) - i(\sin \theta z + \cos \theta)}{(\cos \theta z - \sin \theta) + i(\sin \theta z + \cos \theta)} \\
+&= i \frac{(\cos \theta - i \sin \theta) z - (\sin \theta + i \cos \theta)}{(\cos \theta + i \sin \theta) z - (\sin \theta - i \cos \theta)} \\
+&= i \frac{(\cos \theta - i \sin \theta) z - i(\cos \theta - i \sin \theta)}{(\cos \theta + i \sin \theta) z + i(\cos \theta + i \sin \theta)} \\
+&= i \frac{e^{-i\theta} z - i e^{-i\theta}}{e^{i\theta} z + i e^{i\theta}} \\
+&= e^{-2i\theta} F(z).
+\end{align*}
+
+\textbf{Step 5} \text{Now we complete the proof of the theorem.}
+Suppose $f$ is an automorphism of $\mathbb{H}$ with $f(\beta) = i$.
+Consider $N \in \text{SL}_2(\mathbb{R})$ such that $f_N(i) = \beta$.
+Then $g = f \circ f_N$ fixes $i$, and therefore $F \circ g \circ F^{-1}$ is an automorphism of the disk that fixes origin.
+So $F \circ g \circ F^{-1}$ is a rotation. By \textbf{Step 4}, we know
+
+$$F \circ g \circ F^{-1} = F \circ f_{M_\theta} \circ F^{-1} \quad \text{for some } \theta \in \mathbb{R}.$$
+Then $g = f_{M_\theta}$, and hence $f = f_{M_{\theta} N^{-1}}$, which is of the desired form.
+\end{proof}
+
+A final observation is that the group $\text{Aut}(\mathbb{H})$ is not quite isomorphic with $\text{SL}_2(\mathbb{R})$, since $f_M = f_{-M}$.
+Therefore, if we identify the two matrices $M$ and $-M$, then we obtain a group $\text{PSL}_2(\mathbb{R})$ called the \textbf{projective special linear group}, this group is isomorphic to $\text{Aut}(\mathbb{H})$.
+
+\subsection*{Riemann Mapping Theorem}
+
+\begin{theorem}
+Suppose $\Omega$ is \textbf{proper} (non-empty and not all of $\mathbb{C}$) and \textbf{simply connected}. If $z_0 \in \Omega$, then there exists a \textbf{unique} conformal map $F: \Omega \to \mathbb{D}$ such that
+$$F(z_0) = 0 \quad \text{and } F'(z_0) > 0.$$
+\end{theorem}
+
+\begin{corollary}
+Any two proper simply connected open subsets in $\mathbb{C}$ are conformally equivalent.
+\end{corollary}
+
+\begin{remark}
+The uniqueness part of the statement is straightforward.
+If $F: \Omega \to \mathbb{D}$, $G: \Omega \to \mathbb{D}$ are two conformal maps, then $H = F \circ G^{-1}: \mathbb{D} \to \mathbb{D}$ is also a conformal map which fixes $0$. And hence
+$$H(z) = e^{i\theta} z.$$
+Since $H'(0) > 0$, then $e^{i\theta} = 1$.
+\end{remark}
+
+The rest of the section is devoted to the proof of the existence of the conformal map $F$. The idea of the proof is as follows:
+We consider all injective holomorphic maps $f: \Omega \to \mathbb{D}$ with $f(z_0) = 0$.
+From these we wish to choose an $f$ so that its image fills out all of $\mathbb{D}$, and this can be achieved by making $f'(z_0)$ as huge as possible. In doing this, we shall need to be able to extract $f$ as a limit from a given set of functions.
+
+\subsubsection*{Montel's Theorem}
+
+\begin{definition}
+A family of holomorphic functions $\mathcal{F}$ on $\Omega$ is \textbf{normal} if every sequence in $\mathcal{F}$ has a subsequence that converges uniformly on every compact subset of $\Omega$ (the limit may not be in $\mathcal{F}$).
+\end{definition}
+
+The proof that a family of functions is normal is, in practice, the consequence of two related properties, \textbf{uniform boundedness} and \textbf{equicontinuity}. These we shall now define.
+
+\begin{definition}
+$\mathcal{F}$ is said to be \textbf{uniformly bounded on compact subsets} of $\Omega$ if for each compact set $K \subset \Omega$, there exists $B > 0$ such that $|f(z)| \le B$ for all $z \in K$ and $f \in \mathcal{F}$.
+\end{definition}
+
+\begin{definition}
+$\mathcal{F}$ is \textbf{equicontinuous on a compact set $K$} if for any $\epsilon > 0$, there exists $\delta > 0$ such that whenever $z, w \in K$ and $|z-w| < \delta$, then $|f(z) - f(w)| < \epsilon$ (uniform continuity, uniformly in the family $\mathcal{F}$).
+\end{definition}
+
+\begin{example}
+Any family of differentiable functions on $[0,1]$ whose derivatives are uniformly bounded is equicontinuous.
+\end{example}
+
+\begin{theorem}
+\textbf{(Montel's Theorem)}
+Suppose $\mathcal{F}$ is a family of holomorphic functions on $\Omega$ that is uniformly bounded on compact subsets of $\Omega$. Then:
+\begin{enumerate}
+    \item $\mathcal{F}$ is \textbf{equicontinuous} on every compact subset of $\Omega$.
+    \item $\mathcal{F}$ is a \textbf{normal family}.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+The proof consists of two parts.
+\begin{enumerate}
+    \item relies on $f'$ of a holomorphic function.
+    \item is somehow the result of \textbf{Ascoli-Arzel\`a theorem}, which consists of a \textbf{diagonalization argument}.
+\end{enumerate}
+
+We are required to prove convergence on arbitrary compact subsets of $\Omega$. Therefore it is useful to introduce the following notion.
+\end{remark}
+
+\begin{definition}
+A sequence $\{K_l\}_{l=1}^\infty$ of compact subsets of $\Omega$ is called an \textbf{exhaustion} if:
+\begin{enumerate}
+    \item $K_l \subset K_{l+1}$ for all $l=1, 2, \dots$
+    \item Any compact set $K \subset \Omega$ is contained in $K_l$ for some $l$.
+\end{enumerate}
+In particular, $\Omega = \bigcup_{l=1}^\infty K_l$.
+\end{definition}
+
+\begin{lemma}
+Any open set $\Omega$ in the complex plane has an exhaustion.
+\end{lemma}
+
+\begin{proof}
+If $\Omega$ is bounded: Let $K_l$ denote the set of all points in $\Omega$ at distance $\ge 1/l$ from the boundary of $\Omega$.
+If $\Omega$ is not bounded: Let $K_l$ denote the same set as above except we also require $|z| \le l$ for all $z \in K_l$.
+\end{proof}
+
+\textbf{Now we begin the Proof of Montel's theorem.}
+
+\begin{proof} (i)
+First we want to show $\mathcal{F}$ is \textbf{equicontinuous}.
+Let $K$ be a compact set in $\Omega$.
+In fact, we only need to show there exists $\delta > 0$ and $C > 0$ such that $|f(z) - f(w)| < C |z-w|$, when $|z-w| < \delta$, $z, w \in K$.
+
+Now choose $r$ small enough such that $\bar{D}_{2r}(z) \subset \Omega$ for all $z \in K$. (It suffices to take $3r$ less than $\text{dist}(K, \partial \Omega)$).
+Let $z, w \in K$ with $|z-w| < r$, and let $\gamma$ denote the boundary of the disk $D_{2r}(w)$.
+
+Then by Cauchy's formula we have
+$$f(z) - f(w) = \frac{1}{2\pi i} \oint_\gamma f(\zeta) \left( \frac{1}{\zeta - z} - \frac{1}{\zeta - w} \right) d\zeta.$$
+Observe that
+$$\left| \frac{1}{\zeta - z} - \frac{1}{\zeta - w} \right| = \left| \frac{z - w}{(\zeta - z)(\zeta - w)} \right| \le \frac{|z - w|}{r^2}$$
+since $\zeta \in \gamma$ and $|z - w| < r$. Therefore
+$$|f(z) - f(w)| \le \frac{1}{2\pi} \frac{2\pi r}{r^2} \cdot B \cdot |z - w|$$
+where $B$ denotes the uniform bound for the family $\mathcal{F}$ in the compact set consisting of all points in $\Omega$ at a distance $\le 2r$ from $K$. Therefore $|f(z) - f(w)| \le C |z - w|$, for any $z, w \in K$ and $z, w$ close enough. Hence $\mathcal{F}$ is equicontinuous.
+
+(ii) To prove the second part, we argue as follows.
+Let $\{f_n\}_{n=1}^\infty$ be a sequence in $\mathcal{F}$ and $K$ a compact set in $\Omega$.
+Choose a sequence of points $\{w_j\}_{j=1}^\infty$ dense in $\Omega$. Since $\{f_n\}$ is uniformly bounded, there exists subsequence $\{f_{n, 1}\}$ of $\{f_n\}$ such that $\{f_{n, 1}(w_1)\}$ converges.
+From $\{f_{n, 1}\}$ we can extract a subsequence $\{f_{n, 2}\}$ such that $\{f_{n, 2}(w_2)\}$ converges. We can continue this process, and extract a subsequence $\{f_{n, j}\}$ of $\{f_{n, j-1}\}$ such that $f_{n, j}(w_j)$ converges.
+Finally, let $g_n = f_{n, n}$ the \textbf{diagonal subsequence}. By construction $g_n(w_j)$ converges for each $j$. We now show $g_n$ converges uniformly on $K$.
+
+Given $\epsilon > 0$. Choose $\delta$ as in the definition of equicontinuity and note that for some $J$, the set $K$ is contained in the union of the discs $D_\delta(w_1), \dots, D_\delta(w_J)$. Pick $N$ so large that if $n, m > N$, then $|g_n(w_j) - g_m(w_j)| < \epsilon$, for all $j = 1, 2, \dots, J$.
+
+So if $z \in K$, then $z \in D_\delta(w_j)$ for some $j \le J$.
+\begin{align*}
+|g_n(z) - g_m(z)| &\le |g_n(z) - g_n(w_j)| + |g_n(w_j) - g_m(w_j)| + |g_m(w_j) - g_m(z)| \\
+&\qquad \underbrace{\text{term } 1}_{\text{term } 1} \qquad \underbrace{\text{term } 2}_{\text{term } 2} \qquad \underbrace{\text{term } 3}_{\text{term } 3} \\
+&\le 3\epsilon
+\end{align*}
+term 1 and term 3 by equicontinuity
+term 2 $\le \epsilon$ when $n, m > N$.
+
+Hence $\{g_n\}$ converges uniformly on $K$.
+
+Finally we need one more diagonalization argument to obtain a subsequence that converges uniformly on every compact subset of $\Omega$.
+
+Let $K_1 \subset K_2 \subset K_3 \subset \cdots$ be an \textbf{exhaustion}. Then
+Extract $\{g_{n, 1}\}$ from $\{f_n\}$ such that $\{g_{n, 1}\}$ converges uniformly on $K_1$. Extract $\{g_{n, 2}\}$ from $\{g_{n, 1}\}$ such that $\{g_{n, 2}\}$ converges uniformly on $K_2$, and so on.
+Then $\{g_{n, n}\}$ is a subsequence of $\{f_n\}$ converges uniformly on any compact subset of $\Omega$.
+\end{proof}
+
+We need one further result before we can give the proof of the \textbf{Riemann mapping theorem}.
+
+\begin{proposition}
+\label{prop:3.5}
+If $\Omega$ is a connected open subset of $\mathbb{C}$ and $\{f_n\}$ is a sequence of injective holomorphic functions on $\Omega$ that converges uniformly on every compact subset of $\Omega$ to a holomorphic function $f$, then $f$ is either \textbf{injective or constant}.
+\end{proposition}
+
+\begin{proof}
+We argue by contradiction and suppose that $f$ is not injective, so there exist distinct complex numbers $z_1$ and $z_2$ in $\Omega$ such that $f(z_1) = f(z_2)$. Define a new sequence $g_n(z) = f_n(z) - f_n(z_1)$, so that $g_n$ has no other zeroes besides $z_1$.
+And this sequence converges uniformly on compact subsets of $\Omega$ to $g(z) = f(z) - f(z_1)$.
+If $g$ is not identically zero, then $z_2$ is an isolated zero for $g$.
+(Since $\Omega$ is connected). Therefore
+$$\frac{1}{2\pi i} \oint_\gamma \frac{g'(z)}{g(z)} dz =\text{number of zeros minus poles inside } \gamma \quad \text{(by \textbf{Argument Principle})}$$
+where $\gamma$ is a small circle centered at $z_2$ chosen so that $g$ does not vanish on $\gamma$ or at any point of its interior besides $z_2$.
+
+Therefore $\frac{1}{g_n}$ converges uniformly to $\frac{1}{g}$ on $\gamma$. And since $g_n' \to g'$ uniformly on $\gamma$, we have
+$$\frac{1}{2\pi i} \oint_\gamma \frac{g_n'(z)}{g_n(z)} dz \to \frac{1}{2\pi i} \oint_\gamma \frac{g'(z)}{g(z)} dz \quad \text{as } n \to \infty.$$
+But this contradicts to $\frac{1}{2\pi i} \oint_\gamma \frac{g_n'(z)}{g_n(z)} dz = 0$.
+\end{proof}
+
+\subsubsection*{Proof of Riemann Mapping Theorem}
+
+\textbf{Step 1}: $\Omega$ (a simply connected proper open subset) is conformally equivalent to an open subset of the unit disk that contains the origin.
+
+Since $\Omega$ is proper, we can choose $a \notin \Omega$.
+Now consider $f(z)$, with $e^{f(z)} = z - a$.
+It is well-defined by \textbf{Chap 3, Thm 6.2 in Stein}.
+We see that $f(z)$ is \textbf{injective}. Pick a $w \in \mathbb{C}$ and observe that $f(z) \ne f(w) + 2\pi i$. Otherwise we have $z = w$, a fact contradicted.
+In fact, we claim that $f(z)$ stays strictly away from $f(w) + 2\pi i$, in the sense that there exists a disc centered at $f(w) + 2\pi i$ that consists of no points in $f(\Omega)$. Otherwise, there exists a sequence $\{z_n\}$ in $\Omega$ such that $f(z_n) \to f(w) + 2\pi i$. Then $z_n \to z$.
+Thus $f(z_n) \to f(z)$ contradicted.
+
+Finally consider $F(z) = \frac{1}{f(z) - (f(w) + 2\pi i)}$.
+Since $f(z)$ is injective, so is $F$. Hence $F: \Omega \to F(\Omega)$ is a conformal map. What's more $F(\Omega)$ is bounded by our previous analysis, hence we can translate and rescale $F(\Omega)$ to an open subset of $\mathbb{D}$ contains the origin.
+
+\textbf{Step 2}:
+By the first step, we may assume that $\Omega$ is an open subset of $\mathbb{D}$ with $0 \in \Omega$. Consider the family $\mathcal{F}$ of all injective holomorphic functions on $\Omega$ that maps into the unit disc and fix the origin
+$$\mathcal{F} = \{ f: \Omega \to \mathbb{D} \mid \text{holomorphic, injective and } f(0) = 0 \}.$$
+First, note that $\mathcal{F}$ is non-empty. Also $\mathcal{F}$ is uniformly bounded by construction.
+
+Now we turn to the question of finding a function $f \in \mathcal{F}$ that maximizes $|f'(0)|$. First, observe that the quantities $|f'(0)|$ are uniformly bounded as $f$ ranges in $\mathcal{F}$. This follows from the \textbf{Cauchy inequality} in \textbf{Chap 2, Cor 4.3} for $f'$.
+
+Next, we let $S = \sup \{ |f'(0)| \mid f \in \mathcal{F} \}$. And we choose a sequence $\{f_n\} \subset \mathcal{F}$ such that $|f_n'(0)| \to S$ as $n \to \infty$. By \textbf{Montel's theorem} this sequence has a subsequence that converges uniformly on compact sets to a holomorphic function $f$ on $\Omega$. Since $S \ge 1$, $f$ is non-constant, hence \textbf{injective} by the previous \textbf{Proposition \ref{prop:3.5}}.
+Also, by \textbf{continuity} we have $|f(z)| \le 1, \ \forall z \in \Omega$, and from the \textbf{maximum modulus principle} we see that $|f(z)| < 1$. Since we clearly have $f(0) = 0$, we conclude that $f \in \mathcal{F}$ with $|f'(0)| = S$.
+
+\textbf{Step 3}
+In the last step we conclude that $f$ is a conformal map from $\Omega$ to $\mathbb{D}$. It suffices to prove $f$ is surjective. If this were not true, we could construct a function $F$ in $\mathcal{F}$ with derivative at $0$ strictly greater than $S = |f'(0)|$, contradicting the maximality of $S$.
+
+Indeed, suppose $f(\Omega) \ne \mathbb{D}$. Then there exists a point $\alpha \in \mathbb{D}$ such that $\alpha \notin f(\Omega)$.
+Define the first auxiliary function $g: \Omega \to \mathbb{D}$ by
+$$g(z) = \Psi_\alpha(f(z)) = \frac{\alpha - f(z)}{1 - \bar{\alpha} f(z)}.$$
+The function $g$ is injective (since $f$ and $\Psi_\alpha$ are), holomorphic, and $g(\Omega) = \mathbb{D} \setminus \{0\}$. Since $f(0)=0$, we have $g(0) = \Psi_\alpha(0) = \alpha$.
+
+Since $\alpha \notin g(\Omega)$ (because $\Psi_\alpha(\alpha) = 0$), the image $g(\Omega)$ excludes the origin. Since $g(\Omega)$ is simply connected, we can define a square root function $h$ on $g(\Omega)$. Let $h: g(\Omega) \to \mathbb{D}$ be the branch of the square root that maps $\alpha$ to $\sqrt{\alpha}$.
+$$h(w) = \sqrt{w}.$$
+The function $h \circ g$ is holomorphic and injective on $\Omega$. Its image $(h \circ g)(\Omega)$ is an open, simply connected region in $\mathbb{D}$ that is strictly contained in a half-disc, and thus it does not contain the origin.
+
+Define the final function $F: \Omega \to \mathbb{D}$ as the automorphism that sends the origin of $h \circ g$ to $0$:
+$$F(z) = \Psi_{\sqrt{\alpha}}(h(g(z))) = \frac{\sqrt{\alpha} - \sqrt{g(z)}}{1 - \overline{\sqrt{\alpha}} \sqrt{g(z)}}.$$
+This function $F$ is holomorphic, injective, and $F(\Omega) \subset \mathbb{D}$. We check that $F(0)=0$:
+$$F(0) = \Psi_{\sqrt{\alpha}}(h(g(0))) = \Psi_{\sqrt{\alpha}}(\sqrt{\alpha}) = 0.$$
+Thus, $F \in \mathcal{F}$.
+
+Now we calculate the derivative at $0$ using the chain rule:
+$$|F'(0)| = \left| \Psi_{\sqrt{\alpha}}'(\sqrt{\alpha}) \cdot h'(\alpha) \cdot g'(0) \right|$$
+After computation, we find that
+$$|F'(0)| = |f'(0)| \cdot \frac{1}{\sqrt{1 - |\alpha|^2}}.$$
+Since $f(\Omega) \ne \mathbb{D}$, we have $\alpha \in \mathbb{D}$, so $|\alpha| > 0$. Therefore, $\sqrt{1 - |\alpha|^2} < 1$, which implies
+$$|F'(0)| > |f'(0)| = S.$$
+This contradicts the maximality of $S$. Hence, the assumption $f(\Omega) \ne \mathbb{D}$ must be false, so $f$ is surjective.
+
+Finally, we multiply $f$ by a complex number $e^{i\theta}$ of absolute value $1$ so that $f'(0) > 0$, which ensures uniqueness and ends the proof.
+
+\begin{remark}
+    It is worthwile to note that the simple connectivty is used to make logtrithm function and the square root function is well-defined.
+\end{remark}
+
+
 \end{document}
