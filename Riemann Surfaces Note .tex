@@ -48,6 +48,7 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{tikz-3dplot}
+\usetikzlibrary{calc}
 
 %% define environments
 
@@ -2138,10 +2139,458 @@ $\mathcal{M}_\omega$ is linear.
 Since $\mathcal{M}_\omega$ is a linear bijection, it is an isomorphism.
 \end{proof}
 
+% New content from October 21, 2025
+
+\newpage
+\section{The Genus of a Riemann Surface}
+
+Recall our ultimate goal we have mentioned in Lecture 1 is to compute $l(D)$ \& $l^{(1)}(D)$.
+In fact we have Riemann-Roch thm:
+\[
+\dim \mathcal{L}(D) - \dim L^{(1)}(-D) = \deg D + 1 - g_X.
+\]
+where $g_X$ denotes the genus of $X$.
+Today's aim: Introduce the genus $g_X$ of a Riemann Surface.
+
+\subsection{Orientations}
+
+\textbf{Goal}: Sketch the topological classification of compact oriented surfaces. For every compact connected oriented surface $S$, $\exists ! g \in \mathbb{N}$ s.t. $S \cong S_g$.
+$g = \# \text{holes}$.
+Moreover $g = g(S)$ is computed from the "Euler Characteristic" $\chi(S)$.
+\[
+\chi(S) = 2 - 2g(S).
+\]
+Complex mfds are orientable.
+\begin{definition}
+    \begin{enumerate}[(i)]
+        \item A linear map $f: \mathbb{R}^n \to \mathbb{R}^n$ is \textbf{orientation preserving} if $\det(f) > 0$.
+        \item A smooth atlas $\{ \phi_\alpha: U_\alpha \to V_\alpha \}$ on a smooth mfd $X$ is \textbf{oriented} if $J_p^{\mathbb{R}}(T)$ are orientation preserving for all $T = \phi_\beta \circ \phi_\alpha^{-1}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    A $\mathbb{C}$-atlas on a $\mathbb{C}$-mfd is oriented.
+\end{proposition}
+\begin{proof}
+    Recall the transition map $T = \phi_\beta \circ \phi_\alpha^{-1}$ are holomorphic.
+    \[
+    J_p^{\mathbb{R}}(T) \simeq \begin{pmatrix} J_p(T) & 0 \\ 0 & \overline{J_p(T)} \end{pmatrix} \quad \text{By Cauchy-Riemann Eq.}
+    \]
+    Thus $\det J_p^{\mathbb{R}}(T) = |\det J_p(T)|^2 > 0$.
+\end{proof}
+
+\subsection{Triangulations of Surfaces}
+
+Let $S$ be a compact oriented surface (possibly with boundary).
+\begin{definition}
+    \begin{enumerate}[(i)]
+        \item A \textbf{triangulation} of $S$ is a decomposition $S = \bigcup_i S_i$ into closed subsets $S_i \cong$ (a triangle)
+        then $S_i \cap S_j$ is either empty, a single common vertex, or a single common edge.
+        \item The \textbf{Euler characteristic} of $S$ (w.r.t this triangulation) is
+        \[
+        \chi(S) := v - e + f
+        \]
+        $v = \# \text{vertices}$, $e = \# \text{edges}$, $f = \# \text{faces}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    We can triangulate the sphere as:
+    % Image from page 6
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=1.5]
+            % Define the vertices
+            \coordinate (A) at (0, 2);  % Top vertex
+            \coordinate (B) at (-2, 0); % Left vertex
+            \coordinate (C) at (2, 0);  % Right vertex
+            \coordinate (D) at (0, -1.5); % Bottom vertex
+            \coordinate (E) at (0, 0.2);  % Center vertex (for the blue line intersection)
+        
+            % Draw the outer edges (black)
+            \draw[thick] (A) -- (B) -- (D) -- (C) -- (A);
+        
+            % Draw the inner edges (black)
+            \draw[thick] (A) -- (E);
+            \draw[thick] (B) -- (E);
+            \draw[thick] (C) -- (E);
+            \draw[thick] (D) -- (E);
+        
+            % Draw the "blue" line from your notes.
+            \draw[blue] (B) -- (C);
+        
+            % Draw vertices as filled circles
+            \fill (A) circle (2pt);
+            \fill (B) circle (2pt);
+            \fill (C) circle (2pt);
+            \fill (D) circle (2pt);
+            \fill (E) circle (2pt);
+        \end{tikzpicture}
+        \caption{Triangulation of a sphere (from notes).}
+    \end{figure}
+\end{example}
+
+\begin{theorem*}[Rado's thm]
+    Triangulation exists.
+\end{theorem*}
+
+\begin{theorem}
+    The Euler Characteristic of $S$ is indept of the triangulation. Moreover $\chi$ is a topological invariant.
+\end{theorem}
+\begin{proof}
+    We show $\chi$ is invariant under the following refinements.
+    \begin{enumerate}[(i)]
+        \item Adding a vertex to a triangle.
+        \item Adding a vertex on an interior edge.
+        \item Adding a vertex on a boundary edge.
+    \end{enumerate}
+    the above 3 operations doesn't change the $\chi$.
+    
+    Given 2 triangulations of $S$. we can draw them both on $S$ and add extra vertices and edges to make this union into a triangulation.
+    Thus given 2 triangulations admit a common refinement, so $\chi$ is indep of the choice of triangulations.
+    
+    If $S \cong S'$ (homeo), then we can transport a triangulation of $S$ to $S'$ via this homeo to see that $\chi(S) = \chi(S')$.
+\end{proof}
 
 \begin{remark}
-    Now we see that $\operatorname{CDiv(X)}$ is a coset for $\operatorname{PDiv(X)}$
+    If $S = S' \cup S''$, then $\chi(S) = \chi(S') + \chi(S'') - \chi(S \cap S'')$.
 \end{remark}
+
+\subsection{Surfaces from glueing polygons}
+
+\begin{proposition}
+    Any compact connected surface (without boundary) can be obtained up to homeomorphism from a polygon by glueing pairs of edges.
+\end{proposition}
+\begin{proof}
+    We construct the polygon from a triangulation $S = \bigcup_i S_i$.
+    Label the triangles successively so each pair of successive triangles has a common edge, de then map these triangles to $\mathbb{R}^2$ in that ordering.
+    We get a Polygon $P$ s.t. each edge in $\partial P$ belongs to precisely 2 triangles and precisely 2 edges in $\partial P$ correspond to the same edge in the triangulation. Glue them and we get a polygon.
+\end{proof}
+
+\begin{definition}
+    Given a polygon $P \le \mathbb{R}^2$ with glueing relations on the $2n$ boundary edges. For each pair of glued edges associate a letter and label the edges as $x$ or $x^{-1}$ depending on whether they are oriented clockwise or anticlockwise.
+    The \textbf{word of $P$} starting at a vertex $v$ is the seq of letters for the edges going clockwise starting \& ending at $v$.
+\end{definition}
+
+\begin{example}
+    \begin{enumerate}[(1)]
+        \item \textbf{Torus}: $xyx^{-1}y^{-1}$
+        \item \textbf{Sphere}: $xx^{-1}$
+        \item \textbf{Klein bottle} (non-oriented): $xyx^{-1}y$
+    \end{enumerate}
+\end{example}
+
+\subsubsection*{Description of adding a handle}
+
+% Images from page 8
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.8]
+            % Left Torus with hole
+            \scope[xshift=-5cm]
+                % Main body
+                \draw (0,0) ellipse (2cm and 1.5cm);
+                % Torus hole
+                \draw (-0.5, 0.2) .. controls (-0.2, 0.4) and (0.2, 0.4) .. (0.5, 0.2);
+                \draw (-0.5, 0.1) .. controls (-0.2, -0.1) and (0.2, -0.1) .. (0.5, 0.1);
+                % Cutout area (red shaded)
+                \draw[red, thick, fill=red, opacity=0.2] (1.5, 0.8) .. controls (1.8, 0) and (1.5, -0.8) .. (1.5, 0.8);
+                \draw[red, dashed] (1.5, 0.8) .. controls (1.3, 0) and (1.5, -0.8) .. (1.5, 0.8);
+            \endscope
+        
+            % Plus sign
+            \node at (-2.5, 0) {$+$};
+        
+            % Right Torus with hole
+            \scope[xshift=0cm]
+                % Main body
+                \draw (0,0) ellipse (2cm and 1.5cm);
+                % Torus hole
+                \draw (-0.5, 0.2) .. controls (-0.2, 0.4) and (0.2, 0.4) .. (0.5, 0.2);
+                \draw (-0.5, 0.1) .. controls (-0.2, -0.1) and (0.2, -0.1) .. (0.5, 0.1);
+                % Cutout area (red shaded)
+                \draw[red, thick, fill=red, opacity=0.2] (-1.5, 0.8) .. controls (-1.8, 0) and (-1.5, -0.8) .. (-1.5, 0.8);
+                \draw[red, dashed] (-1.5, 0.8) .. controls (-1.3, 0) and (-1.5, -0.8) .. (-1.5, 0.8);
+            \endscope
+        
+            % Equals sign
+            \node at (2.5, 0) {$=$};
+        
+            % Joined Genus-2 Surface
+            \scope[xshift=6cm]
+                % Left lobe
+                \draw (0,0) ellipse (2cm and 1.5cm);
+                \draw (-0.5, 0.2) .. controls (-0.2, 0.4) and (0.2, 0.4) .. (0.5, 0.2);
+                \draw (-0.5, 0.1) .. controls (-0.2, -0.1) and (0.2, -0.1) .. (0.5, 0.1);
+                % Right lobe
+                \draw (3,0) ellipse (2cm and 1.5cm);
+                \draw (2.5, 0.2) .. controls (2.8, 0.4) and (3.2, 0.4) .. (3.5, 0.2);
+                \draw (2.5, 0.1) .. controls (2.8, -0.1) and (3.2, -0.1) .. (3.5, 0.1);
+                % Neck
+                \draw (1.5, 0.8) -- (1.5, 0.8); % Top join
+                \draw (1.5, -0.8) -- (1.5, -0.8); % Bottom join
+                % Remove overlapping ellipses
+                \draw[fill=white, stroke=white] (1.3, 0) ellipse (0.8cm and 1.1cm);
+                \draw[fill=white, stroke=white] (1.7, 0) ellipse (0.8cm and 1.1cm);
+                % Redraw joining lines
+                \draw[red, dashed] (1.5, 0.8) -- (1.5, -0.8);
+                \draw[red, dashed] (1.5, 0.8) -- (1.5, -0.8);
+            \endscope
+        \end{tikzpicture}
+        \caption{Topologically.}
+    \end{figure}
+    \hfill
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=1, >=stealth] % >=stealth makes arrowheads look nice
+            % Left Polygon (Square)
+            \scope[xshift=-5cm]
+                % Draw rectangle
+                \draw (0,0) -- (3,0) -- (3,3) -- (0,3) -- (0,0);
+                % Draw shaded triangle
+                \draw[fill=red, opacity=0.2] (3,0) -- (3,3) -- (2,0) -- cycle;
+                % Draw vertices
+                \fill (0,0) circle (2pt) node[below] {1};
+                \fill (0,3) circle (2pt) node[above] {2};
+                \fill (3,3) circle (2pt) node[above] {3};
+                \fill (3,0) circle (2pt) node[below] {4};
+                % Draw arrows
+                \draw[thick, ->] (0,0) -- (0,1.5); \draw[thick] (0,1.5) -- (0,3);
+                \draw[thick, ->] (0,3) -- (1.5,3); \draw[thick] (1.5,3) -- (3,3);
+                \draw[thick, ->] (3,3) -- (3,1.5); \draw[thick] (3,1.5) -- (3,0);
+                \draw[thick, ->] (3,0) -- (1.5,0); \draw[thick] (1.5,0) -- (0,0);
+            \endscope
+        
+            % Plus sign
+            \node at (-1, 1.5) {$+$};
+        
+            % Middle Polygon (Rectangle)
+            \scope[xshift=0cm]
+                % Draw rectangle
+                \draw (0,0) -- (3,0) -- (3,3) -- (0,3) -- (0,0);
+                % Draw shaded triangle
+                \draw[fill=red, opacity=0.2] (0,0) -- (0,3) -- (1,0) -- cycle;
+                % Draw vertices
+                \fill (0,0) circle (2pt) node[below] {5};
+                \fill (0,3) circle (2pt) node[above] {6};
+                \fill (3,3) circle (2pt) node[above] {7};
+                \fill (3,0) circle (2pt) node[below] {8};
+                % Draw arrows
+                \draw[thick, ->] (0,0) -- (0,1.5); \draw[thick] (0,1.5) -- (0,3);
+                \draw[thick, ->] (0,3) -- (1.5,3); \draw[thick] (1.5,3) -- (3,3);
+                \draw[thick, ->] (3,3) -- (3,1.5); \draw[thick] (3,1.5) -- (3,0);
+                \draw[thick, ->] (3,0) -- (1.5,0); \draw[thick] (1.5,0) -- (0,0);
+            \endscope
+        
+            % Equals sign
+            \node at (4.5, 1.5) {$=$};
+            
+            % Right Polygon (Octagon)
+            \scope[xshift=8cm, yshift=1.5cm, scale=1.2]
+                % Define vertices of the octagon
+                \coordinate (v1) at (0, -2);
+                \coordinate (v2) at (-1.414, -1.414);
+                \coordinate (v3) at (-2, 0);
+                \coordinate (v4) at (-1.414, 1.414);
+                \coordinate (v5) at (0, 2);
+                \coordinate (v6) at (1.414, 1.414);
+                \coordinate (v7) at (2, 0);
+                \coordinate (v8) at (1.414, -1.414);
+        
+                % Draw edges with arrows
+                \draw[thick, ->] (v1) -- ($(v1)!0.5!(v2)$); \draw[thick] ($(v1)!0.5!(v2)$) -- (v2); % 1
+                \draw[thick, ->] (v2) -- ($(v2)!0.5!(v3)$); \draw[thick] ($(v2)!0.5!(v3)$) -- (v3); % 4'
+                \draw[thick, ->] (v3) -- ($(v3)!0.5!(v4)$); \draw[thick] ($(v3)!0.5!(v4)$) -- (v4); % 5'
+                \draw[thick, ->] (v4) -- ($(v4)!0.5!(v5)$); \draw[thick] ($(v4)!0.5!(v5)$) -- (v5); % 6
+                \draw[thick, ->] (v5) -- ($(v5)!0.5!(v6)$); \draw[thick] ($(v5)!0.5!(v6)$) -- (v6); % 7
+                \draw[thick, ->] (v6) -- ($(v6)!0.5!(v7)$); \draw[thick] ($(v6)!0.5!(v7)$) -- (v7); % 8
+                \draw[thick, ->] (v7) -- ($(v7)!0.5!(v8)$); \draw[thick] ($(v7)!0.5!(v8)$) -- (v8); % 5
+                \draw[thick, ->] (v8) -- ($(v8)!0.5!(v1)$); \draw[thick] ($(v8)!0.5!(v1)$) -- (v1); % 4
+        
+                % Draw vertices and labels
+                \fill (v1) circle (2pt) node[below] {1};
+                \fill (v2) circle (2pt) node[left] {4'};
+                \fill (v3) circle (2pt) node[left] {5'};
+                \fill (v4) circle (2pt) node[left] {6};
+                \fill (v5) circle (2pt) node[above] {7};
+                \fill (v6) circle (2pt) node[right] {8};
+                \fill (v7) circle (2pt) node[right] {5};
+                \fill (v8) circle (2pt) node[right] {4};
+                
+                % Add labels from the original drawing
+                \node at ($(v5)!1.3!(v4)$) {2};
+                \node at ($(v5)!1.3!(v6)$) {3};
+                
+                % Draw black dots at midpoints
+                \fill ($(v1)!0.5!(v2)$) circle (1.5pt);
+                \fill ($(v2)!0.5!(v3)$) circle (1.5pt);
+                \fill ($(v3)!0.5!(v4)$) circle (1.5pt);
+                \fill ($(v4)!0.5!(v5)$) circle (1.5pt);
+                \fill ($(v5)!0.5!(v6)$) circle (1.5pt);
+                \fill ($(v6)!0.5!(v7)$) circle (1.5pt);
+                \fill ($(v7)!0.5!(v8)$) circle (1.5pt);
+                \fill ($(v8)!0.5!(v1)$) circle (1.5pt);
+            \endscope
+        \end{tikzpicture}
+        \caption{Combinatorically}
+    \end{figure}
+   
+
+
+\begin{proposition}
+    For $g > 0$, let $P_g$ be $4g$-polygon with edges oriented and labelled with letters as follows:
+    Thus the surface $S_g := P_g / \sim$ obtained from glueing is a sphere with $g$-handles. Furthermore $\chi(S_g) = 2 - 2g$.
+    In particular $S_g \not\cong S_{g'}$ if $g \ne g'$.
+\end{proposition}
+\begin{proof}
+    Induction on $g$ using the above description for adding a handle.
+    Base case $g=1$: $\chi(\text{torus}) = 0$.
+    Inductive step:
+    $\chi(\text{adding a handle}) = -2 \chi(\text{closed disc}) + \chi(\text{cylinder}) = -2$.
+    $\chi(S_g) = \chi(S_{g-1}) - 2$.
+    Thus $\chi(S_g) = 2 - 2g$.
+\end{proof}
+
+\subsection{Topological classification of compact oriented connected surfaces}
+
+\begin{theorem}
+    For every compact connected orientable surface $S$, $\exists ! g \in \mathbb{N}$ s.t. $S \cong S_g$ (sphere with $g$ handles).
+    Moreover $g = \frac{1}{2}(2 - \chi(S))$.
+\end{theorem}
+\begin{proof}[Proof (Sketch)]
+    \begin{enumerate}[(i)]
+        \item Triangulate $S$ and map these triangles successively to $\mathbb{R}^2$ to get a polygon with glueing data.
+        \item Replace this polygon with an equivalent polygon (i.e. associated surfaces are homeo) s.t. after glueing all the vertices are identified.
+        \item Take the word of this polygon \& apply combinatorial reductions to put your word into a standard form.
+        Case 1: Move $x...y...x^{-1}...y^{-1}$ together $\mapsto xyx^{-1}y^{-1}$.
+        Case 2: Move $x...x$ pairs together (non-orientable case).
+        This results a word in "standard form".
+        For orientable case:
+        \[
+        x_1 y_1 x_1^{-1} y_1^{-1} ... x_g y_g x_g^{-1} y_g^{-1}
+        \]
+    \end{enumerate}
+\end{proof}
+
+\begin{remark}
+    From the description $S_g \cong P_g / \sim$ one can compute
+    \[
+    \pi_1(S_g) = \langle x_1, y_1, ..., x_g, y_g : x_1 y_1 x_1^{-1} y_1^{-1} ... x_g y_g x_g^{-1} y_g^{-1} = 1 \rangle
+    \]
+    $H_1(S_g) \cong \mathbb{Z}^{2g}$.
+\end{remark}
+
+\newpage
+\section{Riemann-Hurwitz Formula}
+
+\subsection{Topological version}
+
+Recall: For a non-constant holo map of RSs, $F: X \to Y$.
+We defined $\text{mult}_p(F) \in \mathbb{Z}_{>0}, \forall p \in X$.
+$R(F) = \{ p \in X : \text{mult}_p(F) > 1 \} \subset X$.
+$B(F) = F(R(F))$ Branch locus.
+$F: X \setminus R(F) \to Y \setminus B(F)$ is a covering map.
+If $X$ \& $Y$ are compact, we defined $\deg(F) = \sum_{p \in F^{-1}(q)} \text{mult}_p(F)$ for any $q \in Y$.
+
+\begin{theorem}[Topological Riemann-Hurwitz]
+    Let $F: X \to Y$ be a non-constant holo map of cpt RSs.
+    Then the genus $g(X)$ and $g(Y)$ are related as follows:
+    \[
+    \underbrace{2g(X) - 2}_{-\chi(X)} = \deg(F) \underbrace{(2g(Y) - 2)}_{-\chi(Y)} + \sum_{p \in X} (\text{mult}_p(F) - 1).
+    \]
+\end{theorem}
+\begin{proof}[Proof (Sketch)]
+    Take a triangulation of $Y$ s.t. all the branch pts of $F$ are vertices and pull this back to a triangulation of $X$.
+    Let $v_X, e_X, f_X$ (resp. $v_Y, e_Y, f_Y$) denote the \# of vertices, edges and faces in the triangulation of $X$ (resp $Y$).
+    Let $d = \deg(F)$.
+    $e_X = d e_Y$ and $f_X = d f_Y$ (why?).
+    
+    while
+    \begin{align*}
+        v_X &= \sum_{\text{vertices } p \in X} 1 = \sum_{\text{vertices } q \in Y} \sum_{p \in F^{-1}(q)} 1 \\
+        &= \sum_{\text{vertices } q \in Y} \sum_{p \in F^{-1}(q)} (1 + \text{mult}_p(F) - \text{mult}_p(F)) \\
+        &= \sum_{\text{vertices } q \in Y} (d + \sum_{p \in F^{-1}(q)} (1 - \text{mult}_p(F))) \\
+        &= d v_Y + \sum_{\text{vertices } p \in X} (1 - \text{mult}_p(F))
+    \end{align*}
+    now with these we have
+    \begin{align*}
+        -\chi(X) &= -v_X + e_X - f_X \\
+        &= -d v_Y - \sum_{p \in X, \text{vertex}} (1 - \text{mult}_p(F)) + d e_Y - d f_Y \\
+        &= -d \chi(Y) + \sum_{p \in X} (\text{mult}_p(F) - 1).
+    \end{align*}
+\end{proof}
+
+\subsection{Canonical divisor version of Riemann-Hurwitz}
+
+\begin{definition}
+    The \textbf{ramification divisor} of a non-constant holo $F: X \to Y$ of RS is $R_F := \sum_{p \in X} (\text{mult}_p(F) - 1) \cdot p \in \text{Div}(X)$.
+\end{definition}
+
+\begin{remark}
+    For $X$ \& $Y$ cpt: topological Riemann-Hurwitz Formula says
+    \[
+    2g(X) - 2 = \deg(F) (2g(Y) - 2) + \deg(R_F).
+    \]
+\end{remark}
+
+\subsection{Pullbacks of divisors and 1-forms}
+
+Pulling back divisors and 1-forms along $F$.
+\begin{itemize}
+    \item \textbf{On divisors}
+    $F^*: \text{Div}(Y) \to \text{Div}(X)$
+    \[
+    F^* (\sum_{q \in Y} m_q \cdot q) = \sum_{p \in X} m_{F(p)} \text{mult}_p(F) \cdot p.
+    \]
+    \item \textbf{On mero 1-forms}
+    $F^*: \mathcal{M}^{(1)}(Y) \to \mathcal{M}^{(1)}(X)$
+    Locally: let $z$ \& $w$ be local coords on $X$ \& $Y$ s.t. $F$ has local form $f(z) = w$.
+    \[
+    \omega = h(w) dw \longrightarrow F^* \omega := h(f(z)) f'(z) dz
+    \]
+    (Recall that $F^*\omega$ is also a 1-form in the sense that changing $z, w$ to $z', w'$, $F^*\omega$ on $z'$ \& $F^*\omega$ on $w'$ satisfy the glueing law.)
+\end{itemize}
+
+\begin{lemma}
+    Let $F: X \to Y$ be a non-constant holo maps of RS, and let $\omega \in \mathcal{M}^{(1)}(Y)^\times$. Then
+    \[
+    \text{div}(F^* \omega) = F^*(\text{div}(\omega)) + R_F
+    \]
+    (canonical divisor on $X$) = (pullback of a canonical divisor on $Y$) + (ramification divisor).
+\end{lemma}
+\begin{proof}
+    At $p \in X$, let $n = \text{mult}_p(F)$ \& take local coordinates $z$ at $p$, and $w$ at $q = F(p)$, s.t. $F$ has local form at $p$:
+    $f(z) = z^n = w$.
+    
+    Let $k := \text{ord}_q(\omega)$. i.e. locally $\omega = h(w) dw$ where $h(w) = c w^k + ...$
+    \begin{align*}
+        F^* \omega &= (c (f(z))^k + ...) f'(z) dz \\
+        &= (c (z^n)^k + ...) (n z^{n-1}) dz \\
+        &= (c z^{nk} + ...) (n z^{n-1}) dz \\
+        &= (c n z^{nk + n - 1} + ...) dz
+    \end{align*}
+    $\text{ord}_p(F^* \omega) = nk + n - 1 = \text{mult}_p(F) \text{ord}_q(\omega) + \text{mult}_p(F) - 1$.
+    
+    Now
+    \begin{align*}
+        \text{div}(F^* \omega) &= \sum_{p \in X} \text{ord}_p(F^* \omega) \cdot p = \sum_{p \in X} (\text{mult}_p(F) \text{ord}_{F(p)}(\omega) + \text{mult}_p(F) - 1) \cdot p \\
+        &= F^*(\text{div}(\omega)) + R_F.
+    \end{align*}
+\end{proof}
+
+\begin{corollary}[Canonical divisor version of Riemann-Hurwitz]
+    If $F: X \to Y$ is a non-constant holo map of RS, \& $K_X$ (resp $K_Y$) are canonical divisors on $X$ (resp. $Y$). Then
+    \[
+    K_X \sim F^* K_Y + R_F.
+    \]
+\end{corollary}
+\begin{proof}
+    Obvious from the lemma.
+\end{proof}
+
+\begin{proposition}
+    On a cpt RS $X$, the degree of any canonical divisor is $\deg(K_X) = 2g(X) - 2$.
+\end{proposition}
 
 \newpage
 \appendix
