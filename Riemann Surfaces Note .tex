@@ -46,6 +46,7 @@
 
 \usepackage{thmtools}
 \usepackage{tikz}
+\usepackage{tikz-cd}
 \usepackage{tikz-3dplot}
 
 %% define environments
@@ -124,7 +125,34 @@ OUr goal in this note is to obtain Riemann-Roch theorem and its application.
 
 \section{Riemann Surfaces and complex \textbf{manifolds}.}
 \subsection{Holomorphic functions in 1-variable}
+
+Holomorphic functions are the central objects of study in complex analysis. They are functions defined on the complex plane that are ``complex differentiable,'' a condition that is far more restrictive and powerful than real differentiability.
+\begin{definition}
+A function $f: U \to \mathbb{C}$ on an open set $U \subseteq \mathbb{C}$ is said to be \textbf{holomorphic} if it is complex differentiable at every point $z_0 \in U$. This means the following limit, which defines the derivative $f'(z_0)$, exists:
+\[ f'(z_0) = \lim_{h \to 0} \frac{f(z_0+h) - f(z_0)}{h} \]
+\end{definition}
+A key equivalent condition for holomorphicity is given by the \textbf{Cauchy-Riemann equations}. If we write $f$ in terms of its real and imaginary parts, $f(x+iy) = u(x,y) + iv(x,y)$, then $f$ is holomorphic if and only if $u$ and $v$ have continuous first partial derivatives that satisfy:
+\[ \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \quad \text{and} \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x} \]
+Holomorphic functions in one variable have several remarkable properties:
+\begin{itemize}
+    \item \textbf{Analyticity:} If a function is once complex differentiable, it is infinitely differentiable and can be represented by a convergent power series (Taylor series) in a neighborhood of every point.
+    \item \textbf{Cauchy's Integral Formula:} The value of a holomorphic function inside a disk is completely determined by its values on the boundary circle.
+    \item \textbf{Liouville's Theorem:} A holomorphic function on the entire complex plane (an ``entire'' function) that is bounded must be constant.
+\end{itemize}
+
 \subsection{Holomorphic functions in $n$-variables}
+
+The theory of holomorphic functions in several complex variables, concerning functions $f: U \to \mathbb{C}$ on an open set $U \subseteq \mathbb{C}^n$, is a rich field with significant differences from the one-variable case.
+\begin{definition}
+A function $f(z_1, \dots, z_n)$ is said to be \textbf{holomorphic} if it is holomorphic with respect to each variable $z_j$ separately when all other variables are held constant. This means it must satisfy the Cauchy-Riemann equations for each variable $z_j = x_j + iy_j$.
+\end{definition}
+While this definition seems like a straightforward extension, the consequences are profound and lead to new phenomena not seen in one dimension:
+\begin{itemize}
+    \item \textbf{No Isolated Zeros:} In $\mathbb{C}$, the function $f(z)=z$ has an isolated zero at the origin. In $\mathbb{C}^n$ for $n \ge 2$, the zero set of a non-constant holomorphic function is never an isolated point. This is a consequence of \textbf{Hartogs's extension theorem}.
+    \item \textbf{Domains of Holomorphy:} In one variable, for any open set, one can find a holomorphic function that cannot be extended analytically to any larger set. This is not true in higher dimensions. For example, any function holomorphic on a ``hollowed-out shell'' like $\{z \in \mathbb{C}^2 : 1 < ||z|| < 2\}$ can be automatically extended to the full ball $\{z \in \mathbb{C}^2 : ||z|| < 2\}$. This leads to the study of special domains called ``domains of holomorphy.''
+\end{itemize}
+These differences motivate the need for a more geometric viewpoint, which is provided by the theory of complex manifolds.
+
 \subsection{Complex manifolds \& Riemann Surfaces.}
 
 \begin{definition}
@@ -186,57 +214,22 @@ OUr goal in this note is to obtain Riemann-Roch theorem and its application.
 \end{enumerate}
 \end{example}
 
-%there should be a image of steoregraphic projection
-\begin{figure}[h!] % The [h!] is an optional placement specifier
-    \centering % This centers the drawing on the page
-    \tdplotsetmaincoords{70}{110}
-    \begin{tikzpicture}[tdplot_main_coords, scale=2]
-
-        % Sphere
-        \draw[ball color=cyan, opacity=0.4] (0,0,0) circle (1);
-
-        % Projection plane
-        \fill[gray, opacity=0.2] (-2,-2,-1) -- (2,-2,-1) -- (2,2,-1) -- (-2,2,-1) -- cycle;
-        \draw (-2,-2,-1) -- (2,-2,-1) -- (2,2,-1) -- (-2,2,-1) -- cycle;
-        \node at (2, -2, -1) [below right] {$z=-1$};
-
-        % North pole (projection point)
-        \fill[red] (0,0,1) circle (0.05);
-        \node at (0,0,1) [above] {$N$};
-
-        % Point on the sphere
-        \tdplotsetthetaplanecoords{60}{30}
-        \tdplotdrawarc[tdplot_rotated_coords, thick, red]{(0,0,0)}{1}{0}{360}{}{}
-        \tdplotsetthetaplanecoords{60}{30}
-        \coordinate (P) at (1,0,0);
-        \node at (P) [above right, red] {$P$};
-        \fill[red] (P) circle (0.05);
-
-        % Projection line
-        \draw[dashed, blue] (0,0,1) -- (P);
-
-        % Projected point on the plane
-        \pgfmathsetmacro{\px}{1*cos(30)*sin(60)}
-        \pgfmathsetmacro{\py}{1*sin(30)*sin(60)}
-        \pgfmathsetmacro{\pz}{1*cos(60)}
-        \pgfmathsetmacro{\pxprime}{2*\px/(1-\pz)}
-        \pgfmathsetmacro{\pyprime}{2*\py/(1-\pz)}
-
-        \coordinate (Pprime) at (\pxprime, \pyprime, -1);
-        \fill[blue] (Pprime) circle (0.05);
-        \node at (Pprime) [below, blue] {$P'$};
-        \draw[dashed, blue] (P) -- (Pprime);
-        \draw[blue, ->] (0,0,1) -- (Pprime);
-
-        % Axes
-        \draw[-latex] (0,0,0) -- (2,0,0) node[anchor=north east]{$x$};
-        \draw[-latex] (0,0,0) -- (0,2,0) node[anchor=north west]{$y$};
-        \draw[-latex] (0,0,0) -- (0,0,2) node[anchor=south]{$z$};
-
-    \end{tikzpicture}
-    \caption{An illustration of the stereographic projection.}
+% The [!htbp] specifier suggests placement: here, top, bottom, or page of floats.
+\begin{figure}[!h]
+    % Centers the image horizontally on the page
+    \centering
+    
+    % The main command to include the image.
+    % 'width=0.8\textwidth' scales the image to 80% of the text width.
+    \includegraphics[width=0.5\textwidth]{stereograhic_projection.pdf}
+    
+    % Adds a caption below the image.
+    \caption{Stereographic projection from the North Pole (N) of a sphere onto the plane $z=0$.}
+    
+    % Adds a label so you can reference the figure elsewhere using \ref{fig:stereo_proj}.
     \label{fig:stereo_proj}
 \end{figure}
+
 $S^2 \setminus \{ (0,0,1) \}$
 \begin{align*}
     \phi_0 : U_0 &\longrightarrow V_0 = \mathbb{C} \\
@@ -1620,7 +1613,7 @@ or
 $$ = \deg(F)\deg(G) \quad (\text{by the exercise above}) $$
 \end{corollary}
 
-\subsection*{4.4 Spaces of meromorphic functions bounded by a divisor.}
+\subsection{Spaces of meromorphic functions bounded by a divisor.}
 
 \begin{definition}
 For $D = \sum_{p \in X} m_p \cdot p \in \mathrm{Div}(X)$, the space of meromorphic functions bounded by $D$ is
@@ -1754,6 +1747,7 @@ Recall that for a point $p$ on the Riemann surface $X$:
     \item The quotient $\mathfrak{m}_p / \mathfrak{m}_p^2$ is a $\mathbb{C}$-vector space (the complex dimension of $X$ is $\dim_{\mathbb{C}}(\mathfrak{m}_p / \mathfrak{m}_p^2) = 1$).
 \end{itemize}
 
+\subsection{Tangent and Cotangent Space}
 
 \begin{definition}[Holomorphic Tangent Space]
 The tangent space at $p$, $T_p X$, is the space of $\mathbb{C}$-derivations of $\mathcal{O}_{X,p}$ into $\mathbb{C}$:
@@ -1795,9 +1789,364 @@ By construction, $\Phi(D_\ell) = \ell$. Thus $\Phi$ is surjective.
 Since $\Phi$ is linear, injective, and surjective, it is an isomorphism.
 \end{proof}
 
+\textbf{Induced maps on local maps \& tangent spaces}
+
+A holomorphic map $F: X \to Y$ of complex manifolds with $q = F(p)$ induces
+\begin{enumerate}[(i)]
+    \item Pullback maps of rings of holomorphic function germs
+    $$F^*: \mathcal{O}_{Y,q} \to \mathcal{O}_{X,p}.$$
+    $$[h, U] \mapsto [\tilde{h}, F^{-1}(U)] \text{ where } \tilde{h} = h \circ F$$
+    with $F^*(\mathfrak{m}_q) \subset \mathfrak{m}_p$.
+    \item Differential maps on tangent spaces
+    $$\mathrm{d}_q F: T_p X \to T_q Y$$
+    $$\left(\mathrm{d}: \mathcal{O}_{X,p} \to \mathbb{C}\right) \mapsto \left(\mathrm{d} \circ F^*: \mathcal{O}_{Y,q} \xrightarrow{F^*} \mathcal{O}_{X,p} \xrightarrow{\mathrm{d}} \mathbb{C}\right)$$
+    \item The dual pullback on a cotangent space
+    $$F^*: T_q^* Y \to T_p^* X.$$
+\end{enumerate}
+
+\subsection{Vector bundles on manifolds}
+
+Let $X$ be a smooth manifold and $k = \mathbb{R}$ or $\mathbb{C}$.
+
+\begin{definition}
+A rank $n$ $k$-vector bundle on $X$ is
+\begin{enumerate}[(i)]
+    \item a smooth manifold $E$ with a smooth map $\pi: E \to X$.
+    \item $\forall p \in X$, the fibre $E_p := \pi^{-1}(p)$ has the structure of a ${k}$-vector space such that $\exists$ open cover $X = \bigcup_i U_i$ and $\forall i$, diffeomorphisms $\Psi_i: E|_{U_i} \xrightarrow{\cong} U_i \times {k}^n$.
+\end{enumerate}
+inducing linear isomorphisms $E_p \to \{p\} \times {k}^n$, $\forall p \in U_i$.
+\end{definition}
+
+\begin{remark}
+\textbf{Rank:} $\forall i,j$, we have $g_{ij}: U_{ij} := U_i \cap U_j \to \mathrm{GL}_n(k)$
+$$p \mapsto \Psi_i \circ \Psi_j^{-1}|_{ \{p\} \times k^n }$$
+satisfying
+\begin{align*}
+    g_{ij} \circ g_{ji} &= \mathrm{Id}_{U_{ij}} \\
+    g_{ij} \circ g_{jk} \circ g_{ki} &= \mathrm{Id}_{U_{ijk}} \quad (*)
+\end{align*}
+\end{remark}
+
+Conversely given an open cover $X = \bigcup_i U_i$ and smooth transition functions $g_{ij}: U_{ij} \to \mathrm{GL}_n(k)$ satisfying $(*)$, we can construct a vector bundle $E = \bigcup_{i \in I} U_i \times k^n / \sim$,
+$$(p, v) \sim (p, g_{ij}(p) \cdot v).$$
+
+\begin{definition}
+Let $X$ be a complex manifold. A \textbf{holomorphic rank $n$ vector bundle} on $X$ is
+\begin{enumerate}[(i)]
+    \item a rank $n$ $\mathbb{C}$-vector bundle $E \xrightarrow{\pi} X$ on the underlying real manifold.
+    \item a complex structure on $E$.
+\end{enumerate}
+such that the local trivializations $\Psi_i$ are biholomorphisms.
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}[(i)]
+    \item $\pi$ is holomorphic and so are the transition functions $g_{ij}$.
+    \item \textbf{Equivalently:} a holomorphic vector bundle on $X$ is given by an open cover $X = \bigcup_i U_i$ and holomorphic transition functions $g_{ij}$ satisfying $(*)$.
+\end{enumerate}
+\end{remark}
+
+\textbf{Vector bundle Constructions} (\textit{Linear algebra constructions generalize to vector bundles})
+
+Let $E$ and $E'$ be vector bundles on $X$ of rank $n$ and $n'$.
+Take a trivializing open cover $X = \bigcup_i U_i$ for both $E$ and $E'$.
+Let $g_{ij}$ and $g'_{ij}$ denote the transition functions for $E$ and $E'$.
+
+\begin{enumerate}[(a)]
+    \item \textbf{Dual bundle}: $E^* = \bigcup_{p \in X} E_p^*$ is the rank $n$ vector bundle.
+    $$ \text{transition functions } g_{ij}^*: U_{ij} \to \mathrm{GL}_n(\mathbb{k}) $$
+    $$ p \mapsto (g_{ij}(p)^T)^{-1} $$
+    \item \textbf{Direct Sum}: $E \oplus E' = \bigcup_{p \in X} E_p \oplus E_p'$ is a rank $n+n'$ vector bundle.
+    $$ \text{transition functions } U_{ij} \to \mathrm{GL}_{n+n'}(\mathbb{k}) $$
+    $$ p \mapsto \begin{pmatrix} g_{ij}(p) & 0 \\ 0 & g'_{ij}(p) \end{pmatrix} $$
+    \item \textbf{Tensor products}: $E \otimes E' = \bigcup_{p \in X} E_p \otimes E_p'$ is a rank $n \cdot n'$ vector bundle.
+    \item \textbf{Exterior powers}: $\bigwedge^k E = \bigcup_{p \in X} \bigwedge^k E_p$ is a rank $\binom{n}{k}$ vector bundle.
+    \item \textbf{Subbundle}: A subbundle of $E$ is a vector subspace $E'_p \subset E_p, \forall p \in X$. $E' = \bigcup_{p \in X} E'_p$ is a subbundle of $E$.
+    \item \textbf{Homomorphisms}: $f: E \to E'$ a map of manifolds is a \textbf{vector bundle homomorphism} if $f$ commutes with the projections to $X$ and $\forall p \in X$, $f_p: E_p \to E'_p$ is $\mathbb{k}$-linear.
+\end{enumerate}
+
+\begin{remark}
+$\ker f \subset E$ and $\mathrm{Im} f \subset E'$ are not necessarily subbundles, because $\mathrm{rank}_p$ might jump.
+\end{remark}
+
+\begin{definition} (\textbf{Sections \& Frames})
+\begin{enumerate}[(i)]
+    \item A \textbf{section} of a holomorphic vector bundle $E \xrightarrow{\pi} X$ over an open set $U \subset X$ is given by a holomorphic map $\sigma: U \to E$ such that $\pi \circ \sigma = \mathrm{id}_U$.
+    
+    \textbf{Notation}: $H^0(U, E)$ space of sections of $E$ over $U \subset X$.
+    \item A \textbf{frame} for $E$ over $U$ is sections $\sigma_1, \dots, \sigma_n \in H^0(U, E)$ such that $\sigma_1(p), \dots, \sigma_n(p)$ is a basis of $E_p$, $\forall p \in U$.
+    
+    A \textbf{frame} for $E$ over $U \iff$ local trivialization of $E$ over $U$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+You can pullback vector bundles along a holomorphic map.
+\end{remark}
+
+\begin{example}
+\textbf{Tangent bundles.}
+
+Let $X$ be a complex manifold of $\dim_{\mathbb{C}} n$. At $p \in X$, take local complex coordinates $z_1, \dots, z_n$. Let $x_1, \dots, x_n, y_1, \dots, y_n$ be local real coordinates, i.e. $z_j = x_j + i y_j$.
+
+\begin{enumerate}[(a)]
+    \item \textbf{Real tangent bundles} ($T_{\mathbb{R}} X$).
+    $$T_{\mathbb{R}, p} X := \mathrm{Der}(\mathcal{O}_{X, p}^{\infty}, \mathbb{R}) \cong T_{\mathbb{R}, 0} \mathbb{R}^{2n} \cong \mathrm{Span}_{\mathbb{R}} \left\{ \left. \frac{\partial}{\partial x_j} \right|_p, \left. \frac{\partial}{\partial y_j} \right|_p \right\}$$
+    $$T_{\mathbb{R}} X := \bigcup_{p \in X} T_{\mathbb{R}, p} X.$$
+    
+    Using a real atlas $\{ \phi_\alpha: U_\alpha \to V_\alpha \}$ on $X$ we can define local trivializations of $T_{\mathbb{R}} X$:
+    $$\Psi_\alpha: T_{\mathbb{R}} X|_{U_\alpha} \to U_\alpha \times \mathbb{R}^{2n}.$$
+    $$(p, \sum a_j \frac{\partial}{\partial x_j}|_p + b_j \frac{\partial}{\partial y_j}|_p) \mapsto (p, a_1, \dots, a_n, b_1, \dots, b_n)$$
+    
+    with transition function given by the real Jacobian
+    $$\Psi_\beta \circ \Psi_\alpha^{-1}(p, (\mathbf{a}, \mathbf{b})) = (p, g_{\beta \alpha}(p) \cdot (\mathbf{a}, \mathbf{b})).$$
+    $$g_{\beta \alpha}(p) = J^{\mathbb{R}}(\phi_\beta \circ \phi_\alpha^{-1})_{\phi_\alpha(p)}$$
+
+    \item \textbf{Complexified tangent bundle} $T_{\mathbb{C}} X$.
+    $$T_{\mathbb{C}, p} X := T_{\mathbb{R}, p} X \otimes_{\mathbb{R}} \mathbb{C} \cong \mathrm{Span}_{\mathbb{C}} \left\{ \left. \frac{\partial}{\partial x_j} \right|_p, \left. \frac{\partial}{\partial y_j} \right|_p \right\} \cong \mathrm{Span}_{\mathbb{C}} \left\{ \left. \frac{\partial}{\partial z_j} \right|_p, \left. \frac{\partial}{\partial \bar{z}_j} \right|_p \right\}$$
+    $$T_{\mathbb{C}} X := \bigcup_{p \in X} T_{\mathbb{C}, p} X \quad \text{complex vector bundle of rank } 2n.$$
+
+\item \textbf{Holomorphic tangent bundle} ($TX$).
+    $$T_p X := \mathrm{Der}(\mathcal{O}_{X,p}, \mathbb{C}) \cong \mathrm{Span}_{\mathbb{C}} \left\{ \left. \frac{\partial}{\partial z_j} \right|_p \right\}_{j=1}^n \subset T_{\mathbb{C}, p} X$$
+    
+    $$T X := \bigcup_{p \in X} T_p X \quad \text{is a rank } n \text{ complex subbundle of } T_{\mathbb{C}} X.$$
+\end{enumerate}
+\end{example}
+Below we present the proof of example (c) that $TX$ is indeed a holomorphic vector bundles
+\begin{claim}
+$TX$ is a holomorphic vector bundle.
+\end{claim}
+
+\begin{proof}
+Take charts $\phi_\alpha: U_\alpha \to V_\alpha$ and $\phi_\beta: U_\beta \to V_\beta$ on $X$.
+Both give local trivializations $\Psi_\alpha$ and $\Psi_\beta$.
+$\phi_\alpha$ defines a local trivialization of $TX$ over the
+$$\Psi_\alpha: TX|_{U_\alpha} \to U_\alpha \times \mathbb{C}^n$$
+$$(p, \sum_{j=1}^n a_j \frac{\partial}{\partial z_j}|_p) \mapsto (p, a_1, \dots, a_n)$$
+
+We want to show the transition function $g_{\beta \alpha}$ for $\Psi_\beta \circ \Psi_\alpha^{-1}$ is holomorphic.
+$$\Psi_\beta \circ \Psi_\alpha^{-1}: U_{\alpha \beta} \times \mathbb{C}^n \to T X|_{U_\beta} \to U_{\alpha \beta} \times \mathbb{C}^n$$
+
+Take charts $\phi_\alpha: U_\alpha \to V_\alpha$ and $\phi_\beta: U_\beta \to V_\beta$ on $X$.
+Both give local trivializations $\Psi_\alpha$ and $\Psi_\beta$.
+$\phi_\alpha$ defines a local trivialization of $TX$ over $U_\alpha$:
+$$\Psi_\alpha: TX|_{U_\alpha} \to U_\alpha \times \mathbb{C}^n$$
+$$(p, \sum_{j=1}^n a_j \frac{\partial}{\partial z_j}|_p) \mapsto (p, a_1, \dots, a_n)$$
+
+We want to show the transition function $g_{\beta \alpha}$ for $\Psi_\beta \circ \Psi_\alpha^{-1}$ is holomorphic.
+$$\Psi_\beta \circ \Psi_\alpha^{-1}: U_{\alpha \beta} \times \mathbb{C}^n \to T X|_{U_\beta} \to U_{\alpha \beta} \times \mathbb{C}^n$$
+$$(p, a_1, \dots, a_n) \mapsto (p, \sum a_i \frac{\partial}{\partial z_i}|_p) \mapsto (p, \sum_i a_i \frac{\partial w_1}{\partial z_i}, \dots, \sum_i a_i \frac{\partial w_n}{\partial z_i})$$
+where we apply the chaine rule
+$$\sum_{i=1}^n a_i \left. \frac{\partial}{\partial z_i} \right|_p = \sum_{i=1}^n a_i \sum_{j=1}^n \frac{\partial w_j}{\partial z_i}(\phi_\alpha(p)) \left. \frac{\partial}{\partial w_j} \right|_p$$
+$$= \sum_{j=1}^n \left( \sum_{i=1}^n a_i \frac{\partial w_j}{\partial z_i} \right) \left. \frac{\partial}{\partial w_j} \right|_p.$$
+Therefore we have
+$$\Psi_\beta \circ \Psi_\alpha^{-1}(p, (a_1, \dots, a_n)) = (p, g_{\beta \alpha}(p) (a_1, \dots, a_n)).$$
+$$g_{\beta \alpha}(p) = J_{\alpha \beta}^{\mathbb{C}}(p)^T \text{ is holomorphic.}$$
+\end{proof}
+
+\subsection{Holomorphic \& Meromorphic 1-forms on a Riemann Surface}
+
+\textbf{Motivation}: often we can make local definitions.
+
+\begin{example}
+$h \in \mathcal{M}(X) \implies h_\alpha = h \circ \phi_\alpha^{-1} \in \mathcal{M}(V_\alpha)$, satisfying the gluing law
+$$h_\alpha = h_\beta \circ T_{\beta \alpha}, \quad T_{\beta \alpha} = \phi_\beta \circ \phi_\alpha^{-1}$$
+on overlaps, where $\phi_\alpha: U_\alpha \to V_\alpha$ is a chart on $X$.
+\end{example}
+
+$$h \in \mathcal{M}(X) \iff \text{local mero functions } h_\alpha \in \mathcal{M}(V_\alpha) \text{ associated to}$$
+$$\text{an atlas satisfying } (*) \text{ on overlaps.}$$
+
+\textbf{Non-Example}: The derivatives $h_\alpha'$ of $h_\alpha \in \mathcal{M}(X)$ don't satisfy $(*)$.
+However, these $h_\alpha'$ are satisfying the gluing laws for mero 1-forms.
+
+$$h_\alpha' = (h_\beta' \circ T_{\beta \alpha}) \cdot T_{\beta \alpha}'$$
+
+\begin{definition}
+\begin{enumerate}[(i)]
+    \item A \textbf{holomorphic vector field} on an open set $U \subset X$ is a holomorphic section of $TX$ over $U$.
+    \item A \textbf{holomorphic 1-form} on an open set $U \subset X$ is a holomorphic section of $T^*X$ over $U$.
+\end{enumerate}
+\end{definition}
+
+\textbf{Local description}
+A local chart $\phi_\alpha: U_\alpha \to V_\alpha$ with coordinate $z$ on $V_\alpha$ gives local holomorphic frames $\frac{\partial}{\partial z}|_p$ of $TX$ and dually $dz|_p$ of $T^*X$.
+
+\textbf{Transformation laws}
+Take another chart $\phi_\beta: U_\beta \to V_\beta$ with coordinate $w$ on $V_\beta$. $T = \phi_\beta \circ \phi_\alpha^{-1}$, $T(z) = w$.
+$$\left. \frac{\partial}{\partial z} \right|_p = T'( \phi_\alpha(p) ) \left. \frac{\partial}{\partial w} \right|_p \quad \text{and} \quad dw|_p = T'(\phi_\alpha(p)) dz|_p$$
+$$ \text{transformation laws.} $$
+
+\textbf{Gluing laws}
+Local holomorphic 1-forms $\omega_\alpha = g_\alpha dz_\alpha$ on $U_\alpha$ and $\omega_\beta = g_\beta dw_\beta$ on $U_\beta$
+(where $g_\alpha \in \mathcal{O}(U_\alpha)$ and $g_\beta \in \mathcal{O}(U_\beta)$)
+glue to $U_\alpha \cap U_\beta$ if $g_\alpha(p) = T'(\phi_\alpha(p)) g_\beta(p)$ $(\ast)$, $\forall p \in U_{\alpha \beta}$.
+$T = \phi_\beta \circ \phi_\alpha^{-1}$, $T(z) = w$.
+
+$\text{holomorphic 1-form on } X \iff \text{local holomorphic 1-forms } \omega_\alpha = g_\alpha dz_\alpha \text{ on } U_\alpha$
+$$\text{for an atlas } \{ \phi_\alpha: U_\alpha \to V_\alpha \} \text{ satisfying } (\ast).$$
+$$\Updownarrow \quad h_\alpha = g_\alpha \circ \phi_\alpha^{-1}$$
+$$\text{local holomorphic 1-forms } \omega_\alpha = h_\alpha dz_\alpha \text{ on } V_\alpha$$
+$$\text{for an atlas satisfying } h_\alpha = (h_\beta \circ T) \cdot T' \quad (\ast).$$
+\begin{remark}
+    The takeaway message of the above discussion is that we have two equivalent ways to define the glueing laws. One is that define the glueing laws for $g_{alpha}:U_{\alpha}\subseteq X \to \mathbb{C}$, the other one is to define for $g_{\alpha}:V_{alpha}\subseteq \mathbb{C} \to \mathbb{C}$. In the class Victoria start with the first definitnion, but the book by Miranda use the second definition.
+\end{remark}
+
+\begin{definition}
+A \textbf{meromorphic 1-form} on $X$ is given by local expressions
+$$\omega_\alpha = g_\alpha dz_\alpha \text{ with } g_\alpha \in \mathcal{M}(U_\alpha) \text{ for an atlas } \{ \phi_\alpha: U_\alpha \to V_\alpha \}$$
+satisfying $(\ast)$.
+\textbf{Equivalently}: local expressions $\omega_\alpha = h_\alpha dz_\alpha$
+with $h_\alpha \in \mathcal{M}(V_\alpha)$ satisfying $(+)$.
+\end{definition}
+
+\textbf{Notation}:
+$$\mathcal{M}^{(1)}(X) = \{ \text{mero 1-forms on } X \}$$
+$$\Omega^1(X) = \{ \text{holo 1-forms on } X \}$$
+
+\textbf{Pullbacks of mero 1-forms along a non-constant holomorphic map $F: X \to Y$ of Riemann Surfaces (RSs).}
+
+Define $F^*: \mathcal{M}^{(1)}(Y) \to \mathcal{M}^{(1)}(X)$. Locally as follows:
+Let $\phi: U \to V$ and $\psi: U' \to V'$ be charts
+$$\begin{tikzcd}
+U \arrow{r}{\phi} \arrow{d} & V \\
+X &
+\end{tikzcd}
+\quad \text{and} \quad
+\begin{tikzcd}
+U' \arrow{r}{\psi} \arrow{d} & V' \\
+Y &
+\end{tikzcd}$$
+such that $F(U) \subset U'$. Given a local meromorphic 1-form $\omega = h(w) dw$ on $V' \cong U' \subset Y$, we define
+$$F^* \omega := h(F(z)) F'(z) dz.$$
+
+\begin{exercise}
+Check this local definition gives a global mero 1-form.
+i.e. the gluing laws $(+)$ hold.
+\end{exercise}
+
+\subsection{Meromorphic 1-forms and divisors.}
+
+\begin{definition}
+For $\omega \in \mathcal{M}^{(1)}(X) \setminus \{0\}$, given locally by $\omega_\alpha = g_\alpha dz_\alpha$ with $g_\alpha \in \mathcal{M}(U_\alpha)$, we define an associated \textbf{canonical divisor} on $X$:
+$$\mathrm{div}(\omega) = \sum_{p \in X} \mathrm{ord}_p(\omega) \cdot p \in \mathrm{Div}(X)$$
+where $\mathrm{ord}_p(\omega) := \mathrm{ord}_p(g_\alpha)$ for any $U_\alpha \ni p$.
+\end{definition}
+
+\begin{lemma}
+\begin{enumerate}[(i)]
+    \item $\mathrm{ord}_p(\omega)$ is well-defined. (\textbf{Proof}: use the gluing law)
+    \item $\mathrm{div}(\omega) \ge 0 \iff \omega \in \Omega^1(X)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{example}
+Meromorphic 1-forms on $X = \mathbb{C} P^1$.
+
+$\mathbb{C} P^1$ has an atlas $\{ \phi_0: U_0 \to \mathbb{C}, \phi_\infty: U_\infty \to \mathbb{C} \}$.
+$$\phi_0(z) = z \quad (\text{coord } z), \quad \phi_\infty(w) = w \quad (\text{coord } w).$$
+$$T = \phi_0 \circ \phi_\infty^{-1}: \mathbb{C}^\times \to \mathbb{C}^\times$$
+$$T(w) = \frac{1}{w} = z.$$
+
+A meromorphic 1-form on $\mathbb{C} P^1$ is given by $\omega_0 = h_0 dz$ and
+$\omega_\infty = h_\infty dw$, satisfying the gluing law:
+$$h_0(T(w)) \cdot T'(w) = h_\infty(w)$$
+$$h_0(\frac{1}{w}) \cdot (-\frac{1}{w^2}) = h_\infty(w).$$
+$$\mathrm{ord}_\infty(\omega) = \mathrm{ord}_0(h_0(\frac{1}{w}) \cdot (-\frac{1}{w^2})) = \mathrm{ord}_0(h_0(\frac{1}{w})) + \mathrm{ord}_0(-\frac{1}{w^2}) = -2 + \mathrm{ord}_{z=0}(h_0(z))$$
+
+In particular if $h_0(z) = \lambda \prod_{i=1}^m (z-a_i)^{r_i}, \quad r_i \in \mathbb{Z}, a_i \in \mathbb{C}, \lambda \in \mathbb{C}$.
+$$\mathrm{ord}_0(\omega) = -2 - \sum_{i=1}^m r_i.$$
+$$\mathrm{div}(\omega) = \sum_{i=1}^m r_i \cdot a_i + (-2 - \sum_{i=1}^m r_i) \cdot \infty.$$
+$$\deg(\mathrm{div}(\omega)) = -2.$$
+\end{example}
+\begin{lemma}
+Let $\omega$ and $\hat{\omega} \in \mathcal{M}^{(1)}(X)$.
+\begin{enumerate}[(i)]
+    \item For $f \in \mathcal{M}(X)^\times$, we have $f\omega \in \mathcal{M}^{(1)}(X)$.
+    and $\mathrm{div}(f\omega) = \mathrm{div}(f) + \mathrm{div}(\omega)$.
+    \item $\exists ! f \in \mathcal{M}(X)^\times$ such that $\hat{\omega} = f\omega$.
+\end{enumerate}
+Consequently $\mathrm{CDiv}(X) = \{ \mathrm{div}(\omega): \omega \in \mathcal{M}^{(1)}(X) \setminus \{0\} \} \subset \mathrm{Div}(X)$
+is a coset for the subgroup $\mathrm{PDiv}(X) \subset \mathrm{Div}(X)$.
+
+For $X$ compact, $\deg(\mathrm{div}(\omega))$ is independent of choice of $\omega \in \mathcal{M}^{(1)}(X)$.
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}[(i)]
+    \item follows from checking the gluing laws and the fact that $\mathrm{ord}_p(fg) = \mathrm{ord}_p(f) + \mathrm{ord}_p(g)$.
+    \item If locally on $U_\alpha \subset X$, we have $\omega_\alpha = g_\alpha dz_\alpha$ and $\hat{\omega}_\alpha = \hat{g}_\alpha dz_\alpha$. Define $f_\alpha := \frac{\hat{g}_\alpha}{g_\alpha} \in \mathcal{M}(U_\alpha)$.
+    and $f_\alpha$ glue to $f \in \mathcal{M}(X)$.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+\textbf{Spaces of meromorphic 1-forms bounded by $D = \sum_{p \in X} n_p \cdot p \in \mathrm{Div}(X)$}:
+$$L^{(1)}(D) = \{0\} \cup \{ \omega \in \mathcal{M}^{(1)}(X): \mathrm{div}(\omega) + D \ge 0 \}$$
+$$ = \{ \omega \in \mathcal{M}^{(1)}(X): \mathrm{ord}_p(\omega) + n_p \ge 0 \text{ for all } p \in X \}.$$
+\end{definition}
+
+\begin{remark}
+$L^{(1)}(D)$ is a $\mathbb{C}$-vector space.
+\end{remark}
+\begin{example}
+$L^{(1)}(0) = \Omega^1(X)$.
+\end{example}
+
+\begin{lemma}
+If $D_1 = D_2 + \mathrm{div}(h)$ for some $h \in \mathcal{M}(X)^\times$, then
+$$\mu_h: L^{(1)}(D_1) \to L^{(1)}(D_2) \text{ is an isomorphism.}$$
+$$\omega \mapsto h\omega$$
+\end{lemma}
+\begin{proof}
+Use lemma above.
+\end{proof}
+
+\begin{proposition}
+If $\omega \in \mathcal{M}^{(1)}(X) \setminus \{0\}$ and $K = \mathrm{div}(\omega)$, then there is an
+isomorphism
+$$\mathcal{M}_\omega: L(D+K) \to L^{(1)}(D)$$
+$$f \mapsto f\omega.$$
+\end{proposition}
+
+\begin{proof}
+\textbf{1. Well-definedness:}
+We must check that for $f \in L(D+K)$, we have $f\omega \in L^{(1)}(D)$.
+The condition $f \in L(D+K)$ is $\mathrm{div}(f) + D + K \ge 0$.
+The condition $f\omega \in L^{(1)}(D)$ is $\mathrm{div}(f\omega) + D \ge 0$.
+Using the property $\mathrm{div}(f\omega) = \mathrm{div}(f) + \mathrm{div}(\omega)$ and $K = \mathrm{div}(\omega)$, we have:
+$$\mathrm{div}(f\omega) + D = (\mathrm{div}(f) + \mathrm{div}(\omega)) + D = \mathrm{div}(f) + K + D.$$
+Since this expression is assumed to be $\ge 0$, $\mathcal{M}_\omega$ is well-defined.
+
+\textbf{2. Linearity:}
+For $c_1, c_2 \in \mathbb{C}$ and $f_1, f_2 \in L(D+K)$:
+$$\mathcal{M}_\omega(c_1 f_1 + c_2 f_2) = (c_1 f_1 + c_2 f_2)\omega = c_1 (f_1 \omega) + c_2 (f_2 \omega) = c_1 \mathcal{M}_\omega(f_1) + c_2 \mathcal{M}_\omega(f_2).$$
+$\mathcal{M}_\omega$ is linear.
+
+\textbf{3. Bijectivity:}
+\begin{itemize}
+    \item \textbf{Injectivity:} Since $\omega \not\equiv 0$ on the connected Riemann surface $X$, if $\mathcal{M}_\omega(f) = f\omega = 0$, then $f$ must be the zero function. Thus, $\ker(\mathcal{M}_\omega) = \{0\}$, and the map is injective.
+    \item \textbf{Surjectivity:}
+    We use Lemma (ii): for any $\hat{\omega} \in \mathcal{M}^{(1)}(X) \setminus \{0\}$, $\exists ! f \in \mathcal{M}(X)^\times$ such that $\hat{\omega} = f\omega$.
+    For any $\hat{\omega} \in L^{(1)}(D)$, we need to show its unique pre-image $f = \hat{\omega}/\omega$ is in $L(D+K)$.
+    Since $\hat{\omega} \in L^{(1)}(D)$, we have $\mathrm{div}(\hat{\omega}) + D \ge 0$.
+    Since $\mathrm{div}(\hat{\omega}) = \mathrm{div}(f) + \mathrm{div}(\omega) = \mathrm{div}(f) + K$, substitution yields:
+    $$(\mathrm{div}(f) + K) + D \ge 0$$
+    This is precisely the defining condition for $f \in L(D+K)$.
+    Therefore, every $\hat{\omega} \in L^{(1)}(D)$ has a unique pre-image $f \in L(D+K)$, and the map is surjective.
+\end{itemize}
+Since $\mathcal{M}_\omega$ is a linear bijection, it is an isomorphism.
+\end{proof}
+
+
+\begin{remark}
+    Now we see that $\operatorname{CDiv(X)}$ is a coset for $\operatorname{PDiv(X)}$
+\end{remark}
+
 \newpage
-\section*{Appendix: The Riemann Mappinng theorem}
-The following note is taken from Stein.
+\appendix
+\section{Appendix: The Riemann Mappinng theorem}
+Riemann mapping thoerem is one of the most intersting theorems in complex analysis. Here we include the detailed proof. The proof is mainly taken from Stein
 
 \subsection*{Conformal Equivalence}
 
@@ -2239,5 +2588,16 @@ Finally, we multiply $f$ by a complex number $e^{i\theta}$ of absolute value $1$
     It is worthwile to note that the simple connectivty is used to make logtrithm function and the square root function is well-defined.
 \end{remark}
 
+\newpage
+\section{Appendix: Picard's Theorem}
+Picard's Theorem, (both the little and the great) is one of the most interesting theorems in complex anlysis. However, like the Riemann mapping theorem, some of the complex analysis course doesn't include the theorem due to the limit of the length of the semester (or the ability of the faculty who teach the course, like cuhksz.) Here we include the discussion of the theorems here.
+
+\begin{theorem}[Picard's Little Theorem]
+If a function $f: \mathbb{C} \to \mathbb{C}$ is entire and non-constant, then the image of $f$ is either the entire complex plane $\mathbb{C}$ or the complex plane minus a single point. That is, the range of $f$ omits at most one value.
+\end{theorem}
+
+\begin{theorem}[Picard's Great Theorem]
+If a function $f(z)$ has an essential singularity at a point $z_0$, then on any punctured neighborhood of $z_0$, $f(z)$ takes on every complex value, with at most one possible exception, infinitely many times.
+\end{theorem}
 
 \end{document}
