@@ -2592,6 +2592,646 @@ Pulling back divisors and 1-forms along $F$.
     On a cpt RS $X$, the degree of any canonical divisor is $\deg(K_X) = 2g(X) - 2$.
 \end{proposition}
 
+% New content from October 25, 2025
+
+\begin{proof}
+    Assuming the existence of a non-constant mero function on $X$. (we will show this later)
+    Given $f \in \mathcal{M}(X)$, non-constant, consider the corr. holo map $F: X \to \mathbb{C}_{\infty}$.
+    Let $\omega = dz \in \mathcal{M}^{(1)}(\mathbb{C}_{\infty})$.
+    $\operatorname{div}(\omega) = -2 \cdot \infty$.
+    $\operatorname{deg}(\operatorname{div}(\omega)) = -2$.
+    By the canonical divisor version of Riemann-Hurwitz:
+    \[
+    K_X \sim F^* (\operatorname{div}(\omega)) + R_F
+    \]
+    Taking degrees:
+    \begin{align*}
+        \operatorname{deg}(K_X) &= \operatorname{deg}(F^* (\operatorname{div}(\omega))) + \operatorname{deg}(R_F) \\
+        &= \operatorname{deg}(F) \operatorname{deg}(\operatorname{div}(\omega)) + \sum_{p \in X} (\operatorname{mult}_{p}(F)-1) \\
+        &= \operatorname{deg}(F)(-2) + \sum_{p \in X} (\operatorname{mult}_{p}(F)-1) \text{}
+    \end{align*}
+    By the topological Riemann-Hurwitz formula, this is exactly $2g_X - 2$.
+\end{proof}
+
+\subsection{The genus of a plane Curve}
+
+Recall: For a smooth projective plane curve $X=V(F) \subset \mathbb{P}^{2}$
+\[
+\operatorname{deg}(X) := \operatorname{deg}(\operatorname{div}_{X}(H)) = \operatorname{deg}(F)
+\]
+where $H \in \mathbb{C}[x,y,z]$ is a linear homogeneous polynomial and $\operatorname{div}_{X}(H)$ is the associated hyperplane divisor.
+The intersection divisor is
+\[
+\operatorname{div}_{X}(G) := \sum_{p \in X} \operatorname{ord}_{p}(G) \cdot p
+\]
+where $\operatorname{ord}_{p}(G) = \operatorname{ord}_{p}(\frac{G}{H})$ for a chosen $H$ such that $G/H$ is a well-defined mero function on X.
+We have showed that $\operatorname{deg}(\operatorname{div}_{X}(G)) = \operatorname{deg}(X)\operatorname{deg}(G)$.
+
+\begin{theorem}[(Plücker's formula)]
+    Let $X=V(F) \subset \mathbb{P}^{2}$ be a smooth projective plane curve of deg $d$.
+    Assume $[0:1:0] \notin X$. Then the projection away from $[0:1:0]$ (projected onto the line $\{y=0\}$)
+    \[
+    \pi: X \to \mathbb{P}^{1}
+    \]
+    \[
+    [x:y:z] \to [x:z]
+    \]
+    restricts to a holo map of degree $d$ with ramification divisor $R_{\pi} = \operatorname{div}_{X}(\frac{\partial F}{\partial y})$.
+\end{theorem}
+
+In particular, $\operatorname{deg}(R_\pi) = d(d-1)$, and $g_X$ is given by $g_X = \frac{(d-1)(d-2)}{2}$.
+This theorem allows us to compute the genus for a smooth projective curve.
+
+\begin{proof}
+    $\pi$ has degree $d$ as generically the preimage $\pi^{-1}([a:b]) = \{$ roots of $F(a,y,b) = 0\}$, which is $d$ pts generally.
+    If we can show $R_{\Pi} = \operatorname{div}_{X}(\frac{\partial F}{\partial y})$, then
+    \[
+    \operatorname{deg}(R_{\Pi}) = \operatorname{deg}(\operatorname{div}_{X}(\frac{\partial F}{\partial y})) = \operatorname{deg}(X)\operatorname{deg}(\frac{\partial F}{\partial y})
+    \]
+    \[
+    = d(d-1)
+    \]
+    By the Riemann Hurwitz for $\pi$ we have
+    \begin{align*}
+        2 g_{x}-2 &= \operatorname{deg} \Pi (2g(\mathbb{P}^1) - 2) + \operatorname{deg} R_{\Pi} \\
+        2 g_{x}-2 &= d(-2) + d(d-1) \text{} \\
+        2 g_{x}-2 &= -2d + d^2 - d = d^2 - 3d \\
+        2 g_{x} &= d^2 - 3d + 2 = (d-1)(d-2) \\
+        g_x &= \frac{(d-1)(d-2)}{2}
+    \end{align*}
+    We'll prove $R_{\Pi} = \operatorname{div}_{X}(\frac{\partial F}{\partial y})$ to get Plücker's formula.
+    In fact, it suffices to check they agree on each affine piece, $X_i = X \cap U_i$.
+    We'll check $X_2 = X \cap \{z \ne 0\} = V(f)$, where $f(x,y) = F(x,y,1)$.
+    Then $\Pi$ restricts to $\pi_x: X_2 \to \mathbb{C}$, $(x,y) \to x$.
+
+    Let $p \in X_2 := V(f)$.
+    \begin{enumerate}[(i)]
+        \item If $\frac{\partial f}{\partial y}(p) \ne 0$. $\pi_x$ is a chart near $p$ and $\operatorname{mult}_p(\pi_x) = 1$.
+        The coefficient of $p$ in $R_{\Pi}$ is 0.
+        Note that $\frac{\partial F}{\partial y}(p) \ne 0$ means $\operatorname{div}_{X}(\frac{\partial F}{\partial y})$ is zero at $p$.
+        
+        \item If $\frac{\partial f}{\partial y}(p) = 0$.
+        Then $\frac{\partial f}{\partial x}(p) \ne 0$ (since $X$ is smooth).
+        $\pi_y$ is a chart near $p$ and locally $X_2$ is the graph of a holomorphic function $x = g(y)$.
+        The local form for $\pi_x$ is $\pi_x \circ \pi_y^{-1} : y \mapsto (g(y), y) \to g(y)$.
+        Hence $\operatorname{mult}_p(\pi_x) - 1 = \operatorname{ord}_p(g')$.
+        In a nghbd of p: $f(g(y), y) = 0$.
+        By the chain rule:
+        \[
+        \frac{\partial f}{\partial x} \cdot g'(y) + \frac{\partial f}{\partial y} = 0
+        \]
+        \[
+        g'(y) = - \frac{\partial f / \partial y}{\partial f / \partial x}
+        \]
+        Since $\frac{\partial f}{\partial x}(p) \ne 0$, $\operatorname{ord}_p(g') = \operatorname{ord}_p(\frac{\partial f}{\partial y})$.
+        Thus $\underbrace{\operatorname{mult}_p(\pi_x) - 1}_{\text{coeff of } p \text{ in } R_\pi} = \operatorname{ord}_p(g') = \underbrace{\operatorname{ord}_p(\frac{\partial f}{\partial y}) = \operatorname{ord}_p(\frac{\partial F}{\partial y})}_{\text{coeff of } p \text{ in } \operatorname{div}_X(\frac{\partial F}{\partial y})}$.
+    \end{enumerate}
+    Consequently we conclude that $R_{\pi} = \operatorname{div}_{X}(\frac{\partial F}{\partial y})$.
+\end{proof}
+
+\newpage
+\section{Meromorphic functions on compact RS}
+Assume RS compact from now on.
+
+\subsection{Existence of meromorphic functions}
+
+\textbf{Fact: (Riemann Existence thm).}
+For a compact Riemann Surface $X$:
+\begin{enumerate}
+    \item $\mathcal{M}(X)$ \textbf{separates pts}: $\forall p \ne q, \exists f \in \mathcal{M}(X)$ s.t. $f(p) \ne f(q)$.
+    \item $\mathcal{M}(X)$ \textbf{provides local coordinates} at all pts: $\forall p \in X, \exists f \in \mathcal{M}(X)$ s.t. $\operatorname{ord}_p(f) = 1$.
+\end{enumerate}
+The pf of Riemann Existence theorem involves v. deep analysis. We take it as a fact here.
+
+\begin{example}
+    We've seen (1) and (2) hold for $\mathbb{C}_{\infty} \cong \mathbb{P}^1 : \mathcal{M}(\mathbb{C}_{\infty}) \cong \mathbb{C}(z)$.
+    \begin{enumerate}
+        \item $f(z) = \frac{z-p}{z-q}$ separate $p$ and $q$.
+        \item $f(z) = z-p$ (if $p \in \mathbb{C}$) is a global mero function giving a local coord at $p$.
+    \end{enumerate}
+\end{example}
+
+\begin{lemma}
+    Let $p, q_1, ..., q_n \in X$ be distinct pts. Then $\exists f \in \mathcal{M}(X)$ with a pole at $p$ and holomorphic at $q_i$'s.
+\end{lemma}
+\begin{proof}
+    By Riemann Existence thm. for $i=1..n, \exists g_i \in \mathcal{M}(X)$ s.t. $0 = g_i(p) \ne g_i(q_i)$.
+    For $a = (a_1, ..., a_n) \in \mathbb{C}^n$. Let $g_a = \sum_{i=1}^n a_i g_i$.
+    Consider the proper hyperplanes $H_i = \{a \in \mathbb{C}^n : g_a(q_i) = 0\} \subsetneq \mathbb{C}^n$.
+    Pick $a \notin \bigcup_{i=1}^n H_i$.
+    then $g_a(p) = 0$ and $g_a(q_i) \ne 0, \forall i$.
+    Then $1/g_a \in \mathcal{M}(X)$ has the desired property.
+\end{proof}
+
+\subsection{Function Field $\mathcal{M}(X)$}
+
+A non-constant holo map $F: X \to Y$ induces an injection $F^*: \mathcal{M}(Y) \hookrightarrow \mathcal{M}(X)$.
+A non-constant $f \in \mathcal{M}(X)$ corresponds to a holo map $F: X \to \mathbb{C}_{\infty}$, which induces $F^*: \mathcal{M}(\mathbb{C}_{\infty}) \hookrightarrow \mathcal{M}(X)$.
+This is the inclusion $\mathbb{C}(z) \mapsto \mathbb{C}(f)$.
+Thus $\mathcal{M}(X)$ has transcendence degree $\ge 1$ over $\mathbb{C}$.
+
+\begin{proposition}
+    For $f \in \mathcal{M}(X)$ non-constant, the field extension $\mathbb{C}(f) \subset \mathcal{M}(X)$ is algebraic. Thus $\operatorname{tr} \operatorname{deg}_{\mathbb{C}}(\mathcal{M}(X)) = 1$.
+\end{proposition}
+\begin{proof}
+    Suppose $\exists g \in \mathcal{M}(X)$ which is transcendental over $\mathbb{C}(f)$.
+    Let $D := \operatorname{div}_{\infty}(f) + \operatorname{div}_{\infty}(g)$. Then $f, g \in \mathcal{L}(D)$.
+    For $m > 0$, the set $\{f^i g^j\}_{i+j \le m}$ are $\mathbb{C}$-linearly indep elements in $\mathcal{L}(mD)$.
+    Thus $l(mD) \ge \sum_{i=0}^{m} (m-i+1) = \sum_{j=1}^{m+1} j = \frac{(m+1)(m+2)}{2}$.
+    This grows at least quadratically with $m$.
+    However, we know $l(mD) \le 1 + \operatorname{deg}(mD) = 1 + m \operatorname{deg}(D)$, which is linear in $m$.
+    This is a contradiction.
+    Thus $\mathbb{C}(f) \subset \mathcal{M}(X)$ must be algebraic.
+\end{proof}
+
+Goal: Show $[\mathcal{M}(X) : \mathbb{C}(f)] = \operatorname{deg}(F)$.
+
+\begin{lemma}
+    Let $f \in \mathcal{M}(X)$ non-constant and $D = \operatorname{div}_{\infty}(f) = F^*(\infty)$.
+    \begin{enumerate}[(i)]
+        \item $\forall E \in \operatorname{Div}(X), \exists r \in \mathbb{C}[t], r \ne 0$ and $m > 0$ s.t.: $E - \operatorname{div}(r(f)) \le mD$.
+        \item $\forall g \in \mathcal{M}(X)$, $\exists r \in \mathbb{C}[t]$ s.t. $h = r(f)g$ has pole set $P(h) \subset P(f)$, and $\forall m \gg 0$, $\operatorname{div}(h) + mD \ge 0$ (i.e. $h \in \mathcal{L}(mD)$).
+        \item If $[\mathcal{M}(X) : \mathbb{C}(f)] \ge n, \exists m_0 > 0$ s.t. $\forall m \ge m_0, l(mD) \ge (m - m_0 + 1) \cdot n$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    (i) Let $E_+$ be the positive part of $E$. $E \le E_+$. W.l.o.g. assume $E \ge 0$.
+    Write $E = \sum_{i=1}^s n_i p_i + \sum_{j=1}^t m_j q_j$, where $p_i \in P(f)$ and $q_j \notin P(f)$.
+    Let $r(t) = \prod_{j=1}^t (t - f(q_j))^{m_j} \in \mathbb{C}[t]$.
+    Then $r(f)$ has a zero at each $q_j$ of order at least $m_j$.
+    Also, $P(r(f)) \subset P(f)$.
+    Consider $E' = E - \operatorname{div}(r(f))$. The coefficient of $q_j$ in $E'$ is $m_j - \operatorname{ord}_{q_j}(r(f)) \le 0$.
+    Thus $\operatorname{supp}((E')_+) \subset P(f)$.
+    Since $D = \operatorname{div}_\infty(f)$ assigns a positive coefficient to every $p \in P(f)$, for $m \gg 0$ we must have $E' \le mD$.
+    
+    (ii) Follows from (i) applied to $E = - \operatorname{div}(g)$.
+    
+    (iii) Let $g_1, ..., g_n \in \mathcal{M}(X)$ be linearly indep over $\mathbb{C}(f)$.
+    By (ii), for each $g_j$, $\exists h_j = r_j(f) g_j \in \mathcal{M}(X)$ s.t. $P(h_j) \subset P(f)$.
+    The $h_1, ..., h_n$ are still linearly indept over $\mathbb{C}(f)$.
+    By (ii) again, $\exists m_0$ s.t. $\forall j$, $h_j \in \mathcal{L}(m_0 D)$.
+    Consider the set $\{f^i h_j\}_{\substack{0 \le i \le m-m_0 \\ 1 \le j \le n}}$. These are $n(m-m_0+1)$ elements.
+    They are linearly independent over $\mathbb{C}$ (if $\sum c_{ij} f^i h_j = 0$, then $\sum_j (\sum_i c_{ij} f^i) h_j = 0 \implies \sum_i c_{ij} f^i = 0 \forall j \implies c_{ij} = 0$).
+    Check they are in $\mathcal{L}(mD)$:
+    $\operatorname{div}(f^i h_j) + mD = i \operatorname{div}(f) + \operatorname{div}(h_j) + mD$
+    $= i(\operatorname{div}_0(f) - D) + \operatorname{div}(h_j) + mD$
+    $\ge i \operatorname{div}_0(f) - i D - m_0 D + mD$ (since $h_j \in \mathcal{L}(m_0 D) \implies \operatorname{div}(h_j) \ge -m_0 D$)
+    $= i \operatorname{div}_0(f) + (m - m_0 - i) D \ge 0$ (since $i \le m-m_0$).
+    Thus $l(mD) \ge n(m-m_0+1)$.
+\end{proof}
+
+\begin{remark}[Explanation of Lemma 8.3]
+    This lemma is the technical engine that drives the proof of the main theorem ($[\mathcal{M}(X) : \mathbb{C}(f)] = \operatorname{deg} F$). It's all about "taming" arbitrary functions and divisors by using polynomials in $f$.
+
+    \textbf{What the Lemma Says}
+    
+    Let's break down what each part means in simpler terms.
+    \begin{itemize}
+        \item \textbf{Setup:} We have a non-constant function $f$. We define $D$ to be its \textbf{pole divisor} ($D = \operatorname{div}_\infty(f)$). Think of $D$ as the "master list" of all places $f$ is allowed to have poles.
+
+        \item \textbf{(i) Taming any Divisor:}
+        For \emph{any} divisor $E$ (which could have positive or negative parts anywhere on $X$), we can find a polynomial in $f$, $r(f)$, such that the new divisor $E' = E - \operatorname{div}(r(f))$ is "bounded above" by a large multiple of $f$'s poles ($mD$).
+        
+        \emph{Meaning:} The function $r(f)$ is "tame" because its poles can only be where $f$ has poles (in $P(f)$). By subtracting $\operatorname{div}(r(f))$, we add the poles of $r(f)$ and subtract its zeros. The proof shows we can cleverly choose the \emph{zeros} of $r(f)$ to "cancel out" all the "wild" positive parts of $E$ (the parts not at $f$'s poles). The resulting divisor $E'$ might still have positive parts, but they will \emph{only} be at the "tame" locations $P(f)$, so $E'$ can be "covered" by a large enough $mD$.
+
+        \item \textbf{(ii) Taming any Function:}
+        For \emph{any} meromorphic function $g$ (which could have poles anywhere), we can find a polynomial $r(f)$ to multiply it by, such that the new function $h = r(f)g$ has its poles \emph{only} where $f$ has poles ($P(h) \subset P(f)$).
+        
+        \emph{Meaning:} If $g$ has a "wild" pole at a point $q$ (where $f$ is holomorphic), we just choose our polynomial $r(t)$ to have a root at $f(q)$. Then $r(f)$ will have a zero at $q$, which cancels the pole of $g$. By doing this for all of $g$'s wild poles, the resulting function $h = r(f)g$ is "tamed". The statement $h \in \mathcal{L}(mD)$ just means $h$'s poles are "no worse" than some multiple of $f$'s poles.
+
+        \item \textbf{(iii) Field Dimension to Vector Space Dimension:}
+        If the field $\mathcal{M}(X)$ is at least $n$-dimensional as a vector space over $\mathbb{C}(f)$, then the $\mathbb{C}$-vector space $\mathcal{L}(mD)$ must grow at least as fast as $n \cdot m$.
+        
+        \emph{Meaning:} This is the key payoff. It connects the "bigness" of the field extension ($n$) to the "bigness" of the $\mathbb{C}$-vector spaces $\mathcal{L}(mD)$. If we have $n$ functions $g_1, \dots, g_n$ that are independent over $\mathbb{C}(f)$, Part (ii) lets us "tame" them (so they all live in some $\mathcal{L}(m_0 D)$). We can then create a large $\mathbb{C}$-linearly independent set $\{f^i g_j\}$ inside $\mathcal{L}(mD)$, proving that $l(mD)$ must be large.
+    \end{itemize}
+
+    \textbf{Step-by-Step Proof of (i)}
+    
+    \begin{itemize}
+        \item \textbf{Let $E_+$ be the positive part of $E$. $E \le E_+$. W.l.o.g, assume $E \ge 0$.}
+        \emph{Explanation:} $E_+$ is the divisor containing only the terms with positive coefficients. If we can find $r(f)$ and $m$ that "work" for $E_+$ (meaning $E_+ - \operatorname{div}(r(f)) \le mD$), it will automatically work for $E$ as well, since $E - \operatorname{div}(r(f)) \le E_+ - \operatorname{div}(r(f)) \le mD$. This just simplifies the problem.
+
+        \item \textbf{Write $E = \sum_{i=1}^s n_i p_i + \sum_{j=1}^t m_j q_j$, where $p_i \in P(f)$ and $q_j \notin P(f)$.}
+        \emph{Explanation:} We split $E$ (assumed $\ge 0$) into two parts: the "tame" part ($p_i$) at $f$'s poles, and the "wild" part ($q_j$) elsewhere. Our goal is to get rid of the "wild" $\sum m_j q_j$ part.
+
+        \item \textbf{Let $r(t) = \prod_{j=1}^t (t - f(q_j))^{m_j} \in \mathbb{C}[t]$.}
+        \emph{Explanation:} This is our polynomial. Since $q_j \notin P(f)$, $f(q_j)$ is just a well-defined complex number, so $r(t)$ is a standard polynomial.
+
+        \item \textbf{Then $r(f)$ has a zero at each $q_j$ of order at least $m_j$.}
+        \emph{Explanation:} At $z=q_j$, the $j$-th factor is $(f(z) - f(q_j))^{m_j}$. This function is 0 at $q_j$. The order of this zero is $m_j \cdot \operatorname{ord}_{q_j}(f(z) - f(q_j))$. Since $f$ is non-constant, $\operatorname{ord}_{q_j}(f(z) - f(q_j)) \ge 1$, so the total order of the zero of $r(f)$ at $q_j$ is $\ge m_j$.
+
+        \item \textbf{Also, $P(r(f)) \subset P(f)$.}
+        \emph{Explanation:} A polynomial in $f$ (e.g., $f^2 - 3f + 2$) can only have poles where $f$ has poles.
+
+        \item \textbf{Consider $E' = E - \operatorname{div}(r(f))$. The coefficient of $q_j$ in $E'$ is $m_j - \operatorname{ord}_{q_j}(r(f)) \le 0$.}
+        \emph{Explanation:} This is the climax. We compute the coefficient of a "wild" point $q_j$ in $E'$.
+        \begin{itemize}
+            \item Coefficient in $E$: $m_j$.
+            \item Coefficient in $\operatorname{div}(r(f))$: $\operatorname{ord}_{q_j}(r(f))$.
+        \end{itemize}
+        Since we just proved $\operatorname{ord}_{q_j}(r(f)) \ge m_j$, the new coefficient ($m_j - \operatorname{ord}_{q_j}(r(f))$) must be $\le 0$.
+
+        \item \textbf{Thus $\operatorname{supp}((E')_+) \subset P(f)$.}
+        \emph{Explanation:} We just showed that at all "wild" points $q_j$, the divisor $E'$ has a non-positive coefficient. This means the \emph{positive part} of $E'$, $(E')_+$, must be zero at all $q_j$. So, any positive part of $E'$ can \emph{only} be at the "tame" points $p_i$ (which are in $P(f)$).
+
+        \item \textbf{Since $D = \operatorname{div}_\infty(f)$ assigns a positive coefficient to every $p \in P(f)$, for $m \gg 0$ we must have $E' \le mD$.}
+        \emph{Explanation:} We have $E' \le (E')_+$ (by definition). We know $(E')_+$ is only supported on $P(f)$, and $D$ is also supported on $P(f)$ with all positive coefficients. We can always find a large enough $m$ that makes $mD$ larger than $(E')_+$ at every point. Therefore, $E' \le (E')_+ \le mD$.
+    \end{itemize}
+\end{remark}
+
+\textcolor{red}{The above remark is made by gemini, it explains perfectly what the lemma says and its proof}
+
+
+\begin{theorem}
+    For $f \in \mathcal{M}(X)$ non-constant corresponding to $F: X \to \mathbb{C}_{\infty}$, we have $[\mathcal{M}(X) : \mathbb{C}(f)] = \operatorname{deg} F$.
+\end{theorem}
+\begin{proof}
+    Let $d = \operatorname{deg} F$ and $D = \operatorname{div}_{\infty}(f)$.
+    If $[\mathcal{M}(X) : \mathbb{C}(f)] > d$, then $[\mathcal{M}(X) : \mathbb{C}(f)] \ge d+1$.
+    By Lemma 8.3(iii), $\exists m_0$ s.t. $\forall m \ge m_0$:
+    $l(mD) \ge (m-m_0+1) \cdot (d+1)$.
+    But we know $l(mD) \le 1 + \operatorname{deg}(mD) = 1 + md$.
+    For $m$ large enough, $(m-m_0+1)(d+1) = m(d+1) + ...$ will be greater than $md+1$, a contradiction.
+    Consequently, $[\mathcal{M}(X) : \mathbb{C}(f)] \le d$.
+
+    For the other direction, assume for simplicity $f$ has $d$ simple poles, $D = p_1 + ... + p_d$.
+    By Lemma 8.1, for each $i \in \{1, ..., d\}$, $\exists g_i \in \mathcal{M}(X)$ with a pole at $p_i$ and holomorphic at $p_j$ for $j \ne i$.
+    We claim $g_1, ..., g_d$ are linearly independent over $\mathbb{C}(f)$.
+    If not, $\sum_{i=1}^d C_i(f) g_i = 0$ for $C_i(f) \in \mathbb{C}(f)$.
+    By clearing denominators, we can assume $C_i(f)$ are polynomials.
+    Pick $j$ such that $\operatorname{deg}(C_j)$ is maximal.
+    Near $p_j$: $C_j(f) g_j$ has a pole of order $\operatorname{deg}(C_j) \cdot \operatorname{ord}_{p_j}(f) + \operatorname{ord}_{p_j}(g_j) = \operatorname{deg}(C_j) \cdot 1 + 1$.
+    For $i \ne j$, $C_i(f) g_i$ is holomorphic at $p_j$ or has a pole of order $\operatorname{deg}(C_i) \cdot \operatorname{ord}_{p_j}(f) = \operatorname{deg}(C_i) \le \operatorname{deg}(C_j)$.
+    The sum $\sum C_i(f) g_i$ must have a pole at $p_j$ of order $\operatorname{deg}(C_j) + 1$, so it cannot be 0.
+    This is a contradiction. Thus $g_1, ..., g_d$ are linearly independent over $\mathbb{C}(f)$.
+    We conclude $[\mathcal{M}(X) : \mathbb{C}(f)] \ge d$.
+    Therefore, $[\mathcal{M}(X) : \mathbb{C}(f)] = d = \operatorname{deg} F$.
+\end{proof}
+\begin{corollary}
+    If $F: X \to Y$ is a non-constant holo map of RSs, then $[\mathcal{M}(X) : F^* \mathcal{M}(Y)] = \operatorname{deg} F$.
+\end{corollary}
+\begin{proof}
+    Exercise (Hint: tower rule).
+\end{proof}
+
+Recall: For $p \in X$, $\exists$ exact seq. $0 \to \mathcal{L}(D) \to \mathcal{L}(D+p) \to \mathbb{C}$.
+i.e. $l(D+p) - l(D) \le 1$.
+Consequently:
+\begin{enumerate}[(i)]
+    \item $l(D) \le 1 + \operatorname{deg}(D)$ (Cor 4.8).
+    \item $D \le E \implies l(E) - l(D) \le \operatorname{deg}(E-D)$.
+\end{enumerate}
+
+\begin{definition}
+    For $D \in \operatorname{Div}(X)$, let $\delta(D) := \operatorname{deg}(D) - l(D)$.
+\end{definition}
+
+From (ii), if $D \le E \implies \operatorname{deg}(E) - \operatorname{deg}(D) \ge l(E) - l(D) \implies \operatorname{deg}(E) - l(E) \ge \operatorname{deg}(D) - l(D) \implies \delta(E) \ge \delta(D)$.
+If $D \sim E$, then $l(D)=l(E)$ and $\operatorname{deg}(D)=\operatorname{deg}(E)$, so $\delta(D)=\delta(E)$.
+Thus $\delta$ descends to $\delta: \operatorname{Cl}(X) \to \mathbb{Z}$.
+
+\begin{theorem}[(lower bound for $l(D)$)]
+    There exists a constant $M = M_X$ s.t. $\forall E \in \operatorname{Div}(X)$, we have $\delta(E) \le M$.
+    Equivalently, $l(E) \ge \operatorname{deg}(E) - M$.
+\end{theorem}
+\begin{proof}
+    Let $f \in \mathcal{M}(X)$ be non-constant, $F: X \to \mathbb{C}_{\infty}$ the corresponding map.
+    Let $D = \operatorname{div}_{\infty}(f) = F^*(\infty)$.
+    Let $d = \operatorname{deg} F = \operatorname{deg} D$. By Thm 8.4, $[\mathcal{M}(X) : \mathbb{C}(f)] = d$.
+    Lemma 8.3 (iii) $\implies \exists m_0$ s.t. $m \ge m_0$, $l(mD) \ge d(m - m_0 + 1)$.
+    i.e. $\delta(mD) = \operatorname{deg}(mD) - l(mD) \le md - d(m - m_0 + 1) = d(m_0 - 1)$.
+    $\delta(mD)$ is a $\mathbb{Z}$-valued non-decreasing function in $m$.
+    Since it is bounded above, it must eventually be constant.
+    $\exists m_1 \ge m_0$ s.t. $m \ge m_1 \implies \delta(mD) = M_X = M$.
+    
+    Let $E \in \operatorname{Div}(X)$. By Lemma 8.3 (i), $\exists r \in \mathbb{C}[t]$ s.t. $E' = E - \operatorname{div}(r(f)) \le mD$ for $m \gg 0$.
+    Since $E \sim E'$, $\delta(E) = \delta(E')$.
+    Since $E' \le mD$, $\delta(E') \le \delta(mD) = M$ (for $m \ge m_1$).
+    Hence $\forall E \in \operatorname{Div}(X)$, we have $\delta(E) \le M$.
+\end{proof}
+
+Goal: compute $l(D)$ via Riemann-Roch Thm.
+(i) Fit the inclusion $\mathcal{L}(D) \subset \mathcal{M}(X)$ into an exact seq.
+(ii) Complete the exact seq $0 \to \mathcal{L}(D) \to \mathcal{L}(D+p) \to \mathbb{C}$.
+We do this by another vector space $H^1(D)$.
+Two approaches:
+\begin{itemize}
+    \item using Laurent tail divisor (Miranda)
+    \item using sheaves of X (our approaches)
+\end{itemize}
+
+% New content from Nov 04, 2025
+
+\subsection{Laurent tails} 
+Fix $p \in X$. 
+Recall 
+$$ \mathfrak{m}_p \subset \mathcal{O}_{X,p} \xrightarrow{\text{ev}_p} \mathbb{C} $$ 
+$$ \mathcal{O}_{X,p} = (z) \quad (\text{uniformizer}) $$ 
+$\mathcal{M}_{X,p} := \text{Frac}(\mathcal{O}_{X,p})$ field of germs of meromorphic functions at $p$. 
+$$ \text{ord}_p(g/h) := \text{ord}_p(g) - \text{ord}_p(h). \quad \text{ord}_p(0) := \infty. $$ 
+For any $f \in \mathcal{M}_{X,p}$, we have $f = u z^r$ where $r = \text{ord}_p(f)$, $u \in \mathcal{O}_{X,p}^\times$. 
+
+\begin{remark}
+There is an injective map
+$$ \mathcal{M}(X) \hookrightarrow \mathcal{M}_{X,p} $$ 
+$$ f \mapsto \text{germ of } f \text{ at } p $$ 
+This map may not be surjective. 
+Consider $\mathcal{M}(\mathbb{P}^1) \subset \mathcal{M}_{\mathbb{P}^1, 0}$. 
+and consider $e^z$. Note that $[e^z]_0 \in \mathcal{M}_{\mathbb{P}^1, 0}$ but $e^z \notin \mathcal{M}(\mathbb{P}^1)$. 
+\end{remark}
+
+\begin{definition} 
+For $p \in X$, and $r \in \mathbb{Z}$. 
+we define 
+$$ \tilde{F}_p^r = \{f \in \mathcal{M}_{X,p} : \text{ord}_p(f) \ge r\} $$ 
+$$ F_p^r := i^{-1}(\tilde{F}_p^r) = \{f \in \mathcal{M}(X) : \text{ord}_p(f) \ge r\}. $$ 
+\end{definition}
+
+\begin{remark} 
+\begin{enumerate}[(i)]
+    \item These form descending filtrations 
+    $$ \dots \subset \tilde{F}_p^{r+1} \subset \tilde{F}_p^r \subset \tilde{F}_p^{r-1} \subset \dots \subset \mathcal{M}_{X,p}. $$ 
+    \item $\dots \subset \tilde{F}_p^2 \subset \mathfrak{m}_p = \tilde{F}_p^1 \subset \tilde{F}_p^0 = \mathcal{O}_{X,p}$. 
+    \item $F_p^0 = \{f \in \mathcal{M}(X) : f \text{ is holomorphic at } p\}$. 
+    \item Via the Taylor Laurent expansions 
+    $\mathcal{O}_{X,p} \cong \mathbb{C}\{z\}$ and $\mathcal{M}_{X,p} \cong \mathbb{C}(\{z\})$. 
+    Laurent expansion: 
+    $$ \sum_{n=-\infty}^{+\infty} c_n z^n = \underbrace{\sum_{n<0} c_n z^n}_{\text{Laurent tail}} + \underbrace{\sum_{n \ge 0} c_n z^n}_{\text{holomorphic part}} $$ 
+    $$ \tilde{F}_p^r = \{\sum_{n \ge r} c_n z^n \text{ Laurent series of deg } \ge r\} $$ 
+    Any element of $\mathcal{M}_{X,p} / \tilde{F}_p^r$ has a representative 
+    $$ C_s z^s + \dots + C_{r-1} z^{r-1} \quad \text{Laurent tails of degree } < r $$ 
+\end{enumerate}
+\end{remark}
+
+\begin{lemma} 
+$\forall r \in \mathbb{Z}$, the inclusion $i: \mathcal{M}(X) \to \mathcal{M}_{X,p}$ induces 
+an isomorphism of $\mathbb{C}$-vector spaces 
+$$ \mathcal{M}(X) / F_p^r \cong \mathcal{M}_{X,p} / \tilde{F}_p^r. $$ 
+\end{lemma}
+\begin{proof}
+Since $F_p^r = i^{-1}(\tilde{F}_p^r)$, the map $i$ induces an injection 
+$$ \bar{i}: \mathcal{M}(X) / F_p^r \hookrightarrow \mathcal{M}_{X,p} / \tilde{F}_p^r. $$ 
+For surjectivity: $\exists z \in \mathcal{M}(X)$ giving a local coordinate at $p$. (By Riemann Existence thm). 
+Since $i(z) = z$ and any element of $\mathcal{M}_{X,p} / \tilde{F}_p^r$ has a representative as a Laurent tail, it is also in the image of $\bar{i}$. 
+\end{proof}
+
+\subsection{Adèles} 
+% Ring of adèles ~ restricted product over p \in X of F_p^0 \subset \mathcal{M}(X) 
+
+\begin{definition} 
+\begin{enumerate}[(i)]
+    \item An \textbf{adèle} on $X$ is a tuple $(f_p)_{p \in X}$ of germs of mero functions indexed by pts $p \in X$ s.t. for almost all $p$, $f_p$ is holo at $p$ (for all but finitely many). 
+    \item The \textbf{ring of adèles} on $X$ is 
+    $$ A_X = \{ (f_p)_{p \in X} \in \prod_{p \in X} \mathcal{M}_{X,p} : \text{ord}_p(f_p) \ge 0 \text{ for almost all } p \}. $$ 
+    \item There is a \textbf{diagonal map} $\Delta: \mathcal{M}(X) \to A_X$. 
+    $$ f \mapsto (f)_{p \in X} $$ 
+    This is well-defined as $f \in \mathcal{M}(X)$ is holo at almost all $p \in X$. 
+    \item For $D = \sum_{p \in X} m_p \cdot p \in \text{Div}(X)$, the space of adèles bdded by $D$ is 
+    $$ A_X(D) = \{ (f_p)_{p \in X} \in A_X : \text{ord}_p(f_p) + m_p \ge 0, \forall p \in X \} $$ 
+    \item Let $d_D: A_X \to A_X / A_X(D)$. 
+    Define $H^1(D) := \text{coker}(d_D \circ \Delta) = \frac{A_X}{A_X(D) + \Delta(\mathcal{M}(X))}$. 
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+$$ \ker(d_D \circ \Delta) = \{f \in \mathcal{M}(X) : \Delta(f) = (f)_{p \in X} \in A_X(D)\} $$ 
+$$ = \{f \in \mathcal{M}(X) : \text{ord}_p(f) + m_p \ge 0, \forall p \in X\} = \mathcal{L}(D) $$ 
+\end{remark}
+
+Thus there is an exact seq: 
+$$ 0 \to \mathcal{L}(D) \to \mathcal{M}(X) \xrightarrow{d_D \circ \Delta} \frac{A_X}{A_X(D)} \to H^1(D) \to 0 $$ 
+
+\begin{lemma} 
+For $D, E \in \text{Div}(X)$. 
+\begin{enumerate}[(i)]
+    \item $D \le E$, then $A_X(D) \subset A_X(E)$ and this $\implies H^1(D) \to H^1(E)$. 
+    \item If $E = D + \text{div}(g)$, for $g \in \mathcal{M}(X)^\times$, then $A_X(E) \cong A_X(D)$ 
+    via $(f_p)_{p \in X} \mapsto (f_p g)_{p \in X}$. 
+\end{enumerate}
+\begin{proof}
+Exercise. 
+\end{proof}
+\end{lemma}
+
+\begin{lemma} 
+For $D = \sum_{x \in X} m_x \cdot x$ and $p \in X$. 
+we have an exact seq: 
+$$ 0 \to A_X(D) \to A_X(D+p) \to \mathbb{C} \to 0. $$ 
+\end{lemma}
+\begin{proof}
+By the Riemann Existence Thm, $\exists f \in \mathcal{M}(X)$ s.t. 
+$\text{ord}_p(f) = m_p+1$. 
+We claim the map $A_X(D+p) \to \mathbb{C}$ given by $(f_x)_{x \in X} \mapsto (f_p \cdot f)(p)$ has kernel $A_X(D)$: 
+For $(f_x)_{x \in X} \in A_X(D+p)$, we have $(f_p \cdot f)(p) = 0$ 
+$$ \iff \text{ord}_p(f_p \cdot f) \ge 1 \iff \text{ord}_p(f_p) + \text{ord}_p(f) \ge 1 $$
+$$ \iff \text{ord}_p(f_p) + (m_p + 1) \ge 1 \iff \text{ord}_p(f_p) + m_p \ge 0 $$
+$$ \iff (f_x)_{x \in X} \in A_X(D) $$ 
+\end{proof}
+
+\begin{proposition}
+For $D = \sum m_p \cdot p$, the map $A_X \to \bigoplus_{p \in X} \mathcal{M}(X) / F_p^{-m_p}$ induces 
+isomorphisms 
+$$ A_X / A_X(D) \cong \bigoplus_{p \in X} \mathcal{M}(X) / F_p^{-m_p} \cong \bigoplus_{p \in X} \mathcal{M}_{X,p} / \tilde{F}_p^{-m_p} $$ 
+Hence $H^1(D) = \text{coker}(\mathcal{M}(X) \to \bigoplus_{p \in X} \mathcal{M}(X) / F_p^{-m_p})$. 
+\end{proposition}
+\begin{proof}
+For $(f_p)_{p \in X} \in A_X$, for almost all $p \in X$, we have that 
+$m_p = 0$ and $\text{ord}_p(f_p) \ge 0$. 
+i.e. the Laurent tail of $f_p$ at $p$ is zero. 
+Thus $(f_p)_{p \in X} \in A_X$ gives an element in 
+$\bigoplus_{p \in X} \mathcal{M}(X) / F_p^{-m_p}$. 
+This gives a surjective map $A_X \to \bigoplus_{p \in X} \mathcal{M}(X) / F_p^{-m_p}$ whose kernel is $A_X(D)$. 
+\end{proof}
+
+\begin{remark}
+The Mittag-Leffler problem asks about the range 
+of $d_D: \mathcal{M}(X) \to A_X \to A_X / A_X(D)$. 
+Question: When is an element $[(f_p)_{p \in X}]$ in the Image of $d_D$? 
+Equivalently: Is the class of this element in $H^1(D) = \text{coker}(d_D)$ zero? 
+\end{remark}
+
+\newpage
+\section{Riemann-Roch Theorem} 
+Recall: For $p \in X$: 
+\begin{enumerate}
+    \item $0 \to \mathcal{L}(D) \to \mathcal{L}(D+p) \to \mathbb{C}$. 
+    \item For $D = \sum_{x \in X} m_x \cdot x \in \text{Div}(X)$, we have exact seq: 
+    $0 \to A_X(D) \to A_X(D+p) \to \mathbb{C} \to 0$. 
+\end{enumerate}
+This $\implies H^1(D) \to H^1(D+p)$. 
+
+\subsection{Exact Sequence for $\mathcal{L}$ \& $H^1$} 
+
+\begin{theorem} 
+For $D = \sum_{x \in X} m_x \cdot x$ and $p \in X$. Let $z$ giving a local coord at $p$. 
+Then there is an exact seq: 
+$$ 0 \to \mathcal{L}(D) \xrightarrow{\beta} \mathcal{L}(D+p) \xrightarrow{\gamma} \mathbb{C} \xrightarrow{\delta} H^1(D) \xrightarrow{\xi} H^1(D+p) \to 0. $$ 
+where 
+\begin{itemize}
+    \item $\beta$ is the natural inclusion and $\xi$ the natural surjection. 
+    \item $\gamma: \mathcal{L}(D+p) \to \mathbb{C}$ 
+    $g \mapsto \text{coeff of } z^{-m_p-1} \text{ (Laurent coeff)}$ 
+    \item $\delta: \mathbb{C} \to H^1(D)$ is the composition 
+    $$ \mathbb{C} \to A_X \to H^1(D) = A_X / (A_X(D) + \Delta(\mathcal{M}(X))) $$ 
+    $$ a \mapsto (a_x)_{x \in X} $$ 
+    where $a_x = \begin{cases} a z^{-m_p-1} & x=p \\ 0 & x \ne p \end{cases}$ 
+\end{itemize}
+\end{theorem}
+\begin{proof}
+We check exactness at $\mathbb{C}$ and $H^1(D)$.
+\begin{itemize}
+    \item \textbf{Im($\gamma$) = Ker($\delta$)}: 
+    ($\subseteq$) Suppose $a \in \text{Im}(\gamma)$, then $a = \gamma(f)$ for some $f \in \mathcal{L}(D+p)$. 
+    Then $f$ has Laurent exp at $p$: $f = a z^{-m_p-1} + \dots$ 
+    and $\text{ord}_x(f) \ge -m_x, \forall x \ne p$. 
+    Let $(a_x)$ be the adèle for $a$ as defined in .
+    Note $\Delta(f) - (a_x)_{x \in X} \in A_X(D)$. 
+    Then $d_D(f) = [\Delta(f)] \in A_X / A_X(D)$. 
+    So $\delta(a) = [(a_x)] = [\Delta(f)] = [d_D(f)]$. 
+    In $H^1(D) = \text{coker}(d_D)$, this class is 0. Thus $\delta(a) = 0$. 
+    
+    ($\supseteq$) Suppose $a \in \text{Ker}(\delta)$, i.e. $\delta(a)=0$. 
+    Then $(a_x)_{x \in X} \in A_X(D) + \Delta(\mathcal{M}(X))$. 
+    So $(a_x) = (g_x) + \Delta(f)$ for $(g_x) \in A_X(D)$ and $f \in \mathcal{M}(X)$. 
+    For $x \ne p$, $a_x = 0 \implies f = -g_x$. Thus $\text{ord}_x(f) = \text{ord}_x(-g_x) \ge -m_x$. 
+    For $x = p$, $a_p = a z^{-m_p-1} = g_p + f$.
+    Since $\text{ord}_p(g_p) \ge -m_p$, we have $\text{ord}_p(f) = \text{ord}_p(a z^{-m_p-1} - g_p) = -m_p-1$. 
+    This implies $f \in \mathcal{L}(D+p) \setminus \mathcal{L}(D)$. 
+    The coefficient of $z^{-m_p-1}$ in $f$ is $a$, so $\gamma(f) = a$. 
+    
+    \item \textbf{Im($\delta$) = Ker($\xi$)}: 
+    ($\subseteq$) We claim $\text{Im}(\delta) \subset \text{Ker}(\xi)$ as $\xi \circ \delta = 0$. 
+    For $a \in \mathbb{C}$, $\delta(a) = [(a_x)]$. The adèle $(a_x)$ is bounded by $D+p$, i.e., 
+    $(a_x)_{x \in X} \in A_X(D+p)$. Then $\xi([(a_x)]) = 0$ in $H^1(D+p)$. 
+    
+    ($\supseteq$) Conversely, if $[(g_x)] \in \text{Ker}(\xi)$. 
+    Then $(g_x) \in A_X(D+p) + \Delta(\mathcal{M}(X))$. 
+    WLOG, assume $(g_x) \in A_X(D+p)$. 
+    $g_p$ has Laurent expansion at $p$: 
+    $g_p = a z^{-m_p-1} + \text{higher order terms}$. 
+    Define $h_x = \begin{cases} g_x & \forall x \ne p \\ g_p - a z^{-m_p-1} & \text{for } x=p \end{cases}$ 
+    Then $\text{ord}_p(h_p) \ge -m_p$, so $(h_x)_{x \in X} \in A_X(D)$. 
+    Then $(g_x) - (a_x) = (h_x) \in A_X(D)$, where $(a_x)$ is the adèle for $a$. 
+    In $H^1(D)$, we have $[(g_x)] = [(a_x)] = \delta(a)$. 
+    Thus $[(g_x)]$ lies in the image of $\delta$. 
+\end{itemize}
+\end{proof}
+
+\begin{corollary}
+For $E \ge D$, we have an exact seq: 
+$$ 0 \to \mathcal{L}(D) \to \mathcal{L}(E) \to \mathbb{C}^{\deg(E-D)} \to H^1(D) \to H^1(E) \to 0 $$ 
+\end{corollary}
+
+Goal: Show $H^1(D)$ is finite dimensional. 
+It suffices to know this for one divisor $D_0$. 
+
+\subsection{Finite dimensionality of $H^1(D)$} 
+Recall: We defined $\delta: \text{Div}(X) \to \mathbb{Z}$, 
+$D \mapsto \deg(D) - l(D)$ 
+Satisfying 
+\begin{enumerate}[(i)]
+    \item $D \le E \implies \delta(D) \le \delta(E)$ 
+    \item $\delta$ is bounded above by $M$. 
+\end{enumerate}
+
+\begin{proposition} 
+If $D \in \text{Div}(X)$ satisfies $\delta(D) \ge \delta(E), \forall E \in \text{Div}(X)$, then $H^1(D) = 0$. 
+\end{proposition}
+\begin{proof}
+$\delta(D) \le \delta(D+p)$ by (i), but $\delta(D+p) \le \delta(D)$ by assumption.
+$\implies \delta(D) = \delta(D+p)$. 
+This means $\deg(D+p) - l(D+p) = \deg(D) - l(D)$
+$\implies (\deg(D)+1) - l(D+p) = \deg(D) - l(D)$
+$\implies l(D+p) = l(D) + 1$. 
+From the exact sequence in Thm 9.1, this means $\gamma$ is surjective, so $\delta$ is the zero map, and $\xi$ is injective.
+$\implies H^1(D) \cong H^1(D+p)$. 
+For any $E \ge D$, by induction we see $H^1(E) \cong H^1(D)$. 
+For any $(f_x) \in A_X$, $A_X = \bigcup_{E \in \text{Div}(X)} A_X(E)$. We can choose $E \ge D$ 
+with $(f_x) \in A_X(E)$. Then the image of $[(f_x)]$ under 
+$A_X \to H^1(E) \cong H^1(D)$ is zero. 
+Hence $H^1(D) = 0$. 
+\end{proof}
+
+\begin{theorem} 
+$\forall E \in \text{Div}(X)$, we have $H^1(E)$ is finite-dimensional. 
+\end{theorem}
+\begin{proof}
+We know $\exists D \in \text{Div}(X)$ s.t. $\delta(D)$ is maximal. 
+By the Prop, $H^1(D) = 0$, which is finite dim. 
+For any $E$, we can find $D'$ s.t. $D' \le D$ and $D' \le E$.
+From the corollary, $0 \to \mathcal{L}(D') \to \mathcal{L}(D) \to \mathbb{C}^{\deg(D-D')} \to H^1(D') \to H^1(D) \to 0$.
+Since $\dim H^1(D) = 0 < \infty$, $\dim H^1(D') < \infty$. 
+Similarly, $0 \to \mathcal{L}(D') \to \mathcal{L}(E) \to \mathbb{C}^{\deg(E-D')} \to H^1(D') \to H^1(E) \to 0$.
+Since $\dim H^1(D') < \infty$, $\dim H^1(E) < \infty$. 
+\end{proof}
+
+\subsection{First Version of Riemann-Roch} 
+\begin{definition}
+$\chi(D) := l(D) - h^1(D)$, where $h^1(D) := \dim H^1(D)$. 
+\end{definition}
+
+\begin{theorem}[First version of Riemann-Roch] 
+For a cpt RS $X$ and $D \in \text{Div}(X)$, 
+$$ \chi(D) = \deg(D) + 1 - h^1(0) $$ 
+\end{theorem}
+\begin{proof}
+Thm 9.1 $\implies \chi(D+p) = \chi(D) + 1$. 
+By induction, $\chi(D) = \chi(0) + \deg(D)$. 
+$\chi(0) = l(0) - h^1(0) = 1 - h^1(0)$ (since $l(0) = \dim \mathcal{O}(X) = 1$). 
+Thus $\chi(D) = \deg(D) + 1 - h^1(0)$. 
+\end{proof}
+
+\subsection{Relation with mero 1-forms and Serre Duality} 
+Goal: Relate $H^1(D)$ with $L^{(1)}(-D) \cong \mathcal{L}(K_X - D)$. 
+
+\begin{definition}[Residue of $\omega \in \mathcal{M}^{(1)}(X)$] 
+The \textbf{residue} of $\omega \in \mathcal{M}^{(1)}(X)$ at $p \in X$ is the coeff of $z^{-1}$ 
+in the Laurent exp at $p$ of $h(z)$ where $\omega = h(z)dz$ 
+a local form of $\omega$. 
+\end{definition}
+
+\begin{theorem}[Residue Thm] 
+For $\omega \in \mathcal{M}^{(1)}(X)$, 
+we have $\sum_{p \in X} \text{Res}_p(\omega) = 0$. 
+\begin{proof}
+Exercise. 
+\end{proof}
+\end{theorem}
+
+\begin{definition} 
+For $D \in \text{Div}(X)$, we define a bilinear pairing 
+$$ \langle -, - \rangle: L^{(1)}(-D) \times A_X \to \mathbb{C} $$ 
+$$ (\omega, (g_p)_{p \in X}) \mapsto \langle \omega, (g_p)_{p \in X} \rangle = \sum_{p \in X} \text{Res}_p(g_p \cdot \omega) $$ 
+This descends to a bilinear mapping: 
+$$ \langle -, - \rangle: L^{(1)}(-D) \times H^1(D) \to \mathbb{C} $$ 
+\end{definition}
+
+\begin{theorem}[Serre Duality] 
+The pairing above $\langle -, - \rangle: L^{(1)}(-D) \times H^1(D) \to \mathbb{C}$ is 
+perfect. Hence $h^1(D) = l^{(1)}(-D) = l(K_X - D)$. 
+Thus,
+$$ \chi(D) = l(D) - h^1(D) = l(D) - l(K_X - D). $$ 
+\end{theorem}
+
+\subsection{Riemann Roch} 
+
+\begin{theorem} 
+Let $X$ be a cpt RS of genus $g$. 
+Then 
+$$ \chi(D) = \deg D + 1 - g. $$ 
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
 \newpage
 \appendix
 \section{Appendix: The Riemann Mappinng theorem}
